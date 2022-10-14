@@ -8,5 +8,6 @@
   "english": "English",
   "vietnamese": "Vietnamese",
   "dark_mode": "Dark mode",
-  "assets": "Assets gen"
+  "assets": "Assets gen",
+  "load_and_insert_db": "Load and insert DB"
 }

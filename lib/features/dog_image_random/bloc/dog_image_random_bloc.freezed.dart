@@ -19,19 +19,19 @@ mixin _$DogImageRandomEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loaded,
-    required TResult Function() randomRequested,
+    required TResult Function(bool insertDb) randomRequested,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loaded,
-    TResult Function()? randomRequested,
+    TResult Function(bool insertDb)? randomRequested,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loaded,
-    TResult Function()? randomRequested,
+    TResult Function(bool insertDb)? randomRequested,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -116,7 +116,7 @@ class _$DogImageRandomLoaded implements DogImageRandomLoaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loaded,
-    required TResult Function() randomRequested,
+    required TResult Function(bool insertDb) randomRequested,
   }) {
     return loaded();
   }
@@ -125,7 +125,7 @@ class _$DogImageRandomLoaded implements DogImageRandomLoaded {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loaded,
-    TResult Function()? randomRequested,
+    TResult Function(bool insertDb)? randomRequested,
   }) {
     return loaded?.call();
   }
@@ -134,7 +134,7 @@ class _$DogImageRandomLoaded implements DogImageRandomLoaded {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loaded,
-    TResult Function()? randomRequested,
+    TResult Function(bool insertDb)? randomRequested,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -186,6 +186,7 @@ abstract class _$$DogImageRandomRandomRequestedCopyWith<$Res> {
           _$DogImageRandomRandomRequested value,
           $Res Function(_$DogImageRandomRandomRequested) then) =
       __$$DogImageRandomRandomRequestedCopyWithImpl<$Res>;
+  $Res call({bool insertDb});
 }
 
 /// @nodoc
@@ -200,55 +201,79 @@ class __$$DogImageRandomRandomRequestedCopyWithImpl<$Res>
   @override
   _$DogImageRandomRandomRequested get _value =>
       super._value as _$DogImageRandomRandomRequested;
+
+  @override
+  $Res call({
+    Object? insertDb = freezed,
+  }) {
+    return _then(_$DogImageRandomRandomRequested(
+      insertDb: insertDb == freezed
+          ? _value.insertDb
+          : insertDb // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$DogImageRandomRandomRequested implements DogImageRandomRandomRequested {
-  const _$DogImageRandomRandomRequested();
+  const _$DogImageRandomRandomRequested({this.insertDb = false});
+
+  @override
+  @JsonKey()
+  final bool insertDb;
 
   @override
   String toString() {
-    return 'DogImageRandomEvent.randomRequested()';
+    return 'DogImageRandomEvent.randomRequested(insertDb: $insertDb)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DogImageRandomRandomRequested);
+            other is _$DogImageRandomRandomRequested &&
+            const DeepCollectionEquality().equals(other.insertDb, insertDb));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(insertDb));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$DogImageRandomRandomRequestedCopyWith<_$DogImageRandomRandomRequested>
+      get copyWith => __$$DogImageRandomRandomRequestedCopyWithImpl<
+          _$DogImageRandomRandomRequested>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loaded,
-    required TResult Function() randomRequested,
+    required TResult Function(bool insertDb) randomRequested,
   }) {
-    return randomRequested();
+    return randomRequested(insertDb);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loaded,
-    TResult Function()? randomRequested,
+    TResult Function(bool insertDb)? randomRequested,
   }) {
-    return randomRequested?.call();
+    return randomRequested?.call(insertDb);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loaded,
-    TResult Function()? randomRequested,
+    TResult Function(bool insertDb)? randomRequested,
     required TResult orElse(),
   }) {
     if (randomRequested != null) {
-      return randomRequested();
+      return randomRequested(insertDb);
     }
     return orElse();
   }
@@ -287,8 +312,13 @@ class _$DogImageRandomRandomRequested implements DogImageRandomRandomRequested {
 }
 
 abstract class DogImageRandomRandomRequested implements DogImageRandomEvent {
-  const factory DogImageRandomRandomRequested() =
+  const factory DogImageRandomRandomRequested({final bool insertDb}) =
       _$DogImageRandomRandomRequested;
+
+  bool get insertDb;
+  @JsonKey(ignore: true)
+  _$$DogImageRandomRandomRequestedCopyWith<_$DogImageRandomRandomRequested>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

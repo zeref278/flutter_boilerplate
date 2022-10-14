@@ -12,6 +12,7 @@ class RepositoryModule {
     injector.registerFactory<DogImageRandomRepository>(
       () => DogImageRandomRepositoryImpl(
         dogApiClient: injector(),
+        appDatabaseManager: injector(),
       ),
     );
   }
