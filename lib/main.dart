@@ -17,6 +17,8 @@ void main() {
     AppConfig.configDev();
     Injector.init();
 
+    await Injector.instance.allReady();
+
     runApp(const MyApp());
   }, (error, stack) {
     final CrashlyticsService crashlyticsService =
