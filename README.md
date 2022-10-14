@@ -24,6 +24,8 @@ The Boilerplate contains the minimal implementation required to create a new lib
 * Local database support
 * Handle multi bloc event in the same time by bloc concurrency
 * Load more infinite list using bloc
+## Architecture
+<img src="https://raw.githubusercontent.com/zeref278/flutter_boilerplate/main/readme_attach/architecture.png" width="300"/>
 
 ## How to Use 
 **Step 1:**
