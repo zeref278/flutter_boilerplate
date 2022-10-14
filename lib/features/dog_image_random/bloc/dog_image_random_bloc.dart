@@ -5,7 +5,9 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:boilerplate/data/repositories/dog_image_random/dog_image_random_repository.dart';
 import 'package:boilerplate/features/application/bloc/application_bloc.dart';
 import 'package:boilerplate/services/log_service/log_service.dart';
+import 'package:boilerplate/utils/mapper_utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:local_database/local_database.dart';
 import 'package:meta/meta.dart';
 import 'package:rest_client/rest_client.dart';
 
@@ -55,6 +57,11 @@ class DogImageRandomBloc
       ));
 
       final DogImage image = await _repository.getDogImageRandom();
+
+      if (event.insertDb) {
+        final DogImageEntity entity = MapperUtils.mapDogImage(image);
+        await _repository.insertDogImageDB(entity);
+      }
 
       emit(state.copyWith(
         status: UIStatus.loadSuccess,

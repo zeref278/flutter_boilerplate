@@ -83,13 +83,35 @@ class _ButtonBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: ElevatedButton(
-        child: Text(S.current.load_image),
-        onPressed: () {
-          context
-              .read<DogImageRandomBloc>()
-              .add(const DogImageRandomRandomRequested());
-        },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Row(
+          children: [
+            Expanded(
+              child: ElevatedButton(
+                child: Text(S.current.load_image),
+                onPressed: () {
+                  context
+                      .read<DogImageRandomBloc>()
+                      .add(const DogImageRandomRandomRequested());
+                },
+              ),
+            ),
+            const SizedBox(
+              width: 16,
+            ),
+            Expanded(
+              child: ElevatedButton(
+                child: Text(S.current.load_and_insert_db),
+                onPressed: () {
+                  context
+                      .read<DogImageRandomBloc>()
+                      .add(const DogImageRandomRandomRequested(insertDb: true));
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

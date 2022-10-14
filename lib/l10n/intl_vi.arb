@@ -8,5 +8,6 @@
   "english": "Tiếng Anh",
   "vietnamese": "Tiếng Việt",
   "dark_mode": "Chế độ tối",
-  "assets": "Gen họa tiết"
+  "assets": "Gen họa tiết",
+  "load_and_insert_db": "Tải và lưu DB"
 }
