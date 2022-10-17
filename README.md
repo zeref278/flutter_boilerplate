@@ -10,9 +10,9 @@ Some packages:
   - [Go router](https://pub.dev/packages/go_router): app navigation
   - [Dependency Injection](https://github.com/fluttercommunity/get_it)
   - [Logger](https://pub.dev/packages/logger)
-  - [Crashlytics template]
-  - [DarkTheme]
-  - [Multi languages]
+  - Crashlytics template
+  - DarkTheme
+  - Multi languages
 
 ## Getting Started
 
@@ -20,8 +20,6 @@ The Boilerplate contains the minimal implementation required to create a new lib
 
 ### Up-Coming Features:
 
-* Flavor config
-* Local database support
 * Handle multi bloc event in the same time by bloc concurrency example
 * Load more infinite list using bloc example
 * Authentication template
@@ -41,25 +39,23 @@ https://github.com/zeref278/flutter_boilerplate.git
 **Step 2:**
 Go to project root and execute the following command in terminal to get the required dependencies and generate languages, freezed, flutter gen: 
 
-```
+```cmd
 flutter pub get
 flutter pub run intl_utils:generate
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
 **Step 3:**
-Go to /packages/rest_client and execute the following command in terminal to generate model and api client: 
+Go to `/packages/rest_client` and execute the following command in terminal to generate model and api client: 
 
-```
+```cmd
 flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
-**Step 3:**
-Go to /packages/rest_client and execute the following command in terminal to generate model and api client: 
-
 **Whenever change freezed file, assets, api**
+
 Run command
-```
+```cmd
 flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
