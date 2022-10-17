@@ -1,6 +1,7 @@
 import 'package:boilerplate/common/app_themes.dart';
 import 'package:boilerplate/features/application/bloc/application_bloc.dart';
 import 'package:boilerplate/generated/l10n.dart';
+import 'package:boilerplate/injector/injector.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +24,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     _locale = 'en';
-    _bloc = ApplicationBloc();
+    _bloc = Injector.instance<ApplicationBloc>();;
     _bloc.add(const ApplicationLoaded());
     _isDarkMode = false;
     super.initState();
