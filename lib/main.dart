@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:boilerplate/app_config.dart';
+import 'package:boilerplate/configs/app_config.dart';
 import 'package:boilerplate/injector/injector.dart';
 import 'package:boilerplate/services/crashlytics_service/crashlytics_service.dart';
 import 'package:flutter/material.dart';

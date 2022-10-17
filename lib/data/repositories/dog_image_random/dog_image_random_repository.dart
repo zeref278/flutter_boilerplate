@@ -8,4 +8,8 @@ abstract class DogImageRandomRepository {
 
   /// Local
   Future<void> insertDogImageDB(DogImageEntity dogImageEntity);
+
+  Future<List<DogImageEntity>> getDogImagesFromDB();
+
+  Future<DogImageEntity?> deleteDogImageDB(String message);
 }

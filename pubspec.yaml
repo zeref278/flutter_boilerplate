@@ -45,6 +45,7 @@ dependencies:
   flutter_svg: ^1.1.4
   go_router: ^4.3.0
   cupertino_icons: ^1.0.2
+  another_flushbar: ^1.12.29
 
   rest_client:
     path: packages/rest_client

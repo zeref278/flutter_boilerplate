@@ -9,5 +9,8 @@
   "vietnamese": "Tiếng Việt",
   "dark_mode": "Chế độ tối",
   "assets": "Gen họa tiết",
-  "load_and_insert_db": "Tải và lưu DB"
+  "load_and_insert_db": "Tải và lưu DB",
+  "image_from_db": "Hình ảnh từ DB",
+  "delete_success": "Xoá thành công",
+  "delete_failed": "Xoá không thành công"
 }

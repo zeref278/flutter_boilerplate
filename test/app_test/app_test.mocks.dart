@@ -7,7 +7,8 @@ import 'dart:async' as _i4;
 
 import 'package:boilerplate/data/repositories/dog_image_random/dog_image_random_repository.dart'
     as _i3;
-import 'package:boilerplate/services/log_service/log_service.dart' as _i5;
+import 'package:boilerplate/services/log_service/log_service.dart' as _i6;
+import 'package:local_database/local_database.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:rest_client/rest_client.dart' as _i2;
 
@@ -55,12 +56,41 @@ class MockDogImageRandomRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.DogImage>);
+  @override
+  _i4.Future<void> insertDogImageDB(_i5.DogImageEntity? dogImageEntity) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #insertDogImageDB,
+          [dogImageEntity],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<List<_i5.DogImageEntity>> getDogImagesFromDB() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getDogImagesFromDB,
+          [],
+        ),
+        returnValue:
+            _i4.Future<List<_i5.DogImageEntity>>.value(<_i5.DogImageEntity>[]),
+      ) as _i4.Future<List<_i5.DogImageEntity>>);
+  @override
+  _i4.Future<_i5.DogImageEntity?> deleteDogImageDB(String? message) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteDogImageDB,
+          [message],
+        ),
+        returnValue: _i4.Future<_i5.DogImageEntity?>.value(),
+      ) as _i4.Future<_i5.DogImageEntity?>);
 }
 
 /// A class which mocks [LogService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLogService extends _i1.Mock implements _i5.LogService {
+class MockLogService extends _i1.Mock implements _i6.LogService {
   MockLogService() {
     _i1.throwOnMissingStub(this);
   }

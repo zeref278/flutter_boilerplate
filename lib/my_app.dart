@@ -1,3 +1,4 @@
+import 'package:boilerplate/common/app_themes.dart';
 import 'package:boilerplate/features/application/bloc/application_bloc.dart';
 import 'package:boilerplate/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,7 +55,6 @@ class _MyAppState extends State<MyApp> {
           }
         },
         child: MaterialApp.router(
-          // Localization
           localizationsDelegates: const [
             AppLocalizationDelegate(),
             GlobalMaterialLocalizations.delegate,
@@ -68,24 +68,12 @@ class _MyAppState extends State<MyApp> {
           ],
           locale: Locale(_locale),
           themeMode: _isDarkMode ? ThemeMode.dark : ThemeMode.light,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            primaryColor: Colors.blue[600],
-            brightness: Brightness.light,
-            backgroundColor: Colors.grey[100],
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
-          darkTheme: ThemeData(
-            primarySwatch: Colors.blue,
-            primaryColor: Colors.blue[300],
-            brightness: Brightness.dark,
-            backgroundColor: Colors.grey[900],
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
+          theme: AppThemes.lightTheme,
+          darkTheme: AppThemes.darkTheme,
           routeInformationProvider: AppRouter.router.routeInformationProvider,
           routeInformationParser: AppRouter.router.routeInformationParser,
           routerDelegate: AppRouter.router.routerDelegate,
-          title: "BoilerPlate",
+          title: 'BoilerPlate',
           debugShowCheckedModeBanner: false,
         ),
       ),
