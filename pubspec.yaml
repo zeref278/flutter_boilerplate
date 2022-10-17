@@ -46,6 +46,7 @@ dependencies:
   go_router: ^4.3.0
   cupertino_icons: ^1.0.2
   another_flushbar: ^1.12.29
+  shared_preferences: ^2.0.15
 
   rest_client:
     path: packages/rest_client

@@ -8,8 +8,8 @@ import 'package:logger/logger.dart';
 
 import 'my_app.dart';
 
-void main() {
-  runZonedGuarded(() async {
+Future<void> main() async {
+  await runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
 
     /// Firebase initialize ...

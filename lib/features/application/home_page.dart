@@ -12,7 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -22,34 +21,34 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.current.go_route),
+        title: Text(S.of(context).go_route),
       ),
       body: Center(
         child: Column(
           children: [
             ElevatedButton(
-              child: Text(S.current.dog_image_random),
+              child: Text(S.of(context).dog_image_random),
               onPressed: () {
                 context.push(AppRouter.dogImageRandomPath);
               },
             ),
             AppSpacing.verticalSpacing32,
             ElevatedButton(
-              child: Text(S.current.config),
+              child: Text(S.of(context).config),
               onPressed: () {
                 context.push(AppRouter.config);
               },
             ),
             AppSpacing.verticalSpacing32,
             ElevatedButton(
-              child: Text(S.current.assets),
+              child: Text(S.of(context).assets),
               onPressed: () {
                 context.push(AppRouter.assets);
               },
             ),
             AppSpacing.verticalSpacing32,
             ElevatedButton(
-              child: Text(S.current.image_from_db),
+              child: Text(S.of(context).image_from_db),
               onPressed: () {
                 context.push(AppRouter.imagesFromDb);
               },

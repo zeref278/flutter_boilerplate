@@ -10,7 +10,8 @@ class BlocModule {
   static void init() {
     final injector = Injector.instance;
 
-    injector.registerFactory<ApplicationBloc>(() => ApplicationBloc());
+    injector.registerSingleton<ApplicationBloc>(
+        ApplicationBloc(localStorageService: injector()));
 
     injector.registerFactory<DogImageRandomBloc>(
       () => DogImageRandomBloc(
