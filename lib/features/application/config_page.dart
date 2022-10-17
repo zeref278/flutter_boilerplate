@@ -25,7 +25,7 @@ class _ConfigPageState extends State<ConfigPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.current.config),
+        title: Text(S.of(context).config),
       ),
       body: Padding(
         padding: const EdgeInsets.all(AppDimens.basePadding),
