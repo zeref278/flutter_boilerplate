@@ -10,4 +10,11 @@ class MapperUtils {
       dogImage.status,
     );
   }
+
+  static DogImage mapDogImageEntity(DogImageEntity dogImageEntity) {
+    return DogImage(
+      message: dogImageEntity.message,
+      status: dogImageEntity.status,
+    );
+  }
 }

@@ -103,15 +103,14 @@ class _$DogImageDao extends DogImageDao {
   _$DogImageDao(
     this.database,
     this.changeListener,
-  )   : _queryAdapter = QueryAdapter(database, changeListener),
+  )   : _queryAdapter = QueryAdapter(database),
         _dogImageEntityInsertionAdapter = InsertionAdapter(
             database,
             'DogImageEntity',
             (DogImageEntity item) => <String, Object?>{
                   'message': item.message,
                   'status': item.status
-                },
-            changeListener);
+                });
 
   final sqflite.DatabaseExecutor database;
 
@@ -122,24 +121,22 @@ class _$DogImageDao extends DogImageDao {
   final InsertionAdapter<DogImageEntity> _dogImageEntityInsertionAdapter;
 
   @override
-  Future<List<DogImageEntity>> findAllPersons() async {
+  Future<List<DogImageEntity>> findAllDogImages() async {
     return _queryAdapter.queryList('SELECT * FROM DogImageEntity',
         mapper: (Map<String, Object?> row) =>
             DogImageEntity(row['message'] as String, row['status'] as String));
   }
 
   @override
-  Stream<DogImageEntity?> findPersonById(String url) {
-    return _queryAdapter.queryStream('SELECT * FROM Person WHERE message = ?1',
+  Future<DogImageEntity?> deleteDogImage(String message) async {
+    return _queryAdapter.query('DELETE FROM DogImageEntity WHERE message = ?1',
         mapper: (Map<String, Object?> row) =>
             DogImageEntity(row['message'] as String, row['status'] as String),
-        arguments: [url],
-        queryableName: 'DogImageEntity',
-        isView: false);
+        arguments: [message]);
   }
 
   @override
-  Future<void> insertPerson(DogImageEntity dogImageEntity) async {
+  Future<void> insertDogImage(DogImageEntity dogImageEntity) async {
     await _dogImageEntityInsertionAdapter.insert(
         dogImageEntity, OnConflictStrategy.abort);
   }

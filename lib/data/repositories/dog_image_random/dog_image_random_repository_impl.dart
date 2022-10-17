@@ -30,4 +30,16 @@ class DogImageRandomRepositoryImpl implements DogImageRandomRepository {
     final DogImageDao dao = await _appDatabaseManager.dogImageDao;
     await dao.insertDogImage(dogImageEntity);
   }
+
+  @override
+  Future<List<DogImageEntity>> getDogImagesFromDB() async {
+    final DogImageDao dao = await _appDatabaseManager.dogImageDao;
+    return await dao.findAllDogImages();
+  }
+
+  @override
+  Future<DogImageEntity?> deleteDogImageDB(String message) async {
+    final DogImageDao dao = await _appDatabaseManager.dogImageDao;
+    return await dao.deleteDogImage(message);
+  }
 }

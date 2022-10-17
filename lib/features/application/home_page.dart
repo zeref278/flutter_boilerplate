@@ -1,3 +1,4 @@
+import 'package:boilerplate/common/app_spacing.dart';
 import 'package:boilerplate/generated/l10n.dart';
 import 'package:boilerplate/router/app_router.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,22 +33,25 @@ class _HomePageState extends State<HomePage> {
                 context.push(AppRouter.dogImageRandomPath);
               },
             ),
-            const SizedBox(
-              height: 30,
-            ),
+            AppSpacing.verticalSpacing32,
             ElevatedButton(
               child: Text(S.current.config),
               onPressed: () {
                 context.push(AppRouter.config);
               },
             ),
-            const SizedBox(
-              height: 30,
-            ),
+            AppSpacing.verticalSpacing32,
             ElevatedButton(
               child: Text(S.current.assets),
               onPressed: () {
                 context.push(AppRouter.assets);
+              },
+            ),
+            AppSpacing.verticalSpacing32,
+            ElevatedButton(
+              child: Text(S.current.image_from_db),
+              onPressed: () {
+                context.push(AppRouter.imagesFromDb);
               },
             ),
           ],

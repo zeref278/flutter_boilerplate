@@ -1,3 +1,5 @@
+import 'package:boilerplate/common/app_dimens.dart';
+import 'package:boilerplate/common/app_spacing.dart';
 import 'package:boilerplate/features/application/bloc/application_bloc.dart';
 import 'package:boilerplate/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -26,11 +28,11 @@ class _ConfigPageState extends State<ConfigPage> {
         title: Text(S.current.config),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppDimens.basePadding),
         child: Column(
           children: [
             _buildLangs(),
-            const SizedBox(height: 20),
+            AppSpacing.verticalSpacing24,
             _buildDarkMode(),
           ],
         ),

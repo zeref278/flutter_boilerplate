@@ -1,3 +1,5 @@
+import 'package:boilerplate/common/app_dimens.dart';
+import 'package:boilerplate/common/app_spacing.dart';
 import 'package:boilerplate/features/application/bloc/application_bloc.dart';
 import 'package:boilerplate/features/dog_image_random/bloc/dog_image_random_bloc.dart';
 import 'package:boilerplate/generated/l10n.dart';
@@ -84,7 +86,8 @@ class _ButtonBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppDimens.basePadding, vertical: AppDimens.basePadding),
         child: Row(
           children: [
             Expanded(
@@ -97,9 +100,7 @@ class _ButtonBar extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(
-              width: 16,
-            ),
+            AppSpacing.horizontalSpacing16,
             Expanded(
               child: ElevatedButton(
                 child: Text(S.current.load_and_insert_db),

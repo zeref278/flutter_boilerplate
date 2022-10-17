@@ -9,5 +9,8 @@
   "vietnamese": "Vietnamese",
   "dark_mode": "Dark mode",
   "assets": "Assets gen",
-  "load_and_insert_db": "Load and insert DB"
+  "load_and_insert_db": "Load and insert DB",
+  "image_from_db": "Image from DB",
+  "delete_success": "Delete success",
+  "delete_failed": "Delete failed"
 }

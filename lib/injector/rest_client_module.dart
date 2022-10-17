@@ -1,4 +1,4 @@
-import 'package:boilerplate/app_config.dart';
+import 'package:boilerplate/configs/app_config.dart';
 import 'package:boilerplate/injector/injector.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
