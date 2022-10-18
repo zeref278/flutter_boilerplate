@@ -6,6 +6,7 @@ class AppConfig {
   static void configDev() {
     baseUrl = 'https://dog.ceo/api';
   }
+
   static void configTest() {
     /// TODO
   }
@@ -13,5 +14,4 @@ class AppConfig {
   static void configProduction() {
     /// TODO
   }
-
 }
