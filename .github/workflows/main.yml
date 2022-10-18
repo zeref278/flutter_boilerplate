@@ -33,6 +33,18 @@ jobs:
     - run: flutter pub run intl_utils:generate
     
     - run: flutter pub run build_runner build --delete-conflicting-outputs
+
+    - name: local_database
+      working-directory: ./packages/local_database
+      run: flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
+
+    - name: rest_client
+      working-directory: ./packages/rest_client
+      run: flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
+
+    - run: flutter analyze
+
+    - run: flutter test
     
     - run: flutter build apk
     

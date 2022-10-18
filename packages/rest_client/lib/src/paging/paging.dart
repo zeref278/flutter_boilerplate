@@ -17,6 +17,6 @@ class Paging<T> with _$Paging<T> {
   }) = _Paging;
 
   factory Paging.fromJson(
-      Map<String, Object?> json, T Function(Object?) fromJsonT) =>
+          Map<String, Object?> json, T Function(Object?) fromJsonT) =>
       _$PagingFromJson(json, fromJsonT);
 }

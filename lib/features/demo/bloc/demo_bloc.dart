@@ -1,14 +1,12 @@
 import 'dart:async';
-
-import 'package:bloc/bloc.dart';
 import 'package:boilerplate/data/repositories/dog_image_random/dog_image_random_repository.dart';
 import 'package:boilerplate/features/application/bloc/application_bloc.dart';
 import 'package:boilerplate/generated/l10n.dart';
 import 'package:boilerplate/services/log_service/log_service.dart';
 import 'package:boilerplate/utils/mapper_utils.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:local_database/local_database.dart';
-import 'package:meta/meta.dart';
 import 'package:rest_client/rest_client.dart';
 
 part 'demo_event.dart';
