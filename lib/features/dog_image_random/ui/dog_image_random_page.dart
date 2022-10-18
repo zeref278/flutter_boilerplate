@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:boilerplate/common/app_dimens.dart';
 import 'package:boilerplate/common/app_spacing.dart';
 import 'package:boilerplate/features/application/bloc/application_bloc.dart';
@@ -60,7 +61,17 @@ class _BodyState extends State<_Body> {
         listenWhen: (prev, next) => prev.status != next.status,
         listener: (context, state) {
           if (state.status == UIStatus.actionFailed) {
-            /// TODO
+            Flushbar(
+              message: state.errorMsg,
+              duration: const Duration(seconds: 1),
+              backgroundColor: Colors.red,
+            ).show(context);
+          } else if (state.status == UIStatus.actionSuccess) {
+            Flushbar(
+              message: state.successMsg,
+              duration: const Duration(seconds: 1),
+              backgroundColor: Colors.green,
+            ).show(context);
           }
         },
         builder: (context, state) {

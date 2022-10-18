@@ -52,12 +52,14 @@ class _Body extends StatelessWidget {
           if (state.status == UIStatus.actionSuccess) {
             Flushbar(
               message: state.successMsg,
-              duration: Duration(seconds: 1),
+              duration: const Duration(seconds: 1),
+              backgroundColor: Colors.green,
             ).show(context);
           } else if (state.status == UIStatus.actionFailed) {
             Flushbar(
               message: state.errorMsg,
-              duration: Duration(seconds: 1),
+              duration: const Duration(seconds: 1),
+              backgroundColor: Colors.red,
             ).show(context);
           }
         },
