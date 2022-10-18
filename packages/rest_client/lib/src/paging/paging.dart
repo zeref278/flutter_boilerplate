@@ -1,22 +1,22 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'collection_pagination.freezed.dart';
-part 'collection_pagination.g.dart';
+part 'paging.freezed.dart';
+part 'paging.g.dart';
 
 /// Model base to get data from api pagination response
-/// Loadmore using this, example CollectionPagination<DogImage>
+/// Loadmore using this, example Paging<DogImage>
 @Freezed(
   genericArgumentFactories: true,
 )
-class CollectionPagination<T> with _$CollectionPagination<T> {
-  const factory CollectionPagination({
+class Paging<T> with _$Paging<T> {
+  const factory Paging({
     @JsonKey(name: 'totalCount') int? totalCount,
     @JsonKey(name: 'currentCount') int? currentCount,
     required List<T> items,
-  }) = _CollectionPagination;
+  }) = _Paging;
 
-  factory CollectionPagination.fromJson(
+  factory Paging.fromJson(
       Map<String, Object?> json, T Function(Object?) fromJsonT) =>
-      _$CollectionPaginationFromJson(json, fromJsonT);
+      _$PagingFromJson(json, fromJsonT);
 }

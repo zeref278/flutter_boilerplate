@@ -5,6 +5,14 @@ import 'package:local_database/local_database.dart';
 import 'app_database.dart';
 
 class AppDatabaseManager {
+  static final AppDatabaseManager _singleton = AppDatabaseManager._internal();
+
+  factory AppDatabaseManager() {
+    return _singleton;
+  }
+
+  AppDatabaseManager._internal();
+
   late final AppDatabase _database;
 
   ///DAO
@@ -46,6 +54,5 @@ class AppDatabaseManager {
   //  });
   //
   // Step 3. Run command "flutter clean && flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs"
-
 
 }
