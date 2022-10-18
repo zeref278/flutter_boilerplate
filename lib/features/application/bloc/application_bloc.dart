@@ -1,11 +1,10 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:boilerplate/generated/l10n.dart';
 import 'package:boilerplate/services/local_storage_service/local_storage_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:meta/meta.dart';
 
 part 'application_event.dart';
 part 'application_state.dart';

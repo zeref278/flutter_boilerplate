@@ -5,6 +5,7 @@ import 'package:mockito/annotations.dart';
 @GenerateMocks([
   DogImageRandomRepository,
   LogService,
+
   /// TODO
 ])
 void main() {}

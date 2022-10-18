@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppSpacing {
   AppSpacing._();
-  
+
   static const horizontalSpacing2 = SizedBox(width: 2);
   static const horizontalSpacing4 = SizedBox(width: 4);
   static const horizontalSpacing6 = SizedBox(width: 6);
@@ -26,5 +26,4 @@ class AppSpacing {
   static const verticalSpacing24 = SizedBox(height: 24);
   static const verticalSpacing32 = SizedBox(height: 32);
   static const verticalSpacing48 = SizedBox(height: 48);
-  
 }

@@ -7,10 +7,6 @@ class AppThemes {
   static const Color _lightPrimaryColor = Color(0xffffffff);
   static const Color _darkPrimaryColor = Color(0xFF1a222d);
 
-  //Secondary
-  static const Color _lightSecondaryColor = Color(0xFFd74315);
-  static const Color _darkSecondaryColor = Color(0xFFd74315);
-
   //Background
   static const Color _lightBackgroundColor = Color(0xffffffff);
   static const Color _darkBackgroundColor = Color(0xFF1a222d);
@@ -18,10 +14,6 @@ class AppThemes {
   //Text
   static const Color _lightTextColor = Color(0xff000000);
   static const Color _darkTextColor = Color(0xffffffff);
-
-  //Border
-  static const Color _lightBorderColor = Colors.grey;
-  static const Color _darkBorderColor = Colors.grey;
 
   //Icon
   static const Color _lightIconColor = Color(0xff000000);

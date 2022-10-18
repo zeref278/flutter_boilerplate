@@ -6,7 +6,7 @@ import 'package:boilerplate/generated/l10n.dart';
 import 'package:boilerplate/injector/injector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rest_client/src/models/dog_image/dog_image.dart';
+import 'package:rest_client/rest_client.dart';
 
 class ImagesFromDbPage extends StatelessWidget {
   const ImagesFromDbPage({Key? key}) : super(key: key);
@@ -81,7 +81,10 @@ class _Body extends StatelessWidget {
           Image.network(images[index].message),
           Positioned(
             child: InkWell(
-              child: const Icon(Icons.delete, color: Colors.red,),
+              child: const Icon(
+                Icons.delete,
+                color: Colors.red,
+              ),
               onTap: () {
                 context
                     .read<DemoBloc>()
