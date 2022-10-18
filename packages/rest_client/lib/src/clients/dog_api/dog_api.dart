@@ -10,5 +10,4 @@ abstract class DogApiClient {
 
   @GET('/breeds/image/random')
   Future<DogImage> getDogImageRandom();
-
 }

@@ -12,5 +12,4 @@ class FirebaseCrashlyticsService implements CrashlyticsService {
     // TODO: implement recordException
     throw UnimplementedError();
   }
-  
 }

@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     _locale = 'en';
-    _bloc = Injector.instance<ApplicationBloc>();;
+    _bloc = Injector.instance<ApplicationBloc>();
     _bloc.add(const ApplicationLoaded());
     _isDarkMode = false;
     super.initState();
