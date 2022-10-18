@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'collection_pagination.dart';
+part of 'paging.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-CollectionPagination<T> _$CollectionPaginationFromJson<T>(
+Paging<T> _$PagingFromJson<T>(
     Map<String, dynamic> json, T Function(Object?) fromJsonT) {
-  return _CollectionPagination<T>.fromJson(json, fromJsonT);
+  return _Paging<T>.fromJson(json, fromJsonT);
 }
 
 /// @nodoc
-mixin _$CollectionPagination<T> {
+mixin _$Paging<T> {
   @JsonKey(name: 'totalCount')
   int? get totalCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'currentCount')
@@ -30,15 +30,14 @@ mixin _$CollectionPagination<T> {
   Map<String, dynamic> toJson(Object? Function(T) toJsonT) =>
       throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $CollectionPaginationCopyWith<T, CollectionPagination<T>> get copyWith =>
+  $PagingCopyWith<T, Paging<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CollectionPaginationCopyWith<T, $Res> {
-  factory $CollectionPaginationCopyWith(CollectionPagination<T> value,
-          $Res Function(CollectionPagination<T>) then) =
-      _$CollectionPaginationCopyWithImpl<T, $Res>;
+abstract class $PagingCopyWith<T, $Res> {
+  factory $PagingCopyWith(Paging<T> value, $Res Function(Paging<T>) then) =
+      _$PagingCopyWithImpl<T, $Res>;
   $Res call(
       {@JsonKey(name: 'totalCount') int? totalCount,
       @JsonKey(name: 'currentCount') int? currentCount,
@@ -46,13 +45,12 @@ abstract class $CollectionPaginationCopyWith<T, $Res> {
 }
 
 /// @nodoc
-class _$CollectionPaginationCopyWithImpl<T, $Res>
-    implements $CollectionPaginationCopyWith<T, $Res> {
-  _$CollectionPaginationCopyWithImpl(this._value, this._then);
+class _$PagingCopyWithImpl<T, $Res> implements $PagingCopyWith<T, $Res> {
+  _$PagingCopyWithImpl(this._value, this._then);
 
-  final CollectionPagination<T> _value;
+  final Paging<T> _value;
   // ignore: unused_field
-  final $Res Function(CollectionPagination<T>) _then;
+  final $Res Function(Paging<T>) _then;
 
   @override
   $Res call({
@@ -78,11 +76,10 @@ class _$CollectionPaginationCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
-abstract class _$$_CollectionPaginationCopyWith<T, $Res>
-    implements $CollectionPaginationCopyWith<T, $Res> {
-  factory _$$_CollectionPaginationCopyWith(_$_CollectionPagination<T> value,
-          $Res Function(_$_CollectionPagination<T>) then) =
-      __$$_CollectionPaginationCopyWithImpl<T, $Res>;
+abstract class _$$_PagingCopyWith<T, $Res> implements $PagingCopyWith<T, $Res> {
+  factory _$$_PagingCopyWith(
+          _$_Paging<T> value, $Res Function(_$_Paging<T>) then) =
+      __$$_PagingCopyWithImpl<T, $Res>;
   @override
   $Res call(
       {@JsonKey(name: 'totalCount') int? totalCount,
@@ -91,16 +88,14 @@ abstract class _$$_CollectionPaginationCopyWith<T, $Res>
 }
 
 /// @nodoc
-class __$$_CollectionPaginationCopyWithImpl<T, $Res>
-    extends _$CollectionPaginationCopyWithImpl<T, $Res>
-    implements _$$_CollectionPaginationCopyWith<T, $Res> {
-  __$$_CollectionPaginationCopyWithImpl(_$_CollectionPagination<T> _value,
-      $Res Function(_$_CollectionPagination<T>) _then)
-      : super(_value, (v) => _then(v as _$_CollectionPagination<T>));
+class __$$_PagingCopyWithImpl<T, $Res> extends _$PagingCopyWithImpl<T, $Res>
+    implements _$$_PagingCopyWith<T, $Res> {
+  __$$_PagingCopyWithImpl(
+      _$_Paging<T> _value, $Res Function(_$_Paging<T>) _then)
+      : super(_value, (v) => _then(v as _$_Paging<T>));
 
   @override
-  _$_CollectionPagination<T> get _value =>
-      super._value as _$_CollectionPagination<T>;
+  _$_Paging<T> get _value => super._value as _$_Paging<T>;
 
   @override
   $Res call({
@@ -108,7 +103,7 @@ class __$$_CollectionPaginationCopyWithImpl<T, $Res>
     Object? currentCount = freezed,
     Object? items = freezed,
   }) {
-    return _then(_$_CollectionPagination<T>(
+    return _then(_$_Paging<T>(
       totalCount: totalCount == freezed
           ? _value.totalCount
           : totalCount // ignore: cast_nullable_to_non_nullable
@@ -127,16 +122,16 @@ class __$$_CollectionPaginationCopyWithImpl<T, $Res>
 
 /// @nodoc
 @JsonSerializable(genericArgumentFactories: true)
-class _$_CollectionPagination<T> implements _CollectionPagination<T> {
-  const _$_CollectionPagination(
+class _$_Paging<T> implements _Paging<T> {
+  const _$_Paging(
       {@JsonKey(name: 'totalCount') this.totalCount,
       @JsonKey(name: 'currentCount') this.currentCount,
       required final List<T> items})
       : _items = items;
 
-  factory _$_CollectionPagination.fromJson(
+  factory _$_Paging.fromJson(
           Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
-      _$$_CollectionPaginationFromJson(json, fromJsonT);
+      _$$_PagingFromJson(json, fromJsonT);
 
   @override
   @JsonKey(name: 'totalCount')
@@ -153,14 +148,14 @@ class _$_CollectionPagination<T> implements _CollectionPagination<T> {
 
   @override
   String toString() {
-    return 'CollectionPagination<$T>(totalCount: $totalCount, currentCount: $currentCount, items: $items)';
+    return 'Paging<$T>(totalCount: $totalCount, currentCount: $currentCount, items: $items)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CollectionPagination<T> &&
+            other is _$_Paging<T> &&
             const DeepCollectionEquality()
                 .equals(other.totalCount, totalCount) &&
             const DeepCollectionEquality()
@@ -178,26 +173,24 @@ class _$_CollectionPagination<T> implements _CollectionPagination<T> {
 
   @JsonKey(ignore: true)
   @override
-  _$$_CollectionPaginationCopyWith<T, _$_CollectionPagination<T>>
-      get copyWith =>
-          __$$_CollectionPaginationCopyWithImpl<T, _$_CollectionPagination<T>>(
-              this, _$identity);
+  _$$_PagingCopyWith<T, _$_Paging<T>> get copyWith =>
+      __$$_PagingCopyWithImpl<T, _$_Paging<T>>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson(Object? Function(T) toJsonT) {
-    return _$$_CollectionPaginationToJson<T>(this, toJsonT);
+    return _$$_PagingToJson<T>(this, toJsonT);
   }
 }
 
-abstract class _CollectionPagination<T> implements CollectionPagination<T> {
-  const factory _CollectionPagination(
+abstract class _Paging<T> implements Paging<T> {
+  const factory _Paging(
       {@JsonKey(name: 'totalCount') final int? totalCount,
       @JsonKey(name: 'currentCount') final int? currentCount,
-      required final List<T> items}) = _$_CollectionPagination<T>;
+      required final List<T> items}) = _$_Paging<T>;
 
-  factory _CollectionPagination.fromJson(
+  factory _Paging.fromJson(
           Map<String, dynamic> json, T Function(Object?) fromJsonT) =
-      _$_CollectionPagination<T>.fromJson;
+      _$_Paging<T>.fromJson;
 
   @override
   @JsonKey(name: 'totalCount')
@@ -209,6 +202,6 @@ abstract class _CollectionPagination<T> implements CollectionPagination<T> {
   List<T> get items;
   @override
   @JsonKey(ignore: true)
-  _$$_CollectionPaginationCopyWith<T, _$_CollectionPagination<T>>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_PagingCopyWith<T, _$_Paging<T>> get copyWith =>
+      throw _privateConstructorUsedError;
 }
