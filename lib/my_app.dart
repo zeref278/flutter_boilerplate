@@ -1,4 +1,5 @@
 import 'package:boilerplate/common/app_themes.dart';
+import 'package:boilerplate/configs/app_config.dart';
 import 'package:boilerplate/features/application/bloc/application_bloc.dart';
 import 'package:boilerplate/generated/l10n.dart';
 import 'package:boilerplate/injector/injector.dart';
@@ -20,13 +21,15 @@ class _MyAppState extends State<MyApp> {
   late final ApplicationBloc _bloc;
   late String _locale;
   late bool _isDarkMode;
+  late final AppLocalizationDelegate appLocalizationDelegate;
 
   @override
   void initState() {
-    _locale = 'en';
+    _locale = AppConfig.defaultLocale;
     _bloc = Injector.instance<ApplicationBloc>();
     _bloc.add(const ApplicationLoaded());
     _isDarkMode = false;
+    appLocalizationDelegate = const AppLocalizationDelegate();
     super.initState();
   }
 
@@ -56,17 +59,14 @@ class _MyAppState extends State<MyApp> {
           }
         },
         child: MaterialApp.router(
-          localizationsDelegates: const [
-            AppLocalizationDelegate(),
+          localizationsDelegates: [
+            appLocalizationDelegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
             DefaultCupertinoLocalizations.delegate
           ],
-          supportedLocales: const [
-            Locale('en'),
-            Locale('vi'),
-          ],
+          supportedLocales: appLocalizationDelegate.supportedLocales,
           locale: Locale(_locale),
           themeMode: _isDarkMode ? ThemeMode.dark : ThemeMode.light,
           theme: AppThemes.lightTheme,
