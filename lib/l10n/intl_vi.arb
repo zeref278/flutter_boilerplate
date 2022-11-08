@@ -12,5 +12,6 @@
   "load_and_insert_db": "Tải và lưu DB",
   "image_from_db": "Hình ảnh từ DB",
   "delete_success": "Xoá thành công",
-  "delete_failed": "Xoá không thành công"
+  "delete_failed": "Xoá không thành công",
+  "didnt_supported": "Không hỗ trợ"
 }
