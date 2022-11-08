@@ -1,5 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:boilerplate/data/repositories/dog_image_random/dog_image_random_repository.dart';
+import 'package:boilerplate/data/repositories/dog_image_random/remote/dog_image_random_repository.dart';
 import 'package:boilerplate/features/application/bloc/application_bloc.dart';
 import 'package:boilerplate/features/dog_image_random/bloc/dog_image_random_bloc.dart';
 import 'package:boilerplate/services/log_service/log_service.dart';
