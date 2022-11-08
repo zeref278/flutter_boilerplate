@@ -49,25 +49,22 @@ class _Body extends StatelessWidget {
       child: BlocConsumer<DemoBloc, DemoState>(
         listenWhen: (prev, next) => prev.status != next.status,
         listener: (context, state) {
-          state.notification?.when(
-            insertSuccess: (message) {
-              Flushbar(
-                message: state.successMsg,
-                duration: const Duration(seconds: 1),
-                backgroundColor: Colors.green,
-              ).show(context);
-            },
-            insertFailed: (message) {
-              Flushbar(
-                message: state.errorMsg,
-                duration: const Duration(seconds: 1),
-                backgroundColor: Colors.red,
-              ).show(context);
-            },
-          );
+          if (state.status == UIStatus.actionSuccess) {
+            Flushbar(
+              message: state.successMsg,
+              duration: const Duration(seconds: 1),
+              backgroundColor: Colors.green,
+            ).show(context);
+          } else if (state.status == UIStatus.actionFailed) {
+            Flushbar(
+              message: state.errorMsg,
+              duration: const Duration(seconds: 1),
+              backgroundColor: Colors.red,
+            ).show(context);
+          }
         },
         builder: (context, state) {
-          if (state.status == UIStatus.loading || state.isBusy) {
+          if (state.status == UIStatus.loading) {
             return const CircularProgressIndicator();
           } else {
             return _buildImages(state.images);

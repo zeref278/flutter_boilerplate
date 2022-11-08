@@ -73,9 +73,8 @@ class DogImageRandomBloc
     } catch (e, s) {
       _log.e('DogImageRandomLoaded failed', e, s);
       emit(state.copyWith(
-        notification: _NotificationNotifyFailed(
-          message: e.toString(),
-        ),
+        status: UIStatus.actionFailed,
+        errorMsg: e.toString(),
       ));
     }
   }
