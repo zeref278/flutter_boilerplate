@@ -1,24 +1,12 @@
 import 'package:local_database/local_database.dart';
-import 'package:rest_client/rest_client.dart';
-import 'dog_image_random_repository.dart';
+import 'dog_image_local_repository.dart';
 
-class DogImageRandomRepositoryImpl implements DogImageRandomRepository {
-  DogImageRandomRepositoryImpl({
-    required DogApiClient dogApiClient,
+class DogImageLocalRepositoryImpl implements DogImageLocalRepository {
+  DogImageLocalRepositoryImpl({
     required AppDatabaseManager appDatabaseManager,
-  })  : _dogApiClient = dogApiClient,
-        _appDatabaseManager = appDatabaseManager;
+  }) : _appDatabaseManager = appDatabaseManager;
 
-  late final DogApiClient _dogApiClient;
   late final AppDatabaseManager _appDatabaseManager;
-
-  /// Remote
-  @override
-  Future<DogImage> getDogImageRandom() async {
-    return await _dogApiClient
-        .getDogImageRandom()
-        .catchError(ExceptionHandler.handleException);
-  }
 
   /// Local
   @override

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:boilerplate/data/repositories/dog_image_random/dog_image_random_repository.dart';
+import 'package:boilerplate/data/repositories/dog_image_random/local/dog_image_local_repository.dart';
 import 'package:boilerplate/features/application/bloc/application_bloc.dart';
 import 'package:boilerplate/generated/l10n.dart';
 import 'package:boilerplate/services/log_service/log_service.dart';
@@ -16,7 +16,7 @@ part 'demo_bloc.freezed.dart';
 class DemoBloc extends Bloc<DemoEvent, DemoState> {
   DemoBloc({
     required LogService logService,
-    required DogImageRandomRepository dogImageRandomRepository,
+    required DogImageLocalRepository dogImageRandomRepository,
   }) : super(const DemoState()) {
     _repository = dogImageRandomRepository;
     _logService = logService;
@@ -24,7 +24,7 @@ class DemoBloc extends Bloc<DemoEvent, DemoState> {
     on<DemoDeleteImageFromDB>(_onDeleteImageFromDB);
   }
 
-  late final DogImageRandomRepository _repository;
+  late final DogImageLocalRepository _repository;
   late final LogService _logService;
 
   FutureOr<void> _onImagesLoadFromDB(

@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:boilerplate/data/repositories/dog_image_random/dog_image_random_repository.dart';
+import 'package:boilerplate/data/repositories/dog_image_random/local/dog_image_local_repository.dart';
+import 'package:boilerplate/data/repositories/dog_image_random/remote/dog_image_random_repository.dart';
 import 'package:boilerplate/features/application/bloc/application_bloc.dart';
 import 'package:boilerplate/services/log_service/log_service.dart';
 import 'package:boilerplate/utils/mapper_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:local_database/local_database.dart';
@@ -18,18 +20,21 @@ class DogImageRandomBloc
   DogImageRandomBloc({
     required DogImageRandomRepository dogImageRandomRepository,
     required LogService logService,
+    DogImageLocalRepository? dogImageLocalRepository,
   }) : super(
           const DogImageRandomState(
             dogImage: DogImage(message: '', status: ''),
           ),
         ) {
     _repository = dogImageRandomRepository;
+    _localRepository = dogImageLocalRepository;
     _log = logService;
     on<DogImageRandomLoaded>(_onLoaded);
     on<DogImageRandomRandomRequested>(_onRandom, transformer: droppable());
   }
 
   late final DogImageRandomRepository _repository;
+  late final DogImageLocalRepository? _localRepository;
   late final LogService _log;
 
   FutureOr<void> _onLoaded(
@@ -56,9 +61,9 @@ class DogImageRandomBloc
 
       final DogImage image = await _repository.getDogImageRandom();
 
-      if (event.insertDb) {
+      if (event.insertDb && !kIsWeb && _localRepository != null) {
         final DogImageEntity entity = MapperUtils.mapDogImage(image);
-        await _repository.insertDogImageDB(entity);
+        await _localRepository!.insertDogImageDB(entity);
       }
 
       emit(state.copyWith(
