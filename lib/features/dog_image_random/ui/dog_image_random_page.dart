@@ -58,24 +58,21 @@ class _BodyState extends State<_Body> {
   Widget build(BuildContext context) {
     return Center(
       child: BlocConsumer<DogImageRandomBloc, DogImageRandomState>(
-        listenWhen: (prev, next) => prev.notification != next.notification,
+        listenWhen: (prev, next) => prev.status != next.status,
         listener: (context, state) {
-          state.notification?.when(
-            notifySuccess: (message) {
-              Flushbar(
-                message: state.errorMsg,
-                duration: const Duration(seconds: 1),
-                backgroundColor: Colors.red,
-              ).show(context);
-            },
-            notifyFailed: (message) {
-              Flushbar(
-                message: state.successMsg,
-                duration: const Duration(seconds: 1),
-                backgroundColor: Colors.green,
-              ).show(context);
-            },
-          );
+          if (state.status == UIStatus.actionFailed) {
+            Flushbar(
+              message: state.errorMsg,
+              duration: const Duration(seconds: 1),
+              backgroundColor: Colors.red,
+            ).show(context);
+          } else if (state.status == UIStatus.actionSuccess) {
+            Flushbar(
+              message: state.successMsg,
+              duration: const Duration(seconds: 1),
+              backgroundColor: Colors.green,
+            ).show(context);
+          }
         },
         builder: (context, state) {
           if (state.status == UIStatus.initial) {

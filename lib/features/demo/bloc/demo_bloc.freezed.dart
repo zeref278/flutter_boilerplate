@@ -315,7 +315,6 @@ abstract class DemoDeleteImageFromDB implements DemoEvent {
 /// @nodoc
 mixin _$DemoState {
   UIStatus get status => throw _privateConstructorUsedError;
-  DemoNotification? get notification => throw _privateConstructorUsedError;
   List<DogImage> get images => throw _privateConstructorUsedError;
   String? get errorMsg => throw _privateConstructorUsedError;
   String? get successMsg => throw _privateConstructorUsedError;
@@ -332,13 +331,10 @@ abstract class $DemoStateCopyWith<$Res> {
       _$DemoStateCopyWithImpl<$Res>;
   $Res call(
       {UIStatus status,
-      DemoNotification? notification,
       List<DogImage> images,
       String? errorMsg,
       String? successMsg,
       bool isBusy});
-
-  $DemoNotificationCopyWith<$Res>? get notification;
 }
 
 /// @nodoc
@@ -352,7 +348,6 @@ class _$DemoStateCopyWithImpl<$Res> implements $DemoStateCopyWith<$Res> {
   @override
   $Res call({
     Object? status = freezed,
-    Object? notification = freezed,
     Object? images = freezed,
     Object? errorMsg = freezed,
     Object? successMsg = freezed,
@@ -363,10 +358,6 @@ class _$DemoStateCopyWithImpl<$Res> implements $DemoStateCopyWith<$Res> {
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as UIStatus,
-      notification: notification == freezed
-          ? _value.notification
-          : notification // ignore: cast_nullable_to_non_nullable
-              as DemoNotification?,
       images: images == freezed
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
@@ -385,17 +376,6 @@ class _$DemoStateCopyWithImpl<$Res> implements $DemoStateCopyWith<$Res> {
               as bool,
     ));
   }
-
-  @override
-  $DemoNotificationCopyWith<$Res>? get notification {
-    if (_value.notification == null) {
-      return null;
-    }
-
-    return $DemoNotificationCopyWith<$Res>(_value.notification!, (value) {
-      return _then(_value.copyWith(notification: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -406,14 +386,10 @@ abstract class _$$_DemoStateCopyWith<$Res> implements $DemoStateCopyWith<$Res> {
   @override
   $Res call(
       {UIStatus status,
-      DemoNotification? notification,
       List<DogImage> images,
       String? errorMsg,
       String? successMsg,
       bool isBusy});
-
-  @override
-  $DemoNotificationCopyWith<$Res>? get notification;
 }
 
 /// @nodoc
@@ -429,7 +405,6 @@ class __$$_DemoStateCopyWithImpl<$Res> extends _$DemoStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = freezed,
-    Object? notification = freezed,
     Object? images = freezed,
     Object? errorMsg = freezed,
     Object? successMsg = freezed,
@@ -440,10 +415,6 @@ class __$$_DemoStateCopyWithImpl<$Res> extends _$DemoStateCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as UIStatus,
-      notification: notification == freezed
-          ? _value.notification
-          : notification // ignore: cast_nullable_to_non_nullable
-              as DemoNotification?,
       images: images == freezed
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
@@ -469,7 +440,6 @@ class __$$_DemoStateCopyWithImpl<$Res> extends _$DemoStateCopyWithImpl<$Res>
 class _$_DemoState implements _DemoState {
   const _$_DemoState(
       {this.status = UIStatus.initial,
-      this.notification,
       final List<DogImage> images = const [],
       this.errorMsg,
       this.successMsg,
@@ -479,8 +449,6 @@ class _$_DemoState implements _DemoState {
   @override
   @JsonKey()
   final UIStatus status;
-  @override
-  final DemoNotification? notification;
   final List<DogImage> _images;
   @override
   @JsonKey()
@@ -499,7 +467,7 @@ class _$_DemoState implements _DemoState {
 
   @override
   String toString() {
-    return 'DemoState(status: $status, notification: $notification, images: $images, errorMsg: $errorMsg, successMsg: $successMsg, isBusy: $isBusy)';
+    return 'DemoState(status: $status, images: $images, errorMsg: $errorMsg, successMsg: $successMsg, isBusy: $isBusy)';
   }
 
   @override
@@ -508,8 +476,6 @@ class _$_DemoState implements _DemoState {
         (other.runtimeType == runtimeType &&
             other is _$_DemoState &&
             const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality()
-                .equals(other.notification, notification) &&
             const DeepCollectionEquality().equals(other._images, _images) &&
             const DeepCollectionEquality().equals(other.errorMsg, errorMsg) &&
             const DeepCollectionEquality()
@@ -521,7 +487,6 @@ class _$_DemoState implements _DemoState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(notification),
       const DeepCollectionEquality().hash(_images),
       const DeepCollectionEquality().hash(errorMsg),
       const DeepCollectionEquality().hash(successMsg),
@@ -536,7 +501,6 @@ class _$_DemoState implements _DemoState {
 abstract class _DemoState implements DemoState {
   const factory _DemoState(
       {final UIStatus status,
-      final DemoNotification? notification,
       final List<DogImage> images,
       final String? errorMsg,
       final String? successMsg,
@@ -544,8 +508,6 @@ abstract class _DemoState implements DemoState {
 
   @override
   UIStatus get status;
-  @override
-  DemoNotification? get notification;
   @override
   List<DogImage> get images;
   @override
@@ -558,342 +520,4 @@ abstract class _DemoState implements DemoState {
   @JsonKey(ignore: true)
   _$$_DemoStateCopyWith<_$_DemoState> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$DemoNotification {
-  String get message => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String message) insertSuccess,
-    required TResult Function(String message) insertFailed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String message)? insertSuccess,
-    TResult Function(String message)? insertFailed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message)? insertSuccess,
-    TResult Function(String message)? insertFailed,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_NotificationInsertSuccess value) insertSuccess,
-    required TResult Function(_NotificationInsertFailed value) insertFailed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_NotificationInsertSuccess value)? insertSuccess,
-    TResult Function(_NotificationInsertFailed value)? insertFailed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NotificationInsertSuccess value)? insertSuccess,
-    TResult Function(_NotificationInsertFailed value)? insertFailed,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $DemoNotificationCopyWith<DemoNotification> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DemoNotificationCopyWith<$Res> {
-  factory $DemoNotificationCopyWith(
-          DemoNotification value, $Res Function(DemoNotification) then) =
-      _$DemoNotificationCopyWithImpl<$Res>;
-  $Res call({String message});
-}
-
-/// @nodoc
-class _$DemoNotificationCopyWithImpl<$Res>
-    implements $DemoNotificationCopyWith<$Res> {
-  _$DemoNotificationCopyWithImpl(this._value, this._then);
-
-  final DemoNotification _value;
-  // ignore: unused_field
-  final $Res Function(DemoNotification) _then;
-
-  @override
-  $Res call({
-    Object? message = freezed,
-  }) {
-    return _then(_value.copyWith(
-      message: message == freezed
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-abstract class _$$_NotificationInsertSuccessCopyWith<$Res>
-    implements $DemoNotificationCopyWith<$Res> {
-  factory _$$_NotificationInsertSuccessCopyWith(
-          _$_NotificationInsertSuccess value,
-          $Res Function(_$_NotificationInsertSuccess) then) =
-      __$$_NotificationInsertSuccessCopyWithImpl<$Res>;
-  @override
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$$_NotificationInsertSuccessCopyWithImpl<$Res>
-    extends _$DemoNotificationCopyWithImpl<$Res>
-    implements _$$_NotificationInsertSuccessCopyWith<$Res> {
-  __$$_NotificationInsertSuccessCopyWithImpl(
-      _$_NotificationInsertSuccess _value,
-      $Res Function(_$_NotificationInsertSuccess) _then)
-      : super(_value, (v) => _then(v as _$_NotificationInsertSuccess));
-
-  @override
-  _$_NotificationInsertSuccess get _value =>
-      super._value as _$_NotificationInsertSuccess;
-
-  @override
-  $Res call({
-    Object? message = freezed,
-  }) {
-    return _then(_$_NotificationInsertSuccess(
-      message: message == freezed
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_NotificationInsertSuccess implements _NotificationInsertSuccess {
-  _$_NotificationInsertSuccess({required this.message});
-
-  @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'DemoNotification.insertSuccess(message: $message)';
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  _$$_NotificationInsertSuccessCopyWith<_$_NotificationInsertSuccess>
-      get copyWith => __$$_NotificationInsertSuccessCopyWithImpl<
-          _$_NotificationInsertSuccess>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String message) insertSuccess,
-    required TResult Function(String message) insertFailed,
-  }) {
-    return insertSuccess(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String message)? insertSuccess,
-    TResult Function(String message)? insertFailed,
-  }) {
-    return insertSuccess?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message)? insertSuccess,
-    TResult Function(String message)? insertFailed,
-    required TResult orElse(),
-  }) {
-    if (insertSuccess != null) {
-      return insertSuccess(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_NotificationInsertSuccess value) insertSuccess,
-    required TResult Function(_NotificationInsertFailed value) insertFailed,
-  }) {
-    return insertSuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_NotificationInsertSuccess value)? insertSuccess,
-    TResult Function(_NotificationInsertFailed value)? insertFailed,
-  }) {
-    return insertSuccess?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NotificationInsertSuccess value)? insertSuccess,
-    TResult Function(_NotificationInsertFailed value)? insertFailed,
-    required TResult orElse(),
-  }) {
-    if (insertSuccess != null) {
-      return insertSuccess(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _NotificationInsertSuccess implements DemoNotification {
-  factory _NotificationInsertSuccess({required final String message}) =
-      _$_NotificationInsertSuccess;
-
-  @override
-  String get message;
-  @override
-  @JsonKey(ignore: true)
-  _$$_NotificationInsertSuccessCopyWith<_$_NotificationInsertSuccess>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_NotificationInsertFailedCopyWith<$Res>
-    implements $DemoNotificationCopyWith<$Res> {
-  factory _$$_NotificationInsertFailedCopyWith(
-          _$_NotificationInsertFailed value,
-          $Res Function(_$_NotificationInsertFailed) then) =
-      __$$_NotificationInsertFailedCopyWithImpl<$Res>;
-  @override
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$$_NotificationInsertFailedCopyWithImpl<$Res>
-    extends _$DemoNotificationCopyWithImpl<$Res>
-    implements _$$_NotificationInsertFailedCopyWith<$Res> {
-  __$$_NotificationInsertFailedCopyWithImpl(_$_NotificationInsertFailed _value,
-      $Res Function(_$_NotificationInsertFailed) _then)
-      : super(_value, (v) => _then(v as _$_NotificationInsertFailed));
-
-  @override
-  _$_NotificationInsertFailed get _value =>
-      super._value as _$_NotificationInsertFailed;
-
-  @override
-  $Res call({
-    Object? message = freezed,
-  }) {
-    return _then(_$_NotificationInsertFailed(
-      message: message == freezed
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_NotificationInsertFailed implements _NotificationInsertFailed {
-  _$_NotificationInsertFailed({required this.message});
-
-  @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'DemoNotification.insertFailed(message: $message)';
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  _$$_NotificationInsertFailedCopyWith<_$_NotificationInsertFailed>
-      get copyWith => __$$_NotificationInsertFailedCopyWithImpl<
-          _$_NotificationInsertFailed>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String message) insertSuccess,
-    required TResult Function(String message) insertFailed,
-  }) {
-    return insertFailed(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String message)? insertSuccess,
-    TResult Function(String message)? insertFailed,
-  }) {
-    return insertFailed?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message)? insertSuccess,
-    TResult Function(String message)? insertFailed,
-    required TResult orElse(),
-  }) {
-    if (insertFailed != null) {
-      return insertFailed(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_NotificationInsertSuccess value) insertSuccess,
-    required TResult Function(_NotificationInsertFailed value) insertFailed,
-  }) {
-    return insertFailed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_NotificationInsertSuccess value)? insertSuccess,
-    TResult Function(_NotificationInsertFailed value)? insertFailed,
-  }) {
-    return insertFailed?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NotificationInsertSuccess value)? insertSuccess,
-    TResult Function(_NotificationInsertFailed value)? insertFailed,
-    required TResult orElse(),
-  }) {
-    if (insertFailed != null) {
-      return insertFailed(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _NotificationInsertFailed implements DemoNotification {
-  factory _NotificationInsertFailed({required final String message}) =
-      _$_NotificationInsertFailed;
-
-  @override
-  String get message;
-  @override
-  @JsonKey(ignore: true)
-  _$$_NotificationInsertFailedCopyWith<_$_NotificationInsertFailed>
-      get copyWith => throw _privateConstructorUsedError;
 }
