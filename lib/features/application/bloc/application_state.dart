@@ -14,7 +14,4 @@ enum UIStatus {
   loading,
   loadSuccess,
   loadFailed,
-  actionLoading,
-  actionSuccess,
-  actionFailed,
 }
