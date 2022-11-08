@@ -1,5 +1,4 @@
 import 'package:local_database/local_database.dart';
-import 'package:rest_client/rest_client.dart';
 import 'dog_image_local_repository.dart';
 
 class DogImageLocalRepositoryImpl implements DogImageLocalRepository {
