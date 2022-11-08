@@ -72,9 +72,9 @@ void main() {
         ),
         isA<DogImageRandomState>()
             .having(
-              (state) => state.status,
+              (state) => state.notification,
               'status',
-              UIStatus.actionFailed,
+              isNotNull,
             )
             .having(
               (state) => state.dogImage,
