@@ -61,7 +61,6 @@ class DemoBloc extends Bloc<DemoEvent, DemoState> {
   ) async {
     try {
       emit(state.copyWith(
-        status: UIStatus.loading,
         isBusy: true,
       ));
 
@@ -72,16 +71,15 @@ class DemoBloc extends Bloc<DemoEvent, DemoState> {
       images.removeWhere((element) => element.message == event.message);
 
       emit(state.copyWith(
-        status: UIStatus.actionSuccess,
+        notification:
+            _NotificationInsertSuccess(message: S.current.delete_success),
         images: images,
-        successMsg: S.current.delete_success,
         isBusy: false,
       ));
     } catch (e, s) {
       _logService.e('DemoLoadImageFromDB failed', e, s);
       emit(state.copyWith(
-        status: UIStatus.actionFailed,
-        errorMsg: e.toString(),
+        notification: _NotificationInsertFailed(message: e.toString()),
         isBusy: false,
       ));
     }
