@@ -1,1 +1,1 @@
-export 'dog_api/dog_api.dart';
+export 'flavor_api.dart';

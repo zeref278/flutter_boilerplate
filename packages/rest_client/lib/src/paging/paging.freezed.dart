@@ -37,7 +37,8 @@ mixin _$Paging<T> {
 /// @nodoc
 abstract class $PagingCopyWith<T, $Res> {
   factory $PagingCopyWith(Paging<T> value, $Res Function(Paging<T>) then) =
-      _$PagingCopyWithImpl<T, $Res>;
+      _$PagingCopyWithImpl<T, $Res, Paging<T>>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'totalCount') int? totalCount,
       @JsonKey(name: 'currentCount') int? currentCount,
@@ -45,33 +46,36 @@ abstract class $PagingCopyWith<T, $Res> {
 }
 
 /// @nodoc
-class _$PagingCopyWithImpl<T, $Res> implements $PagingCopyWith<T, $Res> {
+class _$PagingCopyWithImpl<T, $Res, $Val extends Paging<T>>
+    implements $PagingCopyWith<T, $Res> {
   _$PagingCopyWithImpl(this._value, this._then);
 
-  final Paging<T> _value;
   // ignore: unused_field
-  final $Res Function(Paging<T>) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? totalCount = freezed,
     Object? currentCount = freezed,
-    Object? items = freezed,
+    Object? items = null,
   }) {
     return _then(_value.copyWith(
-      totalCount: totalCount == freezed
+      totalCount: freezed == totalCount
           ? _value.totalCount
           : totalCount // ignore: cast_nullable_to_non_nullable
               as int?,
-      currentCount: currentCount == freezed
+      currentCount: freezed == currentCount
           ? _value.currentCount
           : currentCount // ignore: cast_nullable_to_non_nullable
               as int?,
-      items: items == freezed
+      items: null == items
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
               as List<T>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -81,6 +85,7 @@ abstract class _$$_PagingCopyWith<T, $Res> implements $PagingCopyWith<T, $Res> {
           _$_Paging<T> value, $Res Function(_$_Paging<T>) then) =
       __$$_PagingCopyWithImpl<T, $Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'totalCount') int? totalCount,
       @JsonKey(name: 'currentCount') int? currentCount,
@@ -88,31 +93,30 @@ abstract class _$$_PagingCopyWith<T, $Res> implements $PagingCopyWith<T, $Res> {
 }
 
 /// @nodoc
-class __$$_PagingCopyWithImpl<T, $Res> extends _$PagingCopyWithImpl<T, $Res>
+class __$$_PagingCopyWithImpl<T, $Res>
+    extends _$PagingCopyWithImpl<T, $Res, _$_Paging<T>>
     implements _$$_PagingCopyWith<T, $Res> {
   __$$_PagingCopyWithImpl(
       _$_Paging<T> _value, $Res Function(_$_Paging<T>) _then)
-      : super(_value, (v) => _then(v as _$_Paging<T>));
+      : super(_value, _then);
 
-  @override
-  _$_Paging<T> get _value => super._value as _$_Paging<T>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? totalCount = freezed,
     Object? currentCount = freezed,
-    Object? items = freezed,
+    Object? items = null,
   }) {
     return _then(_$_Paging<T>(
-      totalCount: totalCount == freezed
+      totalCount: freezed == totalCount
           ? _value.totalCount
           : totalCount // ignore: cast_nullable_to_non_nullable
               as int?,
-      currentCount: currentCount == freezed
+      currentCount: freezed == currentCount
           ? _value.currentCount
           : currentCount // ignore: cast_nullable_to_non_nullable
               as int?,
-      items: items == freezed
+      items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
               as List<T>,
@@ -156,23 +160,21 @@ class _$_Paging<T> implements _Paging<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Paging<T> &&
-            const DeepCollectionEquality()
-                .equals(other.totalCount, totalCount) &&
-            const DeepCollectionEquality()
-                .equals(other.currentCount, currentCount) &&
+            (identical(other.totalCount, totalCount) ||
+                other.totalCount == totalCount) &&
+            (identical(other.currentCount, currentCount) ||
+                other.currentCount == currentCount) &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(totalCount),
-      const DeepCollectionEquality().hash(currentCount),
+  int get hashCode => Object.hash(runtimeType, totalCount, currentCount,
       const DeepCollectionEquality().hash(_items));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PagingCopyWith<T, _$_Paging<T>> get copyWith =>
       __$$_PagingCopyWithImpl<T, _$_Paging<T>>(this, _$identity);
 

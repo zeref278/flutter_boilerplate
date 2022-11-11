@@ -51,9 +51,6 @@ dependencies:
   rest_client:
     path: packages/rest_client
 
-  local_database:
-    path: packages/local_database
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -5,15 +5,15 @@ import 'package:rest_client/rest_client.dart';
 void main() {
   Dio dio = Dio(
     BaseOptions(
-      baseUrl: 'https://dog.ceo/api',
+      baseUrl: 'https://dd47327b-1823-4d83-b642-c64124bc5bd0.mock.pstmn.io/dev',
     ),
   );
 
-  final DogApiClient dogApiClient = DogApiClient(dio);
+  final FlavorApiClient flavorApiClient = FlavorApiClient(dio);
 
   test('test', () async {
-    final dogImage = await dogApiClient.getDogImageRandom();
+    final flavor = await flavorApiClient.getFlavor();
 
-    expect(dogImage.message, isNotEmpty);
+    expect(flavor.flavor, 'dev');
   });
 }

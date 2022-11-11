@@ -1,1 +1,1 @@
-export 'dog_image/dog_image.dart';
+export 'flavor_model/flavor_model.dart';

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'dog_api.dart';
+part of 'flavor_api.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'dog_api.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _DogApiClient implements DogApiClient {
-  _DogApiClient(
+class _FlavorApiClient implements FlavorApiClient {
+  _FlavorApiClient(
     this._dio, {
     this.baseUrl,
   });
@@ -19,25 +19,25 @@ class _DogApiClient implements DogApiClient {
   String? baseUrl;
 
   @override
-  Future<DogImage> getDogImageRandom() async {
+  Future<FlavorModel> getFlavor() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<DogImage>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<FlavorModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/breeds/image/random',
+              '/flavor',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = DogImage.fromJson(_result.data!);
+    final value = FlavorModel.fromJson(_result.data!);
     return value;
   }
 
