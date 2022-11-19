@@ -12,7 +12,7 @@ Future<void> main() async {
   await runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
 
-    await Firebase.initializeApp();
+    //await Firebase.initializeApp();
 
     Logger.level = Level.verbose;
     AppConfig.configDev();
@@ -22,8 +22,8 @@ Future<void> main() async {
 
     runApp(const MyApp());
   }, (error, stack) {
-    final CrashlyticsService crashlyticsService =
-    Injector.instance<CrashlyticsService>();
-    crashlyticsService.recordException(error, stack);
+    // final CrashlyticsService crashlyticsService =
+    // Injector.instance<CrashlyticsService>();
+    // crashlyticsService.recordException(error, stack);
   });
 }
