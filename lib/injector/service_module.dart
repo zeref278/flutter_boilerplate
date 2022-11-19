@@ -14,8 +14,10 @@ class ServiceModule {
     final injector = Injector.instance;
 
     injector.registerSingletonAsync<CrashlyticsService>(() async {
-      return FirebaseCrashlyticsService();
-    });
+      final CrashlyticsService service = FirebaseCrashlyticsService();
+      await service.init();
+      return service;
+    },signalsReady: true);
 
     injector.registerFactory<LogService>(() => DebugLogService());
 

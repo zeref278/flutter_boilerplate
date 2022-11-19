@@ -47,6 +47,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   another_flushbar: ^1.12.29
   shared_preferences: ^2.0.15
+  firebase_core: ^2.3.0
+  firebase_crashlytics: ^3.0.6
 
   rest_client:
     path: packages/rest_client
@@ -84,7 +86,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/
     - assets/icons/
 
   # To add assets to your application, add an assets section, like this:
