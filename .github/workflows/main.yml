@@ -10,7 +10,7 @@ on:
 # on: push    # Default will running for every branch.
     
 jobs:
-  build:
+  build_pipeline:
     # This job will run on ubuntu virtual machine
     runs-on: ubuntu-latest
     steps:
