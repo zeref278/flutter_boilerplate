@@ -8,10 +8,3 @@ class ApplicationState with _$ApplicationState {
     @Default(false) bool isDarkMode,
   }) = _ApplicationState;
 }
-
-enum UIStatus {
-  initial,
-  loading,
-  loadSuccess,
-  loadFailed,
-}

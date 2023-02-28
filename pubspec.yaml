@@ -36,8 +36,8 @@ dependencies:
   flutter_bloc: ^8.1.1
   bloc_concurrency: ^0.2.0
   get_it: ^7.2.0
-  freezed_annotation: ^2.1.0
-  dio: ^4.0.6
+  freezed_annotation: ^2.2.0
+  dio: ^5.0.1
   intl: ^0.17.0
   intl_utils: ^2.7.0
   rxdart: ^0.27.5
@@ -47,6 +47,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   another_flushbar: ^1.12.29
   shared_preferences: ^2.0.15
+  pretty_dio_logger: ^1.3.1
 
   rest_client:
     path: packages/rest_client
@@ -64,7 +65,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
-  freezed: ^2.1.0+1
+  freezed: ^2.3.2
   build_runner:
   bloc_test: ^9.1.0
   mockito: ^5.3.0

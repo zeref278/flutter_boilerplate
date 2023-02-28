@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'package:boilerplate/core/bloc_core/ui_status.dart';
 import 'package:boilerplate/data/repositories/dog_image_random/local/dog_image_local_repository.dart';
-import 'package:boilerplate/features/application/bloc/application_bloc.dart';
 import 'package:boilerplate/generated/l10n.dart';
 import 'package:boilerplate/services/log_service/log_service.dart';
 import 'package:boilerplate/utils/mapper_utils.dart';
@@ -49,7 +49,7 @@ class DemoBloc extends Bloc<DemoEvent, DemoState> {
     } catch (e, s) {
       _logService.e('DemoLoadImageFromDB failed', e, s);
       emit(state.copyWith(
-        status: UIStatus.loadFailed,
+        status: UIStatus.loadFailure,
         errorMsg: e.toString(),
       ));
     }

@@ -1,12 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:boilerplate/core/bloc_core/ui_status.dart';
 import 'package:boilerplate/data/repositories/dog_image_random/remote/dog_image_random_repository.dart';
-import 'package:boilerplate/features/application/bloc/application_bloc.dart';
 import 'package:boilerplate/features/dog_image_random/bloc/dog_image_random_bloc.dart';
 import 'package:boilerplate/services/log_service/log_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rest_client/rest_client.dart';
-
 import '../app_test/app_test.mocks.dart';
 
 void main() {

@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:boilerplate/core/bloc_core/ui_status.dart';
 import 'package:boilerplate/data/repositories/dog_image_random/local/dog_image_local_repository.dart';
 import 'package:boilerplate/data/repositories/dog_image_random/remote/dog_image_random_repository.dart';
-import 'package:boilerplate/features/application/bloc/application_bloc.dart';
 import 'package:boilerplate/services/log_service/log_service.dart';
 import 'package:boilerplate/utils/mapper_utils.dart';
 import 'package:flutter/foundation.dart';
@@ -19,8 +19,8 @@ class DogImageRandomBloc
     extends Bloc<DogImageRandomEvent, DogImageRandomState> {
   DogImageRandomBloc({
     required DogImageRandomRepository dogImageRandomRepository,
-    required LogService logService,
     DogImageLocalRepository? dogImageLocalRepository,
+    required LogService logService,
   }) : super(
           const DogImageRandomState(
             dogImage: DogImage(message: '', status: ''),
@@ -44,7 +44,7 @@ class DogImageRandomBloc
     try {} catch (e, s) {
       _log.e('DogImageRandomLoaded failed', e, s);
       emit(state.copyWith(
-        status: UIStatus.loadFailed,
+        status: UIStatus.loadFailure,
         errorMsg: e.toString(),
       ));
     }

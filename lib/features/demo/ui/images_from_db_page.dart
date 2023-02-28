@@ -1,6 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:boilerplate/common/app_spacing.dart';
-import 'package:boilerplate/features/application/bloc/application_bloc.dart';
+import 'package:boilerplate/core/bloc_core/ui_status.dart';
 import 'package:boilerplate/features/demo/bloc/demo_bloc.dart';
 import 'package:boilerplate/generated/l10n.dart';
 import 'package:boilerplate/injector/injector.dart';
@@ -66,6 +66,8 @@ class _Body extends StatelessWidget {
             },
           );
         },
+        buildWhen: (prev, next) =>
+            prev.status != next.status || prev.isBusy != next.isBusy,
         builder: (context, state) {
           if (state.status == UIStatus.loading || state.isBusy) {
             return const CircularProgressIndicator();
@@ -89,9 +91,8 @@ class _Body extends StatelessWidget {
                 color: Colors.red,
               ),
               onTap: () {
-                context
-                    .read<DemoBloc>()
-                    .add(DemoDeleteImageFromDB(images[index].message));
+                final DemoBloc demoBloc = context.read<DemoBloc>();
+                demoBloc.add(DemoDeleteImageFromDB(images[index].message));
               },
             ),
           )

@@ -1,6 +1,6 @@
 name: Flutter CI
 
-# This workflow is triggered on pushes to the repository.
+# This workflow is triggered on pull request to main branch.
 
 on:
   pull_request:
