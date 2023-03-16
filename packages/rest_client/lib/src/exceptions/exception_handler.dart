@@ -14,7 +14,7 @@ class ExceptionHandler {
   }
 
   static CustomException _getException(DioError error) {
-    if (error.type == DioErrorType.other) {
+    if (error.type == DioErrorType.unknown) {
       if (error.error is SocketException) {
         return CustomException(
 
@@ -23,7 +23,7 @@ class ExceptionHandler {
       } else {
         return CustomException();
       }
-    } else if (error.type == DioErrorType.response) {
+    } else if (error.type == DioErrorType.badResponse) {
       try {
         if (error.response!.statusCode == 401) {
           return CustomException();

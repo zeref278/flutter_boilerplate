@@ -1,4 +1,5 @@
 import 'package:boilerplate/injector/database_module.dart';
+import 'package:boilerplate/injector/dio_module.dart';
 import 'package:boilerplate/injector/repository_module.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
@@ -12,6 +13,7 @@ class Injector {
   Injector._();
 
   static void init() {
+    DioModule.setup();
     ServiceModule.init();
     RestClientModule.init();
 

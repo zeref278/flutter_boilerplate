@@ -1,6 +1,6 @@
 name: Flutter CI
 
-# This workflow is triggered on pushes to the repository.
+# This workflow is triggered on pull request to main branch.
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ on:
 # on: push    # Default will running for every branch.
     
 jobs:
-  build:
+  build_pipeline:
     # This job will run on ubuntu virtual machine
     runs-on: ubuntu-latest
     steps:
@@ -25,7 +25,7 @@ jobs:
     - uses: subosito/flutter-action@v1
       with:
         channel: 'stable' # 'dev', 'alpha', default to: 'stable'
-        flutter-version: '3.3.x' # you can also specify exact version of flutter
+        flutter-version: '3.7.6' # you can also specify exact version of flutter
     
     # Get flutter dependencies.
     - run: flutter pub get

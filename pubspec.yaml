@@ -20,7 +20,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.18.2 <3.0.0'
+  sdk: '>=2.19.0 <3.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -33,20 +33,21 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  flutter_bloc: ^8.1.1
-  bloc_concurrency: ^0.2.0
+  flutter_bloc: ^8.1.2
+  bloc_concurrency: ^0.2.1
   get_it: ^7.2.0
-  freezed_annotation: ^2.1.0
-  dio: ^4.0.6
+  freezed_annotation: ^2.2.0
+  dio: ^5.0.2
   intl: ^0.17.0
   intl_utils: ^2.7.0
-  rxdart: ^0.27.5
-  logger: ^1.1.0
-  flutter_svg: ^1.1.4
-  go_router: ^4.3.0
-  cupertino_icons: ^1.0.2
+  rxdart: ^0.27.7
+  logger: ^1.3.0
+  flutter_svg: 2.0.3
+  go_router: ^6.2.0
+  cupertino_icons: ^1.0.5
   another_flushbar: ^1.12.29
-  shared_preferences: ^2.0.15
+  shared_preferences: ^2.0.18
+  pretty_dio_logger: ^1.3.1
 
   rest_client:
     path: packages/rest_client
@@ -63,11 +64,11 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
-  freezed: ^2.1.0+1
+  flutter_lints: ^2.0.1
+  freezed: ^2.3.2
   build_runner:
-  bloc_test: ^9.1.0
-  mockito: ^5.3.0
+  bloc_test: ^9.1.1
+  mockito: ^5.3.2
   flutter_gen_runner:
 
 # For information on the generic Dart part of this file, see the

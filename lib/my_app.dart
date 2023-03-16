@@ -1,5 +1,6 @@
 import 'package:boilerplate/common/app_themes.dart';
 import 'package:boilerplate/configs/app_config.dart';
+import 'package:boilerplate/core/bloc_core/ui_status.dart';
 import 'package:boilerplate/features/application/bloc/application_bloc.dart';
 import 'package:boilerplate/generated/l10n.dart';
 import 'package:boilerplate/injector/injector.dart';
@@ -44,7 +45,7 @@ class _MyAppState extends State<MyApp> {
       child: BlocListener<ApplicationBloc, ApplicationState>(
         bloc: _bloc,
         listener: (context, state) {
-          if (state.status == UIStatus.loadSuccess) {
+          if (state.status is LoadSuccess) {
             if (_locale != state.locale) {
               setState(() {
                 _locale = state.locale;
