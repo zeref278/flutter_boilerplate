@@ -28,14 +28,14 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
     Emitter<ApplicationState> emit,
   ) {
     emit(state.copyWith(
-      status: UIStatus.loading,
+      status: const Loading(),
     ));
 
     final String locale = _localStorageService.locale;
     final bool isDarkMode = _localStorageService.isDarkMode;
 
     emit(state.copyWith(
-      status: UIStatus.loadSuccess,
+      status: const LoadSuccess(),
       locale: locale,
       isDarkMode: isDarkMode,
     ));
@@ -47,14 +47,14 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
   ) async {
     if (state.locale != event.locale) {
       emit(state.copyWith(
-        status: UIStatus.loading,
+        status: const Loading(),
       ));
       await S.load(Locale(event.locale));
 
       _localStorageService.setLocale(event.locale);
 
       emit(state.copyWith(
-        status: UIStatus.loadSuccess,
+        status: const LoadSuccess(),
         locale: event.locale,
       ));
     }
@@ -66,13 +66,13 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
   ) async {
     if (state.isDarkMode != event.enable) {
       emit(state.copyWith(
-        status: UIStatus.loading,
+        status: const Loading(),
       ));
 
       _localStorageService.setIsDarkMode(event.enable);
 
       emit(state.copyWith(
-        status: UIStatus.loadSuccess,
+        status: const LoadSuccess(),
         isDarkMode: event.enable,
       ));
     }

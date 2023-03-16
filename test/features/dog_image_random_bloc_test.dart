@@ -31,19 +31,24 @@ void main() {
       },
       build: () => bloc,
       act: (_) => bloc.add(
-        const DogImageRandomRandomRequested(),
+        const DogImageRandomEvent.randomRequested(),
       ),
       expect: () => [
         isA<DogImageRandomState>().having(
-          (state) => state.status,
-          'status',
-          UIStatus.loading,
+          (state) => state.isBusy,
+          'isBusy',
+          true,
         ),
         isA<DogImageRandomState>()
             .having(
+              (state) => state.isBusy,
+              'isBusy',
+              false,
+            )
+            .having(
               (state) => state.status,
               'status',
-              UIStatus.loadSuccess,
+              isA<LoadSuccess>(),
             )
             .having(
               (state) => state.dogImage,
@@ -61,14 +66,11 @@ void main() {
       build: () => bloc,
       seed: () => const DogImageRandomState(dogImage: image),
       act: (_) => bloc.add(
-        const DogImageRandomRandomRequested(),
+        const DogImageRandomEvent.randomRequested(),
       ),
       expect: () => [
-        isA<DogImageRandomState>().having(
-          (state) => state.status,
-          'status',
-          UIStatus.loading,
-        ),
+        isA<DogImageRandomState>()
+            .having((state) => state.isBusy, 'isBusy', true),
         isA<DogImageRandomState>()
             .having(
               (state) => state.notification,
@@ -79,7 +81,8 @@ void main() {
               (state) => state.dogImage,
               'image',
               image,
-            ),
+            )
+            .having((state) => state.isBusy, 'isBusy', false),
       ],
     );
   });

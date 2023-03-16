@@ -11,7 +11,7 @@ class SampleBlocObserver extends BlocObserver {
 
   @override
   void onCreate(BlocBase bloc) {
-    _logService.i('BLoC: ${bloc.runtimeType} creared');
+    _logService.i('BLoC: ${bloc.runtimeType} created');
     super.onCreate(bloc);
   }
 

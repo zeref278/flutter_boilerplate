@@ -1,28 +1,19 @@
-import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-enum UIStatus {
-  initial,
-  loading,
-  loadSuccess,
-  loadFailure,
-}
+part 'ui_status.freezed.dart';
 
-extension UIStatusExtension on UIStatus {
-  Widget when({
-    Widget Function()? onInitial,
-    required Widget Function() onLoading,
-    required Widget Function() onLoadFailure,
-    required Widget Function() onLoadSuccess,
-  }) {
-    switch (this) {
-      case UIStatus.initial:
-        return onInitial?.call() ?? onLoading();
-      case UIStatus.loading:
-        return onLoading();
-      case UIStatus.loadFailure:
-        return onLoadFailure();
-      case UIStatus.loadSuccess:
-        return onLoadSuccess();
-    }
-  }
+/// Ui status: initial, loading, loadSuccess and loadFailed
+@Freezed(fromJson: false, toJson: false)
+class UIStatus with _$UIStatus {
+  const factory UIStatus.initial() = Initial;
+
+  const factory UIStatus.loading() = Loading;
+
+  const factory UIStatus.loadFailed({
+    required String message,
+  }) = LoadFailed;
+
+  const factory UIStatus.loadSuccess({
+    String? message,
+  }) = LoadSuccess;
 }

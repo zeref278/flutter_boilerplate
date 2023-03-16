@@ -3,6 +3,7 @@ import 'package:boilerplate/features/application/home_page.dart';
 import 'package:boilerplate/features/demo/ui/assets_page.dart';
 import 'package:boilerplate/features/demo/ui/images_from_db_page.dart';
 import 'package:boilerplate/features/dog_image_random/ui/dog_image_random_page.dart';
+import 'package:boilerplate/generated/l10n.dart';
 import 'package:boilerplate/widgets/error_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
@@ -42,7 +43,9 @@ class AppRouter {
             return const ImagesFromDbPage();
           }
 
-          return const ErrorPage();
+          return ErrorPage(
+            content: S.current.didnt_supported,
+          );
         },
       ),
     ],

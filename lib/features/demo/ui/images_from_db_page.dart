@@ -4,6 +4,8 @@ import 'package:boilerplate/core/bloc_core/ui_status.dart';
 import 'package:boilerplate/features/demo/bloc/demo_bloc.dart';
 import 'package:boilerplate/generated/l10n.dart';
 import 'package:boilerplate/injector/injector.dart';
+import 'package:boilerplate/widgets/error_page.dart';
+import 'package:boilerplate/widgets/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rest_client/rest_client.dart';
@@ -16,7 +18,7 @@ class ImagesFromDbPage extends StatelessWidget {
     return BlocProvider<DemoBloc>(
       create: (context) => Injector.instance<DemoBloc>()
         ..add(
-          const DemoLoadImageFromDB(),
+          const DemoEvent.loadImageFromDB(),
         ),
       child: const Scaffold(
         appBar: _AppBar(),
@@ -52,14 +54,14 @@ class _Body extends StatelessWidget {
           state.notification?.when(
             insertSuccess: (message) {
               Flushbar(
-                message: state.successMsg,
+                message: message,
                 duration: const Duration(seconds: 1),
                 backgroundColor: Colors.green,
               ).show(context);
             },
             insertFailed: (message) {
               Flushbar(
-                message: state.errorMsg,
+                message: message,
                 duration: const Duration(seconds: 1),
                 backgroundColor: Colors.red,
               ).show(context);
@@ -69,11 +71,27 @@ class _Body extends StatelessWidget {
         buildWhen: (prev, next) =>
             prev.status != next.status || prev.isBusy != next.isBusy,
         builder: (context, state) {
-          if (state.status == UIStatus.loading || state.isBusy) {
-            return const CircularProgressIndicator();
-          } else {
-            return _buildImages(state.images);
-          }
+          return state.status.when<Widget>(
+            initial: () {
+              return const LoadingPage();
+            },
+            loading: () {
+              return const LoadingPage();
+            },
+            loadFailed: (message) {
+              return ErrorPage(
+                content: message,
+              );
+            },
+            loadSuccess: (message) {
+              return Stack(
+                children: [
+                  _buildImages(state.images),
+                  if (state.isBusy) const LoadingPage(),
+                ],
+              );
+            },
+          );
         },
       ),
     );
@@ -92,7 +110,11 @@ class _Body extends StatelessWidget {
               ),
               onTap: () {
                 final DemoBloc demoBloc = context.read<DemoBloc>();
-                demoBloc.add(DemoDeleteImageFromDB(images[index].message));
+                demoBloc.add(
+                  DemoEvent.deleteImageFromDB(
+                    message: images[index].message,
+                  ),
+                );
               },
             ),
           )
