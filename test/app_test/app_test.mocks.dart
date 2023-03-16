@@ -125,4 +125,12 @@ class MockLogService extends _i1.Mock implements _i7.LogService {
         ),
         returnValueForMissingStub: null,
       );
+  @override
+  void i(String? message) => super.noSuchMethod(
+        Invocation.method(
+          #i,
+          [message],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

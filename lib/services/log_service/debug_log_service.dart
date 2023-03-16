@@ -14,4 +14,9 @@ class DebugLogService implements LogService {
   void e(String message, dynamic e, StackTrace? stack) {
     _logger.e(message, e, stack);
   }
+
+  @override
+  void i(String message) {
+    _logger.i(message);
+  }
 }

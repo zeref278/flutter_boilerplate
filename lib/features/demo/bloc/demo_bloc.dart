@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'package:boilerplate/core/bloc_core/ui_status.dart';
 import 'package:boilerplate/data/repositories/dog_image_random/local/dog_image_local_repository.dart';
-import 'package:boilerplate/features/application/bloc/application_bloc.dart';
 import 'package:boilerplate/generated/l10n.dart';
 import 'package:boilerplate/services/log_service/log_service.dart';
 import 'package:boilerplate/utils/mapper_utils.dart';
@@ -12,6 +12,7 @@ import 'package:rest_client/rest_client.dart';
 part 'demo_event.dart';
 part 'demo_state.dart';
 part 'demo_bloc.freezed.dart';
+part 'demo_notification.dart';
 
 class DemoBloc extends Bloc<DemoEvent, DemoState> {
   DemoBloc({
@@ -20,20 +21,20 @@ class DemoBloc extends Bloc<DemoEvent, DemoState> {
   }) : super(const DemoState()) {
     _repository = dogImageRandomRepository;
     _logService = logService;
-    on<DemoLoadImageFromDB>(_onImagesLoadFromDB);
-    on<DemoDeleteImageFromDB>(_onDeleteImageFromDB);
+    on<_LoadImageFromDB>(_onImagesLoadFromDB);
+    on<_DeleteImageFromDB>(_onDeleteImageFromDB);
   }
 
   late final DogImageLocalRepository _repository;
   late final LogService _logService;
 
   FutureOr<void> _onImagesLoadFromDB(
-    DemoLoadImageFromDB event,
+    _LoadImageFromDB event,
     Emitter<DemoState> emit,
   ) async {
     try {
       emit(state.copyWith(
-        status: UIStatus.loading,
+        status: const Loading(),
       ));
 
       final List<DogImageEntity> imageEntities =
@@ -43,20 +44,19 @@ class DemoBloc extends Bloc<DemoEvent, DemoState> {
           imageEntities.map((e) => MapperUtils.mapDogImageEntity(e)).toList();
 
       emit(state.copyWith(
-        status: UIStatus.loadSuccess,
+        status: const LoadSuccess(),
         images: images,
       ));
     } catch (e, s) {
       _logService.e('DemoLoadImageFromDB failed', e, s);
       emit(state.copyWith(
-        status: UIStatus.loadFailed,
-        errorMsg: e.toString(),
+        status: LoadFailed(message: e.toString()),
       ));
     }
   }
 
   FutureOr<void> _onDeleteImageFromDB(
-    DemoDeleteImageFromDB event,
+    _DeleteImageFromDB event,
     Emitter<DemoState> emit,
   ) async {
     try {

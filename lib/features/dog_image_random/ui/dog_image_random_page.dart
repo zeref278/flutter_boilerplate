@@ -1,10 +1,11 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:boilerplate/common/app_dimens.dart';
 import 'package:boilerplate/common/app_spacing.dart';
-import 'package:boilerplate/features/application/bloc/application_bloc.dart';
 import 'package:boilerplate/features/dog_image_random/bloc/dog_image_random_bloc.dart';
 import 'package:boilerplate/generated/l10n.dart';
 import 'package:boilerplate/injector/injector.dart';
+import 'package:boilerplate/widgets/error_page.dart';
+import 'package:boilerplate/widgets/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,10 +20,7 @@ class _DogImageRandomPageState extends State<DogImageRandomPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<DogImageRandomBloc>(
-      create: (context) => Injector.instance<DogImageRandomBloc>()
-        ..add(
-          const DogImageRandomLoaded(),
-        ),
+      create: (context) => Injector.instance<DogImageRandomBloc>(),
       child: const Scaffold(
         appBar: _AppBar(),
         body: _Body(),
@@ -63,30 +61,44 @@ class _BodyState extends State<_Body> {
           state.notification?.when(
             notifySuccess: (message) {
               Flushbar(
-                message: state.errorMsg,
-                duration: const Duration(seconds: 1),
-                backgroundColor: Colors.red,
-              ).show(context);
-            },
-            notifyFailed: (message) {
-              Flushbar(
-                message: state.successMsg,
+                message: message,
                 duration: const Duration(seconds: 1),
                 backgroundColor: Colors.green,
               ).show(context);
             },
+            notifyFailed: (message) {
+              Flushbar(
+                message: message,
+                duration: const Duration(seconds: 1),
+                backgroundColor: Colors.red,
+              ).show(context);
+            },
           );
         },
+        buildWhen: (prev, next) =>
+            prev.status != next.status || prev.isBusy != next.isBusy,
         builder: (context, state) {
-          if (state.status == UIStatus.initial) {
-            return Text(S.current.press_button);
-          } else if (state.status == UIStatus.loading) {
-            return const CircularProgressIndicator();
-          } else if (state.status == UIStatus.loadFailed) {
-            return Text(S.current.load_failed);
-          }
-
-          return Image.network(state.dogImage.message);
+          return state.status.when<Widget>(
+            initial: () {
+              return Text(S.current.press_button);
+            },
+            loading: () {
+              return const LoadingPage();
+            },
+            loadFailed: (message) {
+              return ErrorPage(
+                content: message,
+              );
+            },
+            loadSuccess: (message) {
+              return Stack(
+                children: [
+                  Image.network(state.dogImage.message),
+                  if (state.isBusy) const LoadingPage(),
+                ],
+              );
+            },
+          );
         },
       ),
     );
@@ -101,16 +113,18 @@ class _ButtonBar extends StatelessWidget {
     return SafeArea(
       child: Container(
         padding: const EdgeInsets.symmetric(
-            horizontal: AppDimens.basePadding, vertical: AppDimens.basePadding),
+          horizontal: AppDimens.basePadding,
+          vertical: AppDimens.basePadding,
+        ),
         child: Row(
           children: [
             Expanded(
               child: ElevatedButton(
                 child: Text(S.current.load_image),
                 onPressed: () {
-                  context
-                      .read<DogImageRandomBloc>()
-                      .add(const DogImageRandomRandomRequested());
+                  final DogImageRandomBloc bloc =
+                      context.read<DogImageRandomBloc>();
+                  bloc.add(const DogImageRandomEvent.randomRequested());
                 },
               ),
             ),
@@ -119,9 +133,13 @@ class _ButtonBar extends StatelessWidget {
               child: ElevatedButton(
                 child: Text(S.current.load_and_insert_db),
                 onPressed: () {
-                  context
-                      .read<DogImageRandomBloc>()
-                      .add(const DogImageRandomRandomRequested(insertDb: true));
+                  final DogImageRandomBloc bloc =
+                      context.read<DogImageRandomBloc>();
+                  bloc.add(
+                    const DogImageRandomEvent.randomRequested(
+                      insertDb: true,
+                    ),
+                  );
                 },
               ),
             ),

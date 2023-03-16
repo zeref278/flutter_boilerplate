@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'demo_bloc.dart';
 
@@ -24,8 +24,8 @@ mixin _$DemoEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? loadImageFromDB,
-    TResult Function(String message)? deleteImageFromDB,
+    TResult? Function()? loadImageFromDB,
+    TResult? Function(String message)? deleteImageFromDB,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,20 +37,20 @@ mixin _$DemoEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(DemoLoadImageFromDB value) loadImageFromDB,
-    required TResult Function(DemoDeleteImageFromDB value) deleteImageFromDB,
+    required TResult Function(_LoadImageFromDB value) loadImageFromDB,
+    required TResult Function(_DeleteImageFromDB value) deleteImageFromDB,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(DemoLoadImageFromDB value)? loadImageFromDB,
-    TResult Function(DemoDeleteImageFromDB value)? deleteImageFromDB,
+    TResult? Function(_LoadImageFromDB value)? loadImageFromDB,
+    TResult? Function(_DeleteImageFromDB value)? deleteImageFromDB,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(DemoLoadImageFromDB value)? loadImageFromDB,
-    TResult Function(DemoDeleteImageFromDB value)? deleteImageFromDB,
+    TResult Function(_LoadImageFromDB value)? loadImageFromDB,
+    TResult Function(_DeleteImageFromDB value)? deleteImageFromDB,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -59,41 +59,40 @@ mixin _$DemoEvent {
 /// @nodoc
 abstract class $DemoEventCopyWith<$Res> {
   factory $DemoEventCopyWith(DemoEvent value, $Res Function(DemoEvent) then) =
-      _$DemoEventCopyWithImpl<$Res>;
+      _$DemoEventCopyWithImpl<$Res, DemoEvent>;
 }
 
 /// @nodoc
-class _$DemoEventCopyWithImpl<$Res> implements $DemoEventCopyWith<$Res> {
+class _$DemoEventCopyWithImpl<$Res, $Val extends DemoEvent>
+    implements $DemoEventCopyWith<$Res> {
   _$DemoEventCopyWithImpl(this._value, this._then);
 
-  final DemoEvent _value;
   // ignore: unused_field
-  final $Res Function(DemoEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
-abstract class _$$DemoLoadImageFromDBCopyWith<$Res> {
-  factory _$$DemoLoadImageFromDBCopyWith(_$DemoLoadImageFromDB value,
-          $Res Function(_$DemoLoadImageFromDB) then) =
-      __$$DemoLoadImageFromDBCopyWithImpl<$Res>;
+abstract class _$$_LoadImageFromDBCopyWith<$Res> {
+  factory _$$_LoadImageFromDBCopyWith(
+          _$_LoadImageFromDB value, $Res Function(_$_LoadImageFromDB) then) =
+      __$$_LoadImageFromDBCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$DemoLoadImageFromDBCopyWithImpl<$Res>
-    extends _$DemoEventCopyWithImpl<$Res>
-    implements _$$DemoLoadImageFromDBCopyWith<$Res> {
-  __$$DemoLoadImageFromDBCopyWithImpl(
-      _$DemoLoadImageFromDB _value, $Res Function(_$DemoLoadImageFromDB) _then)
-      : super(_value, (v) => _then(v as _$DemoLoadImageFromDB));
-
-  @override
-  _$DemoLoadImageFromDB get _value => super._value as _$DemoLoadImageFromDB;
+class __$$_LoadImageFromDBCopyWithImpl<$Res>
+    extends _$DemoEventCopyWithImpl<$Res, _$_LoadImageFromDB>
+    implements _$$_LoadImageFromDBCopyWith<$Res> {
+  __$$_LoadImageFromDBCopyWithImpl(
+      _$_LoadImageFromDB _value, $Res Function(_$_LoadImageFromDB) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$DemoLoadImageFromDB implements DemoLoadImageFromDB {
-  const _$DemoLoadImageFromDB();
+class _$_LoadImageFromDB implements _LoadImageFromDB {
+  const _$_LoadImageFromDB();
 
   @override
   String toString() {
@@ -103,7 +102,7 @@ class _$DemoLoadImageFromDB implements DemoLoadImageFromDB {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DemoLoadImageFromDB);
+        (other.runtimeType == runtimeType && other is _$_LoadImageFromDB);
   }
 
   @override
@@ -121,8 +120,8 @@ class _$DemoLoadImageFromDB implements DemoLoadImageFromDB {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? loadImageFromDB,
-    TResult Function(String message)? deleteImageFromDB,
+    TResult? Function()? loadImageFromDB,
+    TResult? Function(String message)? deleteImageFromDB,
   }) {
     return loadImageFromDB?.call();
   }
@@ -143,8 +142,8 @@ class _$DemoLoadImageFromDB implements DemoLoadImageFromDB {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(DemoLoadImageFromDB value) loadImageFromDB,
-    required TResult Function(DemoDeleteImageFromDB value) deleteImageFromDB,
+    required TResult Function(_LoadImageFromDB value) loadImageFromDB,
+    required TResult Function(_DeleteImageFromDB value) deleteImageFromDB,
   }) {
     return loadImageFromDB(this);
   }
@@ -152,8 +151,8 @@ class _$DemoLoadImageFromDB implements DemoLoadImageFromDB {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(DemoLoadImageFromDB value)? loadImageFromDB,
-    TResult Function(DemoDeleteImageFromDB value)? deleteImageFromDB,
+    TResult? Function(_LoadImageFromDB value)? loadImageFromDB,
+    TResult? Function(_DeleteImageFromDB value)? deleteImageFromDB,
   }) {
     return loadImageFromDB?.call(this);
   }
@@ -161,8 +160,8 @@ class _$DemoLoadImageFromDB implements DemoLoadImageFromDB {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(DemoLoadImageFromDB value)? loadImageFromDB,
-    TResult Function(DemoDeleteImageFromDB value)? deleteImageFromDB,
+    TResult Function(_LoadImageFromDB value)? loadImageFromDB,
+    TResult Function(_DeleteImageFromDB value)? deleteImageFromDB,
     required TResult orElse(),
   }) {
     if (loadImageFromDB != null) {
@@ -172,35 +171,34 @@ class _$DemoLoadImageFromDB implements DemoLoadImageFromDB {
   }
 }
 
-abstract class DemoLoadImageFromDB implements DemoEvent {
-  const factory DemoLoadImageFromDB() = _$DemoLoadImageFromDB;
+abstract class _LoadImageFromDB implements DemoEvent {
+  const factory _LoadImageFromDB() = _$_LoadImageFromDB;
 }
 
 /// @nodoc
-abstract class _$$DemoDeleteImageFromDBCopyWith<$Res> {
-  factory _$$DemoDeleteImageFromDBCopyWith(_$DemoDeleteImageFromDB value,
-          $Res Function(_$DemoDeleteImageFromDB) then) =
-      __$$DemoDeleteImageFromDBCopyWithImpl<$Res>;
+abstract class _$$_DeleteImageFromDBCopyWith<$Res> {
+  factory _$$_DeleteImageFromDBCopyWith(_$_DeleteImageFromDB value,
+          $Res Function(_$_DeleteImageFromDB) then) =
+      __$$_DeleteImageFromDBCopyWithImpl<$Res>;
+  @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$DemoDeleteImageFromDBCopyWithImpl<$Res>
-    extends _$DemoEventCopyWithImpl<$Res>
-    implements _$$DemoDeleteImageFromDBCopyWith<$Res> {
-  __$$DemoDeleteImageFromDBCopyWithImpl(_$DemoDeleteImageFromDB _value,
-      $Res Function(_$DemoDeleteImageFromDB) _then)
-      : super(_value, (v) => _then(v as _$DemoDeleteImageFromDB));
+class __$$_DeleteImageFromDBCopyWithImpl<$Res>
+    extends _$DemoEventCopyWithImpl<$Res, _$_DeleteImageFromDB>
+    implements _$$_DeleteImageFromDBCopyWith<$Res> {
+  __$$_DeleteImageFromDBCopyWithImpl(
+      _$_DeleteImageFromDB _value, $Res Function(_$_DeleteImageFromDB) _then)
+      : super(_value, _then);
 
-  @override
-  _$DemoDeleteImageFromDB get _value => super._value as _$DemoDeleteImageFromDB;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = freezed,
+    Object? message = null,
   }) {
-    return _then(_$DemoDeleteImageFromDB(
-      message == freezed
+    return _then(_$_DeleteImageFromDB(
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
@@ -210,8 +208,8 @@ class __$$DemoDeleteImageFromDBCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DemoDeleteImageFromDB implements DemoDeleteImageFromDB {
-  const _$DemoDeleteImageFromDB(this.message);
+class _$_DeleteImageFromDB implements _DeleteImageFromDB {
+  const _$_DeleteImageFromDB({required this.message});
 
   @override
   final String message;
@@ -225,18 +223,18 @@ class _$DemoDeleteImageFromDB implements DemoDeleteImageFromDB {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DemoDeleteImageFromDB &&
-            const DeepCollectionEquality().equals(other.message, message));
+            other is _$_DeleteImageFromDB &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+  int get hashCode => Object.hash(runtimeType, message);
 
   @JsonKey(ignore: true)
   @override
-  _$$DemoDeleteImageFromDBCopyWith<_$DemoDeleteImageFromDB> get copyWith =>
-      __$$DemoDeleteImageFromDBCopyWithImpl<_$DemoDeleteImageFromDB>(
+  @pragma('vm:prefer-inline')
+  _$$_DeleteImageFromDBCopyWith<_$_DeleteImageFromDB> get copyWith =>
+      __$$_DeleteImageFromDBCopyWithImpl<_$_DeleteImageFromDB>(
           this, _$identity);
 
   @override
@@ -251,8 +249,8 @@ class _$DemoDeleteImageFromDB implements DemoDeleteImageFromDB {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? loadImageFromDB,
-    TResult Function(String message)? deleteImageFromDB,
+    TResult? Function()? loadImageFromDB,
+    TResult? Function(String message)? deleteImageFromDB,
   }) {
     return deleteImageFromDB?.call(message);
   }
@@ -273,8 +271,8 @@ class _$DemoDeleteImageFromDB implements DemoDeleteImageFromDB {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(DemoLoadImageFromDB value) loadImageFromDB,
-    required TResult Function(DemoDeleteImageFromDB value) deleteImageFromDB,
+    required TResult Function(_LoadImageFromDB value) loadImageFromDB,
+    required TResult Function(_DeleteImageFromDB value) deleteImageFromDB,
   }) {
     return deleteImageFromDB(this);
   }
@@ -282,8 +280,8 @@ class _$DemoDeleteImageFromDB implements DemoDeleteImageFromDB {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(DemoLoadImageFromDB value)? loadImageFromDB,
-    TResult Function(DemoDeleteImageFromDB value)? deleteImageFromDB,
+    TResult? Function(_LoadImageFromDB value)? loadImageFromDB,
+    TResult? Function(_DeleteImageFromDB value)? deleteImageFromDB,
   }) {
     return deleteImageFromDB?.call(this);
   }
@@ -291,8 +289,8 @@ class _$DemoDeleteImageFromDB implements DemoDeleteImageFromDB {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(DemoLoadImageFromDB value)? loadImageFromDB,
-    TResult Function(DemoDeleteImageFromDB value)? deleteImageFromDB,
+    TResult Function(_LoadImageFromDB value)? loadImageFromDB,
+    TResult Function(_DeleteImageFromDB value)? deleteImageFromDB,
     required TResult orElse(),
   }) {
     if (deleteImageFromDB != null) {
@@ -302,13 +300,13 @@ class _$DemoDeleteImageFromDB implements DemoDeleteImageFromDB {
   }
 }
 
-abstract class DemoDeleteImageFromDB implements DemoEvent {
-  const factory DemoDeleteImageFromDB(final String message) =
-      _$DemoDeleteImageFromDB;
+abstract class _DeleteImageFromDB implements DemoEvent {
+  const factory _DeleteImageFromDB({required final String message}) =
+      _$_DeleteImageFromDB;
 
   String get message;
   @JsonKey(ignore: true)
-  _$$DemoDeleteImageFromDBCopyWith<_$DemoDeleteImageFromDB> get copyWith =>
+  _$$_DeleteImageFromDBCopyWith<_$_DeleteImageFromDB> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -317,8 +315,6 @@ mixin _$DemoState {
   UIStatus get status => throw _privateConstructorUsedError;
   DemoNotification? get notification => throw _privateConstructorUsedError;
   List<DogImage> get images => throw _privateConstructorUsedError;
-  String? get errorMsg => throw _privateConstructorUsedError;
-  String? get successMsg => throw _privateConstructorUsedError;
   bool get isBusy => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -329,71 +325,73 @@ mixin _$DemoState {
 /// @nodoc
 abstract class $DemoStateCopyWith<$Res> {
   factory $DemoStateCopyWith(DemoState value, $Res Function(DemoState) then) =
-      _$DemoStateCopyWithImpl<$Res>;
+      _$DemoStateCopyWithImpl<$Res, DemoState>;
+  @useResult
   $Res call(
       {UIStatus status,
       DemoNotification? notification,
       List<DogImage> images,
-      String? errorMsg,
-      String? successMsg,
       bool isBusy});
 
+  $UIStatusCopyWith<$Res> get status;
   $DemoNotificationCopyWith<$Res>? get notification;
 }
 
 /// @nodoc
-class _$DemoStateCopyWithImpl<$Res> implements $DemoStateCopyWith<$Res> {
+class _$DemoStateCopyWithImpl<$Res, $Val extends DemoState>
+    implements $DemoStateCopyWith<$Res> {
   _$DemoStateCopyWithImpl(this._value, this._then);
 
-  final DemoState _value;
   // ignore: unused_field
-  final $Res Function(DemoState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = freezed,
+    Object? status = null,
     Object? notification = freezed,
-    Object? images = freezed,
-    Object? errorMsg = freezed,
-    Object? successMsg = freezed,
-    Object? isBusy = freezed,
+    Object? images = null,
+    Object? isBusy = null,
   }) {
     return _then(_value.copyWith(
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as UIStatus,
-      notification: notification == freezed
+      notification: freezed == notification
           ? _value.notification
           : notification // ignore: cast_nullable_to_non_nullable
               as DemoNotification?,
-      images: images == freezed
+      images: null == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<DogImage>,
-      errorMsg: errorMsg == freezed
-          ? _value.errorMsg
-          : errorMsg // ignore: cast_nullable_to_non_nullable
-              as String?,
-      successMsg: successMsg == freezed
-          ? _value.successMsg
-          : successMsg // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isBusy: isBusy == freezed
+      isBusy: null == isBusy
           ? _value.isBusy
           : isBusy // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
+  $UIStatusCopyWith<$Res> get status {
+    return $UIStatusCopyWith<$Res>(_value.status, (value) {
+      return _then(_value.copyWith(status: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $DemoNotificationCopyWith<$Res>? get notification {
     if (_value.notification == null) {
       return null;
     }
 
     return $DemoNotificationCopyWith<$Res>(_value.notification!, (value) {
-      return _then(_value.copyWith(notification: value));
+      return _then(_value.copyWith(notification: value) as $Val);
     });
   }
 }
@@ -404,59 +402,49 @@ abstract class _$$_DemoStateCopyWith<$Res> implements $DemoStateCopyWith<$Res> {
           _$_DemoState value, $Res Function(_$_DemoState) then) =
       __$$_DemoStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {UIStatus status,
       DemoNotification? notification,
       List<DogImage> images,
-      String? errorMsg,
-      String? successMsg,
       bool isBusy});
 
+  @override
+  $UIStatusCopyWith<$Res> get status;
   @override
   $DemoNotificationCopyWith<$Res>? get notification;
 }
 
 /// @nodoc
-class __$$_DemoStateCopyWithImpl<$Res> extends _$DemoStateCopyWithImpl<$Res>
+class __$$_DemoStateCopyWithImpl<$Res>
+    extends _$DemoStateCopyWithImpl<$Res, _$_DemoState>
     implements _$$_DemoStateCopyWith<$Res> {
   __$$_DemoStateCopyWithImpl(
       _$_DemoState _value, $Res Function(_$_DemoState) _then)
-      : super(_value, (v) => _then(v as _$_DemoState));
+      : super(_value, _then);
 
-  @override
-  _$_DemoState get _value => super._value as _$_DemoState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = freezed,
+    Object? status = null,
     Object? notification = freezed,
-    Object? images = freezed,
-    Object? errorMsg = freezed,
-    Object? successMsg = freezed,
-    Object? isBusy = freezed,
+    Object? images = null,
+    Object? isBusy = null,
   }) {
     return _then(_$_DemoState(
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as UIStatus,
-      notification: notification == freezed
+      notification: freezed == notification
           ? _value.notification
           : notification // ignore: cast_nullable_to_non_nullable
               as DemoNotification?,
-      images: images == freezed
+      images: null == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
               as List<DogImage>,
-      errorMsg: errorMsg == freezed
-          ? _value.errorMsg
-          : errorMsg // ignore: cast_nullable_to_non_nullable
-              as String?,
-      successMsg: successMsg == freezed
-          ? _value.successMsg
-          : successMsg // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isBusy: isBusy == freezed
+      isBusy: null == isBusy
           ? _value.isBusy
           : isBusy // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -468,11 +456,9 @@ class __$$_DemoStateCopyWithImpl<$Res> extends _$DemoStateCopyWithImpl<$Res>
 
 class _$_DemoState implements _DemoState {
   const _$_DemoState(
-      {this.status = UIStatus.initial,
+      {this.status = const Initial(),
       this.notification,
       final List<DogImage> images = const [],
-      this.errorMsg,
-      this.successMsg,
       this.isBusy = false})
       : _images = images;
 
@@ -485,21 +471,18 @@ class _$_DemoState implements _DemoState {
   @override
   @JsonKey()
   List<DogImage> get images {
+    if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_images);
   }
 
-  @override
-  final String? errorMsg;
-  @override
-  final String? successMsg;
   @override
   @JsonKey()
   final bool isBusy;
 
   @override
   String toString() {
-    return 'DemoState(status: $status, notification: $notification, images: $images, errorMsg: $errorMsg, successMsg: $successMsg, isBusy: $isBusy)';
+    return 'DemoState(status: $status, notification: $notification, images: $images, isBusy: $isBusy)';
   }
 
   @override
@@ -507,28 +490,20 @@ class _$_DemoState implements _DemoState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DemoState &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality()
-                .equals(other.notification, notification) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.notification, notification) ||
+                other.notification == notification) &&
             const DeepCollectionEquality().equals(other._images, _images) &&
-            const DeepCollectionEquality().equals(other.errorMsg, errorMsg) &&
-            const DeepCollectionEquality()
-                .equals(other.successMsg, successMsg) &&
-            const DeepCollectionEquality().equals(other.isBusy, isBusy));
+            (identical(other.isBusy, isBusy) || other.isBusy == isBusy));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(notification),
-      const DeepCollectionEquality().hash(_images),
-      const DeepCollectionEquality().hash(errorMsg),
-      const DeepCollectionEquality().hash(successMsg),
-      const DeepCollectionEquality().hash(isBusy));
+  int get hashCode => Object.hash(runtimeType, status, notification,
+      const DeepCollectionEquality().hash(_images), isBusy);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_DemoStateCopyWith<_$_DemoState> get copyWith =>
       __$$_DemoStateCopyWithImpl<_$_DemoState>(this, _$identity);
 }
@@ -538,8 +513,6 @@ abstract class _DemoState implements DemoState {
       {final UIStatus status,
       final DemoNotification? notification,
       final List<DogImage> images,
-      final String? errorMsg,
-      final String? successMsg,
       final bool isBusy}) = _$_DemoState;
 
   @override
@@ -548,10 +521,6 @@ abstract class _DemoState implements DemoState {
   DemoNotification? get notification;
   @override
   List<DogImage> get images;
-  @override
-  String? get errorMsg;
-  @override
-  String? get successMsg;
   @override
   bool get isBusy;
   @override
@@ -571,8 +540,8 @@ mixin _$DemoNotification {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String message)? insertSuccess,
-    TResult Function(String message)? insertFailed,
+    TResult? Function(String message)? insertSuccess,
+    TResult? Function(String message)? insertFailed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -590,8 +559,8 @@ mixin _$DemoNotification {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_NotificationInsertSuccess value)? insertSuccess,
-    TResult Function(_NotificationInsertFailed value)? insertFailed,
+    TResult? Function(_NotificationInsertSuccess value)? insertSuccess,
+    TResult? Function(_NotificationInsertFailed value)? insertFailed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -611,29 +580,32 @@ mixin _$DemoNotification {
 abstract class $DemoNotificationCopyWith<$Res> {
   factory $DemoNotificationCopyWith(
           DemoNotification value, $Res Function(DemoNotification) then) =
-      _$DemoNotificationCopyWithImpl<$Res>;
+      _$DemoNotificationCopyWithImpl<$Res, DemoNotification>;
+  @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class _$DemoNotificationCopyWithImpl<$Res>
+class _$DemoNotificationCopyWithImpl<$Res, $Val extends DemoNotification>
     implements $DemoNotificationCopyWith<$Res> {
   _$DemoNotificationCopyWithImpl(this._value, this._then);
 
-  final DemoNotification _value;
   // ignore: unused_field
-  final $Res Function(DemoNotification) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = freezed,
+    Object? message = null,
   }) {
     return _then(_value.copyWith(
-      message: message == freezed
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -645,28 +617,26 @@ abstract class _$$_NotificationInsertSuccessCopyWith<$Res>
           $Res Function(_$_NotificationInsertSuccess) then) =
       __$$_NotificationInsertSuccessCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String message});
 }
 
 /// @nodoc
 class __$$_NotificationInsertSuccessCopyWithImpl<$Res>
-    extends _$DemoNotificationCopyWithImpl<$Res>
+    extends _$DemoNotificationCopyWithImpl<$Res, _$_NotificationInsertSuccess>
     implements _$$_NotificationInsertSuccessCopyWith<$Res> {
   __$$_NotificationInsertSuccessCopyWithImpl(
       _$_NotificationInsertSuccess _value,
       $Res Function(_$_NotificationInsertSuccess) _then)
-      : super(_value, (v) => _then(v as _$_NotificationInsertSuccess));
+      : super(_value, _then);
 
-  @override
-  _$_NotificationInsertSuccess get _value =>
-      super._value as _$_NotificationInsertSuccess;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = freezed,
+    Object? message = null,
   }) {
     return _then(_$_NotificationInsertSuccess(
-      message: message == freezed
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
@@ -689,6 +659,7 @@ class _$_NotificationInsertSuccess implements _NotificationInsertSuccess {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_NotificationInsertSuccessCopyWith<_$_NotificationInsertSuccess>
       get copyWith => __$$_NotificationInsertSuccessCopyWithImpl<
           _$_NotificationInsertSuccess>(this, _$identity);
@@ -705,8 +676,8 @@ class _$_NotificationInsertSuccess implements _NotificationInsertSuccess {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String message)? insertSuccess,
-    TResult Function(String message)? insertFailed,
+    TResult? Function(String message)? insertSuccess,
+    TResult? Function(String message)? insertFailed,
   }) {
     return insertSuccess?.call(message);
   }
@@ -736,8 +707,8 @@ class _$_NotificationInsertSuccess implements _NotificationInsertSuccess {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_NotificationInsertSuccess value)? insertSuccess,
-    TResult Function(_NotificationInsertFailed value)? insertFailed,
+    TResult? Function(_NotificationInsertSuccess value)? insertSuccess,
+    TResult? Function(_NotificationInsertFailed value)? insertFailed,
   }) {
     return insertSuccess?.call(this);
   }
@@ -776,27 +747,25 @@ abstract class _$$_NotificationInsertFailedCopyWith<$Res>
           $Res Function(_$_NotificationInsertFailed) then) =
       __$$_NotificationInsertFailedCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String message});
 }
 
 /// @nodoc
 class __$$_NotificationInsertFailedCopyWithImpl<$Res>
-    extends _$DemoNotificationCopyWithImpl<$Res>
+    extends _$DemoNotificationCopyWithImpl<$Res, _$_NotificationInsertFailed>
     implements _$$_NotificationInsertFailedCopyWith<$Res> {
   __$$_NotificationInsertFailedCopyWithImpl(_$_NotificationInsertFailed _value,
       $Res Function(_$_NotificationInsertFailed) _then)
-      : super(_value, (v) => _then(v as _$_NotificationInsertFailed));
+      : super(_value, _then);
 
-  @override
-  _$_NotificationInsertFailed get _value =>
-      super._value as _$_NotificationInsertFailed;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = freezed,
+    Object? message = null,
   }) {
     return _then(_$_NotificationInsertFailed(
-      message: message == freezed
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
@@ -819,6 +788,7 @@ class _$_NotificationInsertFailed implements _NotificationInsertFailed {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_NotificationInsertFailedCopyWith<_$_NotificationInsertFailed>
       get copyWith => __$$_NotificationInsertFailedCopyWithImpl<
           _$_NotificationInsertFailed>(this, _$identity);
@@ -835,8 +805,8 @@ class _$_NotificationInsertFailed implements _NotificationInsertFailed {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String message)? insertSuccess,
-    TResult Function(String message)? insertFailed,
+    TResult? Function(String message)? insertSuccess,
+    TResult? Function(String message)? insertFailed,
   }) {
     return insertFailed?.call(message);
   }
@@ -866,8 +836,8 @@ class _$_NotificationInsertFailed implements _NotificationInsertFailed {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_NotificationInsertSuccess value)? insertSuccess,
-    TResult Function(_NotificationInsertFailed value)? insertFailed,
+    TResult? Function(_NotificationInsertSuccess value)? insertSuccess,
+    TResult? Function(_NotificationInsertFailed value)? insertFailed,
   }) {
     return insertFailed?.call(this);
   }
