@@ -63,14 +63,14 @@ class _BodyState extends State<_Body> {
               Flushbar(
                 message: message,
                 duration: const Duration(seconds: 1),
-                backgroundColor: Colors.red,
+                backgroundColor: Colors.green,
               ).show(context);
             },
             notifyFailed: (message) {
               Flushbar(
                 message: message,
                 duration: const Duration(seconds: 1),
-                backgroundColor: Colors.green,
+                backgroundColor: Colors.red,
               ).show(context);
             },
           );
