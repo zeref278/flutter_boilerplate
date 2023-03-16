@@ -1,6 +1,5 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:boilerplate/common/app_spacing.dart';
-import 'package:boilerplate/core/bloc_core/ui_status.dart';
 import 'package:boilerplate/features/demo/bloc/demo_bloc.dart';
 import 'package:boilerplate/generated/l10n.dart';
 import 'package:boilerplate/injector/injector.dart';

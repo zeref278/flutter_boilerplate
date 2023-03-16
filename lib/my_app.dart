@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
       child: BlocListener<ApplicationBloc, ApplicationState>(
         bloc: _bloc,
         listener: (context, state) {
-          if (state.status == UIStatus.loadSuccess) {
+          if (state.status is LoadSuccess) {
             if (_locale != state.locale) {
               setState(() {
                 _locale = state.locale;
