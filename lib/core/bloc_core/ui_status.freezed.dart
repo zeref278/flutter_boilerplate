@@ -43,26 +43,26 @@ mixin _$UIStatus {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(LoadFailed value) loadFailed,
-    required TResult Function(LoadSuccess value) loadSuccess,
+    required TResult Function(UIInitial value) initial,
+    required TResult Function(UILoading value) loading,
+    required TResult Function(UILoadFailed value) loadFailed,
+    required TResult Function(UILoadSuccess value) loadSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Loading value)? loading,
-    TResult? Function(LoadFailed value)? loadFailed,
-    TResult? Function(LoadSuccess value)? loadSuccess,
+    TResult? Function(UIInitial value)? initial,
+    TResult? Function(UILoading value)? loading,
+    TResult? Function(UILoadFailed value)? loadFailed,
+    TResult? Function(UILoadSuccess value)? loadSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(LoadFailed value)? loadFailed,
-    TResult Function(LoadSuccess value)? loadSuccess,
+    TResult Function(UIInitial value)? initial,
+    TResult Function(UILoading value)? loading,
+    TResult Function(UILoadFailed value)? loadFailed,
+    TResult Function(UILoadSuccess value)? loadSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -86,23 +86,25 @@ class _$UIStatusCopyWithImpl<$Res, $Val extends UIStatus>
 }
 
 /// @nodoc
-abstract class _$$InitialCopyWith<$Res> {
-  factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
-      __$$InitialCopyWithImpl<$Res>;
+abstract class _$$UIInitialCopyWith<$Res> {
+  factory _$$UIInitialCopyWith(
+          _$UIInitial value, $Res Function(_$UIInitial) then) =
+      __$$UIInitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<$Res>
-    extends _$UIStatusCopyWithImpl<$Res, _$Initial>
-    implements _$$InitialCopyWith<$Res> {
-  __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
+class __$$UIInitialCopyWithImpl<$Res>
+    extends _$UIStatusCopyWithImpl<$Res, _$UIInitial>
+    implements _$$UIInitialCopyWith<$Res> {
+  __$$UIInitialCopyWithImpl(
+      _$UIInitial _value, $Res Function(_$UIInitial) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Initial implements Initial {
-  const _$Initial();
+class _$UIInitial implements UIInitial {
+  const _$UIInitial();
 
   @override
   String toString() {
@@ -112,7 +114,7 @@ class _$Initial implements Initial {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Initial);
+        (other.runtimeType == runtimeType && other is _$UIInitial);
   }
 
   @override
@@ -158,10 +160,10 @@ class _$Initial implements Initial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(LoadFailed value) loadFailed,
-    required TResult Function(LoadSuccess value) loadSuccess,
+    required TResult Function(UIInitial value) initial,
+    required TResult Function(UILoading value) loading,
+    required TResult Function(UILoadFailed value) loadFailed,
+    required TResult Function(UILoadSuccess value) loadSuccess,
   }) {
     return initial(this);
   }
@@ -169,10 +171,10 @@ class _$Initial implements Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Loading value)? loading,
-    TResult? Function(LoadFailed value)? loadFailed,
-    TResult? Function(LoadSuccess value)? loadSuccess,
+    TResult? Function(UIInitial value)? initial,
+    TResult? Function(UILoading value)? loading,
+    TResult? Function(UILoadFailed value)? loadFailed,
+    TResult? Function(UILoadSuccess value)? loadSuccess,
   }) {
     return initial?.call(this);
   }
@@ -180,10 +182,10 @@ class _$Initial implements Initial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(LoadFailed value)? loadFailed,
-    TResult Function(LoadSuccess value)? loadSuccess,
+    TResult Function(UIInitial value)? initial,
+    TResult Function(UILoading value)? loading,
+    TResult Function(UILoadFailed value)? loadFailed,
+    TResult Function(UILoadSuccess value)? loadSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -193,28 +195,30 @@ class _$Initial implements Initial {
   }
 }
 
-abstract class Initial implements UIStatus {
-  const factory Initial() = _$Initial;
+abstract class UIInitial implements UIStatus {
+  const factory UIInitial() = _$UIInitial;
 }
 
 /// @nodoc
-abstract class _$$LoadingCopyWith<$Res> {
-  factory _$$LoadingCopyWith(_$Loading value, $Res Function(_$Loading) then) =
-      __$$LoadingCopyWithImpl<$Res>;
+abstract class _$$UILoadingCopyWith<$Res> {
+  factory _$$UILoadingCopyWith(
+          _$UILoading value, $Res Function(_$UILoading) then) =
+      __$$UILoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadingCopyWithImpl<$Res>
-    extends _$UIStatusCopyWithImpl<$Res, _$Loading>
-    implements _$$LoadingCopyWith<$Res> {
-  __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
+class __$$UILoadingCopyWithImpl<$Res>
+    extends _$UIStatusCopyWithImpl<$Res, _$UILoading>
+    implements _$$UILoadingCopyWith<$Res> {
+  __$$UILoadingCopyWithImpl(
+      _$UILoading _value, $Res Function(_$UILoading) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Loading implements Loading {
-  const _$Loading();
+class _$UILoading implements UILoading {
+  const _$UILoading();
 
   @override
   String toString() {
@@ -224,7 +228,7 @@ class _$Loading implements Loading {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Loading);
+        (other.runtimeType == runtimeType && other is _$UILoading);
   }
 
   @override
@@ -270,10 +274,10 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(LoadFailed value) loadFailed,
-    required TResult Function(LoadSuccess value) loadSuccess,
+    required TResult Function(UIInitial value) initial,
+    required TResult Function(UILoading value) loading,
+    required TResult Function(UILoadFailed value) loadFailed,
+    required TResult Function(UILoadSuccess value) loadSuccess,
   }) {
     return loading(this);
   }
@@ -281,10 +285,10 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Loading value)? loading,
-    TResult? Function(LoadFailed value)? loadFailed,
-    TResult? Function(LoadSuccess value)? loadSuccess,
+    TResult? Function(UIInitial value)? initial,
+    TResult? Function(UILoading value)? loading,
+    TResult? Function(UILoadFailed value)? loadFailed,
+    TResult? Function(UILoadSuccess value)? loadSuccess,
   }) {
     return loading?.call(this);
   }
@@ -292,10 +296,10 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(LoadFailed value)? loadFailed,
-    TResult Function(LoadSuccess value)? loadSuccess,
+    TResult Function(UIInitial value)? initial,
+    TResult Function(UILoading value)? loading,
+    TResult Function(UILoadFailed value)? loadFailed,
+    TResult Function(UILoadSuccess value)? loadSuccess,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -305,25 +309,25 @@ class _$Loading implements Loading {
   }
 }
 
-abstract class Loading implements UIStatus {
-  const factory Loading() = _$Loading;
+abstract class UILoading implements UIStatus {
+  const factory UILoading() = _$UILoading;
 }
 
 /// @nodoc
-abstract class _$$LoadFailedCopyWith<$Res> {
-  factory _$$LoadFailedCopyWith(
-          _$LoadFailed value, $Res Function(_$LoadFailed) then) =
-      __$$LoadFailedCopyWithImpl<$Res>;
+abstract class _$$UILoadFailedCopyWith<$Res> {
+  factory _$$UILoadFailedCopyWith(
+          _$UILoadFailed value, $Res Function(_$UILoadFailed) then) =
+      __$$UILoadFailedCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$LoadFailedCopyWithImpl<$Res>
-    extends _$UIStatusCopyWithImpl<$Res, _$LoadFailed>
-    implements _$$LoadFailedCopyWith<$Res> {
-  __$$LoadFailedCopyWithImpl(
-      _$LoadFailed _value, $Res Function(_$LoadFailed) _then)
+class __$$UILoadFailedCopyWithImpl<$Res>
+    extends _$UIStatusCopyWithImpl<$Res, _$UILoadFailed>
+    implements _$$UILoadFailedCopyWith<$Res> {
+  __$$UILoadFailedCopyWithImpl(
+      _$UILoadFailed _value, $Res Function(_$UILoadFailed) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -331,7 +335,7 @@ class __$$LoadFailedCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$LoadFailed(
+    return _then(_$UILoadFailed(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -342,8 +346,8 @@ class __$$LoadFailedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadFailed implements LoadFailed {
-  const _$LoadFailed({required this.message});
+class _$UILoadFailed implements UILoadFailed {
+  const _$UILoadFailed({required this.message});
 
   @override
   final String message;
@@ -357,7 +361,7 @@ class _$LoadFailed implements LoadFailed {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoadFailed &&
+            other is _$UILoadFailed &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -367,8 +371,8 @@ class _$LoadFailed implements LoadFailed {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoadFailedCopyWith<_$LoadFailed> get copyWith =>
-      __$$LoadFailedCopyWithImpl<_$LoadFailed>(this, _$identity);
+  _$$UILoadFailedCopyWith<_$UILoadFailed> get copyWith =>
+      __$$UILoadFailedCopyWithImpl<_$UILoadFailed>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -410,10 +414,10 @@ class _$LoadFailed implements LoadFailed {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(LoadFailed value) loadFailed,
-    required TResult Function(LoadSuccess value) loadSuccess,
+    required TResult Function(UIInitial value) initial,
+    required TResult Function(UILoading value) loading,
+    required TResult Function(UILoadFailed value) loadFailed,
+    required TResult Function(UILoadSuccess value) loadSuccess,
   }) {
     return loadFailed(this);
   }
@@ -421,10 +425,10 @@ class _$LoadFailed implements LoadFailed {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Loading value)? loading,
-    TResult? Function(LoadFailed value)? loadFailed,
-    TResult? Function(LoadSuccess value)? loadSuccess,
+    TResult? Function(UIInitial value)? initial,
+    TResult? Function(UILoading value)? loading,
+    TResult? Function(UILoadFailed value)? loadFailed,
+    TResult? Function(UILoadSuccess value)? loadSuccess,
   }) {
     return loadFailed?.call(this);
   }
@@ -432,10 +436,10 @@ class _$LoadFailed implements LoadFailed {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(LoadFailed value)? loadFailed,
-    TResult Function(LoadSuccess value)? loadSuccess,
+    TResult Function(UIInitial value)? initial,
+    TResult Function(UILoading value)? loading,
+    TResult Function(UILoadFailed value)? loadFailed,
+    TResult Function(UILoadSuccess value)? loadSuccess,
     required TResult orElse(),
   }) {
     if (loadFailed != null) {
@@ -445,30 +449,30 @@ class _$LoadFailed implements LoadFailed {
   }
 }
 
-abstract class LoadFailed implements UIStatus {
-  const factory LoadFailed({required final String message}) = _$LoadFailed;
+abstract class UILoadFailed implements UIStatus {
+  const factory UILoadFailed({required final String message}) = _$UILoadFailed;
 
   String get message;
   @JsonKey(ignore: true)
-  _$$LoadFailedCopyWith<_$LoadFailed> get copyWith =>
+  _$$UILoadFailedCopyWith<_$UILoadFailed> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LoadSuccessCopyWith<$Res> {
-  factory _$$LoadSuccessCopyWith(
-          _$LoadSuccess value, $Res Function(_$LoadSuccess) then) =
-      __$$LoadSuccessCopyWithImpl<$Res>;
+abstract class _$$UILoadSuccessCopyWith<$Res> {
+  factory _$$UILoadSuccessCopyWith(
+          _$UILoadSuccess value, $Res Function(_$UILoadSuccess) then) =
+      __$$UILoadSuccessCopyWithImpl<$Res>;
   @useResult
   $Res call({String? message});
 }
 
 /// @nodoc
-class __$$LoadSuccessCopyWithImpl<$Res>
-    extends _$UIStatusCopyWithImpl<$Res, _$LoadSuccess>
-    implements _$$LoadSuccessCopyWith<$Res> {
-  __$$LoadSuccessCopyWithImpl(
-      _$LoadSuccess _value, $Res Function(_$LoadSuccess) _then)
+class __$$UILoadSuccessCopyWithImpl<$Res>
+    extends _$UIStatusCopyWithImpl<$Res, _$UILoadSuccess>
+    implements _$$UILoadSuccessCopyWith<$Res> {
+  __$$UILoadSuccessCopyWithImpl(
+      _$UILoadSuccess _value, $Res Function(_$UILoadSuccess) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -476,7 +480,7 @@ class __$$LoadSuccessCopyWithImpl<$Res>
   $Res call({
     Object? message = freezed,
   }) {
-    return _then(_$LoadSuccess(
+    return _then(_$UILoadSuccess(
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -487,8 +491,8 @@ class __$$LoadSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadSuccess implements LoadSuccess {
-  const _$LoadSuccess({this.message});
+class _$UILoadSuccess implements UILoadSuccess {
+  const _$UILoadSuccess({this.message});
 
   @override
   final String? message;
@@ -502,7 +506,7 @@ class _$LoadSuccess implements LoadSuccess {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoadSuccess &&
+            other is _$UILoadSuccess &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -512,8 +516,8 @@ class _$LoadSuccess implements LoadSuccess {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoadSuccessCopyWith<_$LoadSuccess> get copyWith =>
-      __$$LoadSuccessCopyWithImpl<_$LoadSuccess>(this, _$identity);
+  _$$UILoadSuccessCopyWith<_$UILoadSuccess> get copyWith =>
+      __$$UILoadSuccessCopyWithImpl<_$UILoadSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -555,10 +559,10 @@ class _$LoadSuccess implements LoadSuccess {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(LoadFailed value) loadFailed,
-    required TResult Function(LoadSuccess value) loadSuccess,
+    required TResult Function(UIInitial value) initial,
+    required TResult Function(UILoading value) loading,
+    required TResult Function(UILoadFailed value) loadFailed,
+    required TResult Function(UILoadSuccess value) loadSuccess,
   }) {
     return loadSuccess(this);
   }
@@ -566,10 +570,10 @@ class _$LoadSuccess implements LoadSuccess {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Loading value)? loading,
-    TResult? Function(LoadFailed value)? loadFailed,
-    TResult? Function(LoadSuccess value)? loadSuccess,
+    TResult? Function(UIInitial value)? initial,
+    TResult? Function(UILoading value)? loading,
+    TResult? Function(UILoadFailed value)? loadFailed,
+    TResult? Function(UILoadSuccess value)? loadSuccess,
   }) {
     return loadSuccess?.call(this);
   }
@@ -577,10 +581,10 @@ class _$LoadSuccess implements LoadSuccess {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(LoadFailed value)? loadFailed,
-    TResult Function(LoadSuccess value)? loadSuccess,
+    TResult Function(UIInitial value)? initial,
+    TResult Function(UILoading value)? loading,
+    TResult Function(UILoadFailed value)? loadFailed,
+    TResult Function(UILoadSuccess value)? loadSuccess,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
@@ -590,11 +594,11 @@ class _$LoadSuccess implements LoadSuccess {
   }
 }
 
-abstract class LoadSuccess implements UIStatus {
-  const factory LoadSuccess({final String? message}) = _$LoadSuccess;
+abstract class UILoadSuccess implements UIStatus {
+  const factory UILoadSuccess({final String? message}) = _$UILoadSuccess;
 
   String? get message;
   @JsonKey(ignore: true)
-  _$$LoadSuccessCopyWith<_$LoadSuccess> get copyWith =>
+  _$$UILoadSuccessCopyWith<_$UILoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;
 }

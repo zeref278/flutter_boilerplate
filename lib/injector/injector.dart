@@ -1,16 +1,15 @@
-import 'package:boilerplate/injector/database_module.dart';
-import 'package:boilerplate/injector/dio_module.dart';
-import 'package:boilerplate/injector/repository_module.dart';
+import 'package:boilerplate/injector/modules/bloc_module.dart';
+import 'package:boilerplate/injector/modules/database_module.dart';
+import 'package:boilerplate/injector/modules/dio_module.dart';
+import 'package:boilerplate/injector/modules/repository_module.dart';
+import 'package:boilerplate/injector/modules/rest_client_module.dart';
+import 'package:boilerplate/injector/modules/service_module.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 
-import 'bloc_module.dart';
-import 'rest_client_module.dart';
-import 'service_module.dart';
-
 class Injector {
-  static GetIt instance = GetIt.instance;
   Injector._();
+  static GetIt instance = GetIt.instance;
 
   static void init() {
     DioModule.setup();
@@ -19,7 +18,6 @@ class Injector {
 
     if (!kIsWeb) {
       DatabaseModule.init();
-      DatabaseModule.initRepositories();
     }
 
     RepositoryModule.init();

@@ -110,6 +110,14 @@ class _$DogImageDao extends DogImageDao {
             (DogImageEntity item) => <String, Object?>{
                   'message': item.message,
                   'status': item.status
+                }),
+        _dogImageEntityDeletionAdapter = DeletionAdapter(
+            database,
+            'DogImageEntity',
+            ['message'],
+            (DogImageEntity item) => <String, Object?>{
+                  'message': item.message,
+                  'status': item.status
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -120,6 +128,8 @@ class _$DogImageDao extends DogImageDao {
 
   final InsertionAdapter<DogImageEntity> _dogImageEntityInsertionAdapter;
 
+  final DeletionAdapter<DogImageEntity> _dogImageEntityDeletionAdapter;
+
   @override
   Future<List<DogImageEntity>> findAllDogImages() async {
     return _queryAdapter.queryList('SELECT * FROM DogImageEntity',
@@ -128,16 +138,13 @@ class _$DogImageDao extends DogImageDao {
   }
 
   @override
-  Future<DogImageEntity?> deleteDogImage(String message) async {
-    return _queryAdapter.query('DELETE FROM DogImageEntity WHERE message = ?1',
-        mapper: (Map<String, Object?> row) =>
-            DogImageEntity(row['message'] as String, row['status'] as String),
-        arguments: [message]);
-  }
-
-  @override
   Future<void> insertDogImage(DogImageEntity dogImageEntity) async {
     await _dogImageEntityInsertionAdapter.insert(
         dogImageEntity, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<void> deleteDogImage(DogImageEntity dogImageEntity) async {
+    await _dogImageEntityDeletionAdapter.delete(dogImageEntity);
   }
 }

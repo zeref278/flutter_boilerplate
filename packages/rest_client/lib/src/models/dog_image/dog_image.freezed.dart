@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'dog_image.dart';
 
@@ -32,33 +32,37 @@ mixin _$DogImage {
 /// @nodoc
 abstract class $DogImageCopyWith<$Res> {
   factory $DogImageCopyWith(DogImage value, $Res Function(DogImage) then) =
-      _$DogImageCopyWithImpl<$Res>;
+      _$DogImageCopyWithImpl<$Res, DogImage>;
+  @useResult
   $Res call({String message, String status});
 }
 
 /// @nodoc
-class _$DogImageCopyWithImpl<$Res> implements $DogImageCopyWith<$Res> {
+class _$DogImageCopyWithImpl<$Res, $Val extends DogImage>
+    implements $DogImageCopyWith<$Res> {
   _$DogImageCopyWithImpl(this._value, this._then);
 
-  final DogImage _value;
   // ignore: unused_field
-  final $Res Function(DogImage) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = freezed,
-    Object? status = freezed,
+    Object? message = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
-      message: message == freezed
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -68,30 +72,30 @@ abstract class _$$_DogImageCopyWith<$Res> implements $DogImageCopyWith<$Res> {
           _$_DogImage value, $Res Function(_$_DogImage) then) =
       __$$_DogImageCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String message, String status});
 }
 
 /// @nodoc
-class __$$_DogImageCopyWithImpl<$Res> extends _$DogImageCopyWithImpl<$Res>
+class __$$_DogImageCopyWithImpl<$Res>
+    extends _$DogImageCopyWithImpl<$Res, _$_DogImage>
     implements _$$_DogImageCopyWith<$Res> {
   __$$_DogImageCopyWithImpl(
       _$_DogImage _value, $Res Function(_$_DogImage) _then)
-      : super(_value, (v) => _then(v as _$_DogImage));
+      : super(_value, _then);
 
-  @override
-  _$_DogImage get _value => super._value as _$_DogImage;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = freezed,
-    Object? status = freezed,
+    Object? message = null,
+    Object? status = null,
   }) {
     return _then(_$_DogImage(
-      message: message == freezed
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
@@ -122,19 +126,17 @@ class _$_DogImage implements _DogImage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DogImage &&
-            const DeepCollectionEquality().equals(other.message, message) &&
-            const DeepCollectionEquality().equals(other.status, status));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(message),
-      const DeepCollectionEquality().hash(status));
+  int get hashCode => Object.hash(runtimeType, message, status);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_DogImageCopyWith<_$_DogImage> get copyWith =>
       __$$_DogImageCopyWithImpl<_$_DogImage>(this, _$identity);
 

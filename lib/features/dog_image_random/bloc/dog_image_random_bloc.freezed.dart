@@ -488,7 +488,7 @@ class _$_DogImageRandomState
     with DiagnosticableTreeMixin
     implements _DogImageRandomState {
   const _$_DogImageRandomState(
-      {this.status = const Initial(),
+      {this.status = const UIInitial(),
       this.notification,
       this.dogImage = const DogImage(message: '', status: ''),
       this.isBusy = false});

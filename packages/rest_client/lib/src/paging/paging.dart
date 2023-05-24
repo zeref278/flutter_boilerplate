@@ -10,13 +10,17 @@ part 'paging.g.dart';
   genericArgumentFactories: true,
 )
 class Paging<T> with _$Paging<T> {
+  /// Constructor
   const factory Paging({
+    required List<T> items,
     @JsonKey(name: 'totalCount') int? totalCount,
     @JsonKey(name: 'currentCount') int? currentCount,
-    required List<T> items,
   }) = _Paging;
 
+  ///
   factory Paging.fromJson(
-          Map<String, Object?> json, T Function(Object?) fromJsonT) =>
+    Map<String, Object?> json,
+    T Function(Object?) fromJsonT,
+  ) =>
       _$PagingFromJson(json, fromJsonT);
 }

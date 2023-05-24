@@ -5,6 +5,6 @@ class DemoEvent with _$DemoEvent {
   const factory DemoEvent.loadImageFromDB() = _LoadImageFromDB;
 
   const factory DemoEvent.deleteImageFromDB({
-    required String message,
+    required DogImage dogImage,
   }) = _DeleteImageFromDB;
 }

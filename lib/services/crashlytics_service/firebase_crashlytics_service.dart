@@ -3,13 +3,13 @@ import 'package:boilerplate/services/crashlytics_service/crashlytics_service.dar
 class FirebaseCrashlyticsService implements CrashlyticsService {
   @override
   Future<void> init() {
-    // TODO: implement init
+    // TODO(boilerplate): implement init
     throw UnimplementedError();
   }
 
   @override
-  Future<void> recordException(exception, StackTrace? stack) {
-    // TODO: implement recordException
+  Future<void> recordException(dynamic exception, StackTrace? stack) {
+    // TODO(boilerplate): implement recordException
     throw UnimplementedError();
   }
 }
