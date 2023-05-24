@@ -33,25 +33,31 @@ class DemoBloc extends Bloc<DemoEvent, DemoState> {
     Emitter<DemoState> emit,
   ) async {
     try {
-      emit(state.copyWith(
-        status: const Loading(),
-      ));
+      emit(
+        state.copyWith(
+          status: const UILoading(),
+        ),
+      );
 
       final List<DogImageEntity> imageEntities =
           await _repository.getDogImagesFromDB();
 
       final List<DogImage> images =
-          imageEntities.map((e) => MapperUtils.mapDogImageEntity(e)).toList();
+          imageEntities.map(MapperUtils.mapDogImageEntity).toList();
 
-      emit(state.copyWith(
-        status: const LoadSuccess(),
-        images: images,
-      ));
+      emit(
+        state.copyWith(
+          status: const UILoadSuccess(),
+          images: images,
+        ),
+      );
     } catch (e, s) {
       _logService.e('DemoLoadImageFromDB failed', e, s);
-      emit(state.copyWith(
-        status: LoadFailed(message: e.toString()),
-      ));
+      emit(
+        state.copyWith(
+          status: UILoadFailed(message: e.toString()),
+        ),
+      );
     }
   }
 
@@ -60,28 +66,34 @@ class DemoBloc extends Bloc<DemoEvent, DemoState> {
     Emitter<DemoState> emit,
   ) async {
     try {
-      emit(state.copyWith(
-        isBusy: true,
-      ));
+      emit(
+        state.copyWith(
+          isBusy: true,
+        ),
+      );
 
-      await _repository.deleteDogImageDB(event.message);
+      await _repository
+          .deleteDogImageDB(MapperUtils.mapDogImage(event.dogImage));
 
-      final List<DogImage> images = List.from(state.images);
+      final List<DogImage> images = List.from(state.images)
+        ..removeWhere((element) => element.message == event.dogImage.message);
 
-      images.removeWhere((element) => element.message == event.message);
-
-      emit(state.copyWith(
-        notification:
-            _NotificationInsertSuccess(message: S.current.delete_success),
-        images: images,
-        isBusy: false,
-      ));
+      emit(
+        state.copyWith(
+          notification:
+              _NotificationInsertSuccess(message: S.current.delete_success),
+          images: images,
+          isBusy: false,
+        ),
+      );
     } catch (e, s) {
       _logService.e('DemoLoadImageFromDB failed', e, s);
-      emit(state.copyWith(
-        notification: _NotificationInsertFailed(message: e.toString()),
-        isBusy: false,
-      ));
+      emit(
+        state.copyWith(
+          notification: _NotificationInsertFailed(message: e.toString()),
+          isBusy: false,
+        ),
+      );
     }
   }
 }

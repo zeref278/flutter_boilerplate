@@ -1,23 +1,38 @@
 import 'dart:async';
 
 abstract class LocalStorageService {
-  String tokenKey = '';
-  String localeKey = '';
-  String isDarkModeKey = '';
-  String isFirstUseKey = '';
-
   FutureOr<void> init();
-  String? get token;
-  String get locale;
-  bool get isDarkMode;
 
-  bool get isFirstUse;
+  FutureOr<void> setValue({
+    required String key,
+    required dynamic value,
+  });
 
-  Future<bool> setToken(String token);
-  Future<bool> setLocale(String locale);
-  Future<bool> setIsDarkMode(bool isDarkMode);
-  Future<bool> setIsFirstUse(bool isFirstUse);
+  Object? getValue({
+    required String key,
+  });
 
-  void setValue({required String key, required dynamic value});
-  dynamic getValue({required String key});
+  String? getString({
+    required String key,
+  });
+
+  int? getInt({
+    required String key,
+  });
+
+  double? getDouble({
+    required String key,
+  });
+
+  bool? getBool({
+    required String key,
+  });
+
+  List<String>? getStringList({
+    required String key,
+  });
+
+  FutureOr<bool> removeEntry({
+    required String key,
+  });
 }

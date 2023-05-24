@@ -6,5 +6,5 @@ abstract class DogImageLocalRepository {
 
   Future<List<DogImageEntity>> getDogImagesFromDB();
 
-  Future<DogImageEntity?> deleteDogImageDB(String message);
+  Future<void> deleteDogImageDB(DogImageEntity dogImageEntity);
 }

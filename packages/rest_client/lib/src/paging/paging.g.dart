@@ -11,9 +11,9 @@ _$_Paging<T> _$$_PagingFromJson<T>(
   T Function(Object? json) fromJsonT,
 ) =>
     _$_Paging<T>(
+      items: (json['items'] as List<dynamic>).map(fromJsonT).toList(),
       totalCount: json['totalCount'] as int?,
       currentCount: json['currentCount'] as int?,
-      items: (json['items'] as List<dynamic>).map(fromJsonT).toList(),
     );
 
 Map<String, dynamic> _$$_PagingToJson<T>(
@@ -21,7 +21,7 @@ Map<String, dynamic> _$$_PagingToJson<T>(
   Object? Function(T value) toJsonT,
 ) =>
     <String, dynamic>{
+      'items': instance.items.map(toJsonT).toList(),
       'totalCount': instance.totalCount,
       'currentCount': instance.currentCount,
-      'items': instance.items.map(toJsonT).toList(),
     };

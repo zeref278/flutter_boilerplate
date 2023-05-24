@@ -1,5 +1,6 @@
+import 'package:boilerplate/core/exceptions/api_exception.dart';
+import 'package:boilerplate/data/repositories/dog_image_random/remote/dog_image_random_repository.dart';
 import 'package:rest_client/rest_client.dart';
-import 'dog_image_random_repository.dart';
 
 class DogImageRandomRepositoryImpl implements DogImageRandomRepository {
   DogImageRandomRepositoryImpl({
@@ -11,8 +12,6 @@ class DogImageRandomRepositoryImpl implements DogImageRandomRepository {
   /// Remote
   @override
   Future<DogImage> getDogImageRandom() async {
-    return await _dogApiClient
-        .getDogImageRandom()
-        .catchError(ExceptionHandler.handleException);
+    return _dogApiClient.getDogImageRandom().onApiError;
   }
 }

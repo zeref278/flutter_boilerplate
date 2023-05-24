@@ -20,8 +20,8 @@ class DogImageRandomBloc
     extends Bloc<DogImageRandomEvent, DogImageRandomState> {
   DogImageRandomBloc({
     required DogImageRandomRepository dogImageRandomRepository,
-    DogImageLocalRepository? dogImageLocalRepository,
     required LogService logService,
+    DogImageLocalRepository? dogImageLocalRepository,
   }) : super(
           const DogImageRandomState(),
         ) {
@@ -41,18 +41,24 @@ class DogImageRandomBloc
     Emitter<DogImageRandomState> emit,
   ) {
     try {
-      emit(state.copyWith(
-        status: const Loading(),
-      ));
+      emit(
+        state.copyWith(
+          status: const UILoading(),
+        ),
+      );
 
-      emit(state.copyWith(
-        status: const LoadSuccess(),
-      ));
+      emit(
+        state.copyWith(
+          status: const UILoadSuccess(),
+        ),
+      );
     } catch (e, s) {
       _log.e('DogImageRandomLoaded failed', e, s);
-      emit(state.copyWith(
-        status: LoadFailed(message: e.toString()),
-      ));
+      emit(
+        state.copyWith(
+          status: UILoadFailed(message: e.toString()),
+        ),
+      );
     }
   }
 
@@ -61,9 +67,11 @@ class DogImageRandomBloc
     Emitter<DogImageRandomState> emit,
   ) async {
     try {
-      emit(state.copyWith(
-        isBusy: true,
-      ));
+      emit(
+        state.copyWith(
+          isBusy: true,
+        ),
+      );
 
       final DogImage image = await _repository.getDogImageRandom();
 
@@ -72,19 +80,23 @@ class DogImageRandomBloc
         await _localRepository!.insertDogImageDB(entity);
       }
 
-      emit(state.copyWith(
-        isBusy: false,
-        status: const LoadSuccess(),
-        dogImage: image,
-      ));
+      emit(
+        state.copyWith(
+          isBusy: false,
+          status: const UILoadSuccess(),
+          dogImage: image,
+        ),
+      );
     } catch (e, s) {
       _log.e('DogImageRandomLoaded failed', e, s);
-      emit(state.copyWith(
-        isBusy: false,
-        notification: _NotificationNotifyFailed(
-          message: e.toString(),
+      emit(
+        state.copyWith(
+          isBusy: false,
+          notification: _NotificationNotifyFailed(
+            message: e.toString(),
+          ),
         ),
-      ));
+      );
     }
   }
 }

@@ -11,8 +11,13 @@ on:
     
 jobs:
   build_pipeline:
-    # This job will run on ubuntu virtual machine
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
+
+    strategy:
+      matrix:
+        api-level:
+          - 29
+
     steps:
     
     # Setup Java environment in order to build the Android app.
@@ -25,10 +30,12 @@ jobs:
     - uses: subosito/flutter-action@v1
       with:
         channel: 'stable' # 'dev', 'alpha', default to: 'stable'
-        flutter-version: '3.7.6' # you can also specify exact version of flutter
+        flutter-version: '3.10.1' # you can also specify exact version of flutter
     
     # Get flutter dependencies.
     - run: flutter pub get
+
+    - run: flutter pub upgrade
     
     - run: flutter pub run intl_utils:generate
     
@@ -36,15 +43,25 @@ jobs:
 
     - name: local_database
       working-directory: ./packages/local_database
-      run: flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
+      run: flutter pub get && flutter pub upgrade && flutter pub run build_runner build --delete-conflicting-outputs
 
     - name: rest_client
       working-directory: ./packages/rest_client
-      run: flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
+      run: flutter pub get && flutter pub upgrade && flutter pub run build_runner build --delete-conflicting-outputs
 
     - run: flutter analyze
 
     - run: flutter test
+
+
+    - name: Run integration tests
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: ${{ matrix.api-level }}
+        arch: x86_64
+        profile: Nexus 6
+        script: flutter test integration_test --verbose
+
     
     - run: flutter build apk
     
