@@ -11,12 +11,12 @@ on:
     
 jobs:
   build_pipeline:
-    # This job will run on ubuntu virtual machine
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     strategy:
       matrix:
-        api-level: [ 29 ]
+        api-level:
+          - 29
 
     steps:
     
