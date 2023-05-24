@@ -13,6 +13,11 @@ jobs:
   build_pipeline:
     # This job will run on ubuntu virtual machine
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        api-level: [ 29 ]
+
     steps:
     
     # Setup Java environment in order to build the Android app.
@@ -48,10 +53,11 @@ jobs:
 
     - run: flutter test
 
+
     - name: Run integration tests
       uses: reactivecircus/android-emulator-runner@v2
       with:
-        api-level: 33
+        api-level: ${{ matrix.api-level }}
         arch: x86_64
         profile: Nexus 6
         script: flutter test integration_test --verbose
