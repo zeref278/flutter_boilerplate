@@ -19,19 +19,19 @@ mixin _$DemoEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadImageFromDB,
-    required TResult Function(String message) deleteImageFromDB,
+    required TResult Function(DogImage dogImage) deleteImageFromDB,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadImageFromDB,
-    TResult? Function(String message)? deleteImageFromDB,
+    TResult? Function(DogImage dogImage)? deleteImageFromDB,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadImageFromDB,
-    TResult Function(String message)? deleteImageFromDB,
+    TResult Function(DogImage dogImage)? deleteImageFromDB,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -112,7 +112,7 @@ class _$_LoadImageFromDB implements _LoadImageFromDB {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadImageFromDB,
-    required TResult Function(String message) deleteImageFromDB,
+    required TResult Function(DogImage dogImage) deleteImageFromDB,
   }) {
     return loadImageFromDB();
   }
@@ -121,7 +121,7 @@ class _$_LoadImageFromDB implements _LoadImageFromDB {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadImageFromDB,
-    TResult? Function(String message)? deleteImageFromDB,
+    TResult? Function(DogImage dogImage)? deleteImageFromDB,
   }) {
     return loadImageFromDB?.call();
   }
@@ -130,7 +130,7 @@ class _$_LoadImageFromDB implements _LoadImageFromDB {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadImageFromDB,
-    TResult Function(String message)? deleteImageFromDB,
+    TResult Function(DogImage dogImage)? deleteImageFromDB,
     required TResult orElse(),
   }) {
     if (loadImageFromDB != null) {
@@ -181,7 +181,9 @@ abstract class _$$_DeleteImageFromDBCopyWith<$Res> {
           $Res Function(_$_DeleteImageFromDB) then) =
       __$$_DeleteImageFromDBCopyWithImpl<$Res>;
   @useResult
-  $Res call({String message});
+  $Res call({DogImage dogImage});
+
+  $DogImageCopyWith<$Res> get dogImage;
 }
 
 /// @nodoc
@@ -195,28 +197,36 @@ class __$$_DeleteImageFromDBCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = null,
+    Object? dogImage = null,
   }) {
     return _then(_$_DeleteImageFromDB(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
+      dogImage: null == dogImage
+          ? _value.dogImage
+          : dogImage // ignore: cast_nullable_to_non_nullable
+              as DogImage,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DogImageCopyWith<$Res> get dogImage {
+    return $DogImageCopyWith<$Res>(_value.dogImage, (value) {
+      return _then(_value.copyWith(dogImage: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_DeleteImageFromDB implements _DeleteImageFromDB {
-  const _$_DeleteImageFromDB({required this.message});
+  const _$_DeleteImageFromDB({required this.dogImage});
 
   @override
-  final String message;
+  final DogImage dogImage;
 
   @override
   String toString() {
-    return 'DemoEvent.deleteImageFromDB(message: $message)';
+    return 'DemoEvent.deleteImageFromDB(dogImage: $dogImage)';
   }
 
   @override
@@ -224,11 +234,12 @@ class _$_DeleteImageFromDB implements _DeleteImageFromDB {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DeleteImageFromDB &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.dogImage, dogImage) ||
+                other.dogImage == dogImage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, dogImage);
 
   @JsonKey(ignore: true)
   @override
@@ -241,29 +252,29 @@ class _$_DeleteImageFromDB implements _DeleteImageFromDB {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadImageFromDB,
-    required TResult Function(String message) deleteImageFromDB,
+    required TResult Function(DogImage dogImage) deleteImageFromDB,
   }) {
-    return deleteImageFromDB(message);
+    return deleteImageFromDB(dogImage);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadImageFromDB,
-    TResult? Function(String message)? deleteImageFromDB,
+    TResult? Function(DogImage dogImage)? deleteImageFromDB,
   }) {
-    return deleteImageFromDB?.call(message);
+    return deleteImageFromDB?.call(dogImage);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadImageFromDB,
-    TResult Function(String message)? deleteImageFromDB,
+    TResult Function(DogImage dogImage)? deleteImageFromDB,
     required TResult orElse(),
   }) {
     if (deleteImageFromDB != null) {
-      return deleteImageFromDB(message);
+      return deleteImageFromDB(dogImage);
     }
     return orElse();
   }
@@ -301,10 +312,10 @@ class _$_DeleteImageFromDB implements _DeleteImageFromDB {
 }
 
 abstract class _DeleteImageFromDB implements DemoEvent {
-  const factory _DeleteImageFromDB({required final String message}) =
+  const factory _DeleteImageFromDB({required final DogImage dogImage}) =
       _$_DeleteImageFromDB;
 
-  String get message;
+  DogImage get dogImage;
   @JsonKey(ignore: true)
   _$$_DeleteImageFromDBCopyWith<_$_DeleteImageFromDB> get copyWith =>
       throw _privateConstructorUsedError;

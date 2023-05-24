@@ -9,6 +9,6 @@ abstract class DogImageDao {
   @insert
   Future<void> insertDogImage(DogImageEntity dogImageEntity);
 
-  @Query('DELETE FROM DogImageEntity WHERE message = :message')
-  Future<DogImageEntity?> deleteDogImage(String message);
+  @delete
+  Future<void> deleteDogImage(DogImageEntity dogImageEntity);
 }

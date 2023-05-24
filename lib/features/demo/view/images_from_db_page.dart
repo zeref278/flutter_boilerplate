@@ -110,7 +110,7 @@ class _Body extends StatelessWidget {
               onTap: () {
                 context.read<DemoBloc>().add(
                       DemoEvent.deleteImageFromDB(
-                        message: images[index].message,
+                        dogImage: images[index],
                       ),
                     );
               },

@@ -22,8 +22,8 @@ class DogImageLocalRepositoryImpl implements DogImageLocalRepository {
   }
 
   @override
-  Future<DogImageEntity?> deleteDogImageDB(String message) async {
+  Future<void> deleteDogImageDB(DogImageEntity dogImageEntity) async {
     final DogImageDao dao = await _appDatabaseManager.dogImageDao;
-    return dao.deleteDogImage(message);
+    return dao.deleteDogImage(dogImageEntity);
   }
 }

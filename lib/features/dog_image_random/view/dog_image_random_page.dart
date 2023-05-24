@@ -73,26 +73,27 @@ class _Body extends StatelessWidget {
         buildWhen: (prev, next) =>
             prev.status != next.status || prev.isBusy != next.isBusy,
         builder: (context, state) {
-          return state.status.when<Widget>(
-            initial: () {
-              return Text(S.current.press_button);
-            },
-            loading: () {
-              return const LoadingPage();
-            },
-            loadFailed: (message) {
-              return ErrorPage(
-                content: message,
-              );
-            },
-            loadSuccess: (message) {
-              return Stack(
-                children: [
-                  Image.network(state.dogImage.message),
-                  if (state.isBusy) const LoadingPage(),
-                ],
-              );
-            },
+          return Stack(
+            alignment: Alignment.center,
+            children: [
+              state.status.when<Widget>(
+                initial: () {
+                  return Text(S.current.press_button);
+                },
+                loading: () {
+                  return const LoadingPage();
+                },
+                loadFailed: (message) {
+                  return ErrorPage(
+                    content: message,
+                  );
+                },
+                loadSuccess: (message) {
+                  return Image.network(state.dogImage.message);
+                },
+              ),
+              if (state.isBusy) const LoadingPage(),
+            ],
           );
         },
       ),

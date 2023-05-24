@@ -72,10 +72,11 @@ class DemoBloc extends Bloc<DemoEvent, DemoState> {
         ),
       );
 
-      await _repository.deleteDogImageDB(event.message);
+      await _repository
+          .deleteDogImageDB(MapperUtils.mapDogImage(event.dogImage));
 
       final List<DogImage> images = List.from(state.images)
-        ..removeWhere((element) => element.message == event.message);
+        ..removeWhere((element) => element.message == event.dogImage.message);
 
       emit(
         state.copyWith(
