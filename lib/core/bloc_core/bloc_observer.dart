@@ -2,8 +2,8 @@ import 'package:boilerplate/injector/injector.dart';
 import 'package:boilerplate/services/log_service/log_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SampleBlocObserver extends BlocObserver {
-  SampleBlocObserver() {
+class AppBlocObserver extends BlocObserver {
+  AppBlocObserver() {
     _logService = Injector.instance<LogService>();
   }
 

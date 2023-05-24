@@ -1,5 +1,5 @@
+import 'package:boilerplate/data/repositories/dog_image_random/local/dog_image_local_repository.dart';
 import 'package:local_database/local_database.dart';
-import 'dog_image_local_repository.dart';
 
 class DogImageLocalRepositoryImpl implements DogImageLocalRepository {
   DogImageLocalRepositoryImpl({
@@ -18,12 +18,12 @@ class DogImageLocalRepositoryImpl implements DogImageLocalRepository {
   @override
   Future<List<DogImageEntity>> getDogImagesFromDB() async {
     final DogImageDao dao = await _appDatabaseManager.dogImageDao;
-    return await dao.findAllDogImages();
+    return dao.findAllDogImages();
   }
 
   @override
   Future<DogImageEntity?> deleteDogImageDB(String message) async {
     final DogImageDao dao = await _appDatabaseManager.dogImageDao;
-    return await dao.deleteDogImage(message);
+    return dao.deleteDogImage(message);
   }
 }

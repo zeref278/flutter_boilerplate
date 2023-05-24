@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:rest_client/rest_client.dart';
 
 void main() {
-  Dio dio = Dio(
+  final Dio dio = Dio(
     BaseOptions(
       baseUrl: 'https://dog.ceo/api',
     ),

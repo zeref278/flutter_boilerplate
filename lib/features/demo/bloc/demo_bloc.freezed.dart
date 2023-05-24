@@ -456,7 +456,7 @@ class __$$_DemoStateCopyWithImpl<$Res>
 
 class _$_DemoState implements _DemoState {
   const _$_DemoState(
-      {this.status = const Initial(),
+      {this.status = const UIInitial(),
       this.notification,
       final List<DogImage> images = const [],
       this.isBusy = false})

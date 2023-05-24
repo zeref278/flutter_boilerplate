@@ -6,7 +6,7 @@ import 'package:boilerplate/services/log_service/log_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rest_client/rest_client.dart';
-import '../app_test/app_test.mocks.dart';
+import '../dependencies/mock_dependencies.mocks.dart';
 
 void main() {
   const DogImage image = DogImage(message: 'demo', status: 'success');
@@ -26,8 +26,11 @@ void main() {
     blocTest(
       'emit state when success',
       setUp: () {
-        when(repository.getDogImageRandom())
-            .thenAnswer((_) => Future<DogImage>.value(image));
+        when(repository.getDogImageRandom()).thenAnswer(
+          (_) => Future<DogImage>.value(
+            image,
+          ),
+        );
       },
       build: () => bloc,
       act: (_) => bloc.add(
@@ -48,7 +51,7 @@ void main() {
             .having(
               (state) => state.status,
               'status',
-              isA<LoadSuccess>(),
+              isA<UILoadSuccess>(),
             )
             .having(
               (state) => state.dogImage,
@@ -61,7 +64,11 @@ void main() {
     blocTest(
       'emit state when failed',
       setUp: () {
-        when(repository.getDogImageRandom()).thenThrow(Exception('error'));
+        when(repository.getDogImageRandom()).thenThrow(
+          Exception(
+            'error',
+          ),
+        );
       },
       build: () => bloc,
       seed: () => const DogImageRandomState(dogImage: image),
@@ -69,8 +76,11 @@ void main() {
         const DogImageRandomEvent.randomRequested(),
       ),
       expect: () => [
-        isA<DogImageRandomState>()
-            .having((state) => state.isBusy, 'isBusy', true),
+        isA<DogImageRandomState>().having(
+          (state) => state.isBusy,
+          'isBusy',
+          true,
+        ),
         isA<DogImageRandomState>()
             .having(
               (state) => state.notification,
@@ -82,7 +92,11 @@ void main() {
               'image',
               image,
             )
-            .having((state) => state.isBusy, 'isBusy', false),
+            .having(
+              (state) => state.isBusy,
+              'isBusy',
+              false,
+            ),
       ],
     );
   });

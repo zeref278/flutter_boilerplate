@@ -1,24 +1,18 @@
 import 'dart:async';
-
-import 'package:boilerplate/configs/app_config.dart';
 import 'package:boilerplate/injector/injector.dart';
 import 'package:boilerplate/services/local_storage_service/local_storage_service.dart';
+import 'package:boilerplate/services/log_service/log_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesService implements LocalStorageService {
-  SharedPreferencesService() {
+  SharedPreferencesService({
+    required LogService logService,
+  }) {
+    _logService = logService;
     init();
   }
   late final SharedPreferences _pref;
-
-  @override
-  String tokenKey = 'tokenKey';
-  @override
-  String localeKey = 'localeKey';
-  @override
-  String isDarkModeKey = 'isDarkModeKey';
-  @override
-  String isFirstUseKey = 'isFirstUseKey';
+  late final LogService _logService;
 
   @override
   FutureOr<void> init() async {
@@ -27,42 +21,66 @@ class SharedPreferencesService implements LocalStorageService {
   }
 
   @override
-  String? get token => _pref.getString(tokenKey);
-
-  @override
-  bool get isDarkMode => _pref.getBool(isDarkModeKey) ?? false;
-
-  @override
-  bool get isFirstUse => _pref.getBool(isFirstUseKey) ?? false;
-
-  @override
-  String get locale => _pref.getString(localeKey) ?? AppConfig.defaultLocale;
-
-  @override
-  Future<bool> setIsDarkMode(bool isDarkMode) async {
-    return await _pref.setBool(isDarkModeKey, isDarkMode);
-  }
-
-  @override
-  Future<bool> setIsFirstUse(bool isFirstUse) async {
-    return await _pref.setBool(isFirstUseKey, isFirstUse);
-  }
-
-  @override
-  Future<bool> setLocale(String locale) async {
-    return await _pref.setString(localeKey, locale);
-  }
-
-  @override
-  Future<bool> setToken(String token) async {
-    return await _pref.setString(tokenKey, token);
-  }
-
-  @override
-  getValue({required String key}) {
+  Object? getValue({
+    required String key,
+  }) {
     return _pref.get(key);
   }
 
   @override
-  void setValue({required String key, required value}) {}
+  FutureOr<void> setValue({
+    required String key,
+    required dynamic value,
+  }) async {
+    if (value is String) {
+      await _pref.setString(key, value);
+    } else if (value is int) {
+      await _pref.setInt(key, value);
+    } else if (value is double) {
+      await _pref.setDouble(key, value);
+    } else if (value is bool) {
+      await _pref.setBool(key, value);
+    } else if (value is List<String>) {
+      await _pref.setStringList(key, value);
+    } else {
+      await _pref.setString(key, value.toString());
+      _logService.w(
+        'SharedPreferences did not support this type,'
+        ' will save to String by toString() function',
+      );
+    }
+  }
+
+  @override
+  bool? getBool({required String key}) {
+    return _pref.getBool(key);
+  }
+
+  @override
+  double? getDouble({required String key}) {
+    return _pref.getDouble(key);
+  }
+
+  @override
+  int? getInt({required String key}) {
+    return _pref.getInt(key);
+  }
+
+  @override
+  String? getString({required String key}) {
+    return _pref.getString(key);
+  }
+
+  @override
+  List<String>? getStringList({required String key}) {
+    return _pref.getStringList(key);
+  }
+
+  @override
+  FutureOr<bool> removeEntry({
+    required String key,
+  }) async {
+    final bool result = await _pref.remove(key);
+    return result;
+  }
 }

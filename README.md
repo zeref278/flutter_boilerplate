@@ -4,7 +4,8 @@
 <a href="https://github.com/zeref278"><img alt="GitHub: zeref278" src="https://img.shields.io/github/followers/zeref278?label=Follow&style=social" /></a>
 <a href="https://github.com/zeref278/flutter_boilerplate"><img src="https://img.shields.io/github/stars/zeref278/flutter_boilerplate?style=social" /></a>
 
-<a href="https://www.buymeacoffee.com/zeref278"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=zeref278&button_colour=5F7FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00"></a>
+<a href="https://www.buymeacoffee.com/zeref278" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
 
 </div>
 
@@ -25,6 +26,7 @@ A boilerplate project created in flutter using Bloc, Retrofit. Depend on code ge
 * DarkTheme
 * Multi languages
 * Unit tests
+* Integration test
 * Clean architecture
 * Flutter CI
 
@@ -91,10 +93,10 @@ flutter pub get && flutter pub run build_runner build --delete-conflicting-outpu
 ## Folder structure
 ```
 flutter_boilerplate/
-|- asssets/                   (assets)
+|- assets/                    (assets)
 |- lib/
-  |- common/                  (dimens, spacing, theming)
-  |- config/                  (flavor config)
+  |- configs/                 (flavor config)
+  |- core/                    (bloc observer, theme,...)
   |- data/                    (repository)
   |- features/                (features page)
   |- generated/               (code generation includes localization and assets generation)
@@ -106,8 +108,9 @@ flutter_boilerplate/
 |- packages/
   |- rest_client/             (api client)
   |- local_database/          (local database)
-|- tests/
-  |- app_test/                (mock dependencies)
+|- integration_test
+|- test/
+  |- dependencies/                (mock dependencies)
   |- features/                (bloc test features)
 
 ```

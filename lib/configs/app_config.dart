@@ -8,10 +8,10 @@ class AppConfig {
   }
 
   static void configTest() {
-    /// TODO
+    // TODO(boilerplate): flavoring
   }
 
   static void configProduction() {
-    /// TODO
+    // TODO(boilerplate): flavoring
   }
 }
