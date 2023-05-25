@@ -65,11 +65,9 @@ jobs:
         key: avd-${{ matrix.api-level }}
 
     - name: Run integration tests
-      if: steps.avd-cache.outputs.cache-hit != 'true'
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: ${{ matrix.api-level }}
-        force-avd-creation: false
         arch: x86_64
         profile: Nexus 6
         script: flutter test integration_test --verbose
