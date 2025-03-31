@@ -4,20 +4,20 @@ version: 0.0.1
 homepage:
 
 environment:
-  sdk: '>=3.0.0'
-
+  sdk: '>=3.6.0 <4.0.0'
+  
 dependencies:
   flutter:
     sdk: flutter
-  floor: ^1.4.1
-  sqflite: ^2.2.6
+  floor: ^1.5.0
+  sqflite: ^2.4.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.1
-  floor_generator: ^1.4.1
-  build_runner: ^2.3.3
+  flutter_lints: ^5.0.0
+  floor_generator: ^1.5.0
+  build_runner: ^2.4.15
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
