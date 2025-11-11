@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:boilerplate/core/dimens/app_dimens.dart';
+import 'package:boilerplate/core/bloc_core/ui_status.dart';
 import 'package:boilerplate/core/spacings/app_spacing.dart';
 import 'package:boilerplate/features/dog_image_random/bloc/dog_image_random_bloc.dart';
 import 'package:boilerplate/generated/l10n.dart';
@@ -76,22 +77,14 @@ class _Body extends StatelessWidget {
           return Stack(
             alignment: Alignment.center,
             children: [
-              state.status.when<Widget>(
-                initial: () {
-                  return Text(S.current.press_button);
-                },
-                loading: () {
-                  return const LoadingPage();
-                },
-                loadFailed: (message) {
-                  return ErrorPage(
+              switch (state.status) {
+                UIInitial() => Text(S.current.press_button),
+                UILoading() => const LoadingPage(),
+                UILoadFailed(:final message) => ErrorPage(
                     content: message,
-                  );
-                },
-                loadSuccess: (message) {
-                  return Image.network(state.dogImage.message);
-                },
-              ),
+                  ),
+                UILoadSuccess() => Image.network(state.dogImage.message),
+              },
               if (state.isBusy) const LoadingPage(),
             ],
           );

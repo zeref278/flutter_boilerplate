@@ -1,4 +1,5 @@
 import 'package:another_flushbar/flushbar.dart';
+import 'package:boilerplate/core/bloc_core/ui_status.dart';
 import 'package:boilerplate/core/spacings/app_spacing.dart';
 import 'package:boilerplate/features/demo/bloc/demo_bloc.dart';
 import 'package:boilerplate/generated/l10n.dart';
@@ -70,27 +71,19 @@ class _Body extends StatelessWidget {
         buildWhen: (prev, next) =>
             prev.status != next.status || prev.isBusy != next.isBusy,
         builder: (context, state) {
-          return state.status.when<Widget>(
-            initial: () {
-              return const LoadingPage();
-            },
-            loading: () {
-              return const LoadingPage();
-            },
-            loadFailed: (message) {
-              return ErrorPage(
+          return switch (state.status) {
+            UIInitial() => const LoadingPage(),
+            UILoading() => const LoadingPage(),
+            UILoadFailed(:final message) => ErrorPage(
                 content: message,
-              );
-            },
-            loadSuccess: (message) {
-              return Stack(
+              ),
+            UILoadSuccess() => Stack(
                 children: [
                   _buildImages(state.images),
                   if (state.isBusy) const LoadingPage(),
                 ],
-              );
-            },
-          );
+              ),
+          };
         },
       ),
     );
