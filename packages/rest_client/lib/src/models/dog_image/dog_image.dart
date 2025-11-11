@@ -4,13 +4,11 @@ part 'dog_image.freezed.dart';
 part 'dog_image.g.dart';
 
 /// Image dog data
-@Freezed(fromJson: true)
-class DogImage with _$DogImage {
+@freezed
+abstract class DogImage with _$DogImage {
   ///
-  const factory DogImage({
-    required String message,
-    required String status,
-  }) = _DogImage;
+  const factory DogImage({required String message, required String status}) =
+      _DogImage;
 
   ///
   factory DogImage.fromJson(Map<String, dynamic> json) =>

@@ -1,7 +1,7 @@
 part of 'app_bloc.dart';
 
-@Freezed()
-class AppState with _$AppState {
+@freezed
+abstract class AppState with _$AppState {
   const factory AppState({
     @Default(UIInitial()) UIStatus status,
     @Default(AppConfig.defaultLocale) String locale,
