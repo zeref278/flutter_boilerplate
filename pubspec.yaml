@@ -39,7 +39,7 @@ dependencies:
   injectable: ^2.5.0
   freezed_annotation: ^3.0.0
   dio: ^5.8.0+1
-  intl: ^0.19.0
+  intl: ^0.20.2
   intl_utils: ^2.8.10
   rxdart: ^0.28.0
   logger: ^2.5.0
@@ -71,7 +71,7 @@ dev_dependencies:
   freezed: ^3.0.4
   build_runner: ^2.4.15
   bloc_test: ^10.0.0
-  mockito: ^5.4.5
+  mockito: ^5.5.0
   flutter_gen_runner:
 
 # For information on the generic Dart part of this file, see the

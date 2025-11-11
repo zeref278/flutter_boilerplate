@@ -4,14 +4,14 @@ version: 0.0.1
 homepage:
 
 environment:
-  sdk: '>=3.6.0 <4.0.0'
+  sdk: '>=3.8.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
   dio: ^5.8.0+1
-  json_annotation: ^4.8.0
+  json_annotation: ^4.9.0
   freezed_annotation: ^3.0.0
   retrofit: ^4.0.1
   logger: ^2.5.0
@@ -22,8 +22,8 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   freezed: ^3.0.4
   json_serializable: ^6.6.1
-  retrofit_generator: ^6.0.0+1
-  build_runner: ^2.4.15
+  retrofit_generator: ^10.1.4
+  build_runner: ^2.4.13
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
