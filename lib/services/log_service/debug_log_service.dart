@@ -21,7 +21,7 @@ class DebugLogService implements LogService {
 
   @override
   void e(String message, dynamic e, StackTrace? stack) {
-    _logger.e(message, e, stack);
+    _logger.e(message);
   }
 
   @override
@@ -31,7 +31,7 @@ class DebugLogService implements LogService {
 
   @override
   void w(String message, [dynamic e, StackTrace? stack]) {
-    _logger.w(message, e, stack);
+    _logger.w(message);
   }
 }
 
