@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,175 +9,45 @@ part of 'app_bloc.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$AppEvent {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loaded,
-    required TResult Function(String locale) localeChanged,
-    required TResult Function() disableFirstUse,
-    required TResult Function() darkModeChanged,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loaded,
-    TResult? Function(String locale)? localeChanged,
-    TResult? Function()? disableFirstUse,
-    TResult? Function()? darkModeChanged,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loaded,
-    TResult Function(String locale)? localeChanged,
-    TResult Function()? disableFirstUse,
-    TResult Function()? darkModeChanged,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_LocaleChanged value) localeChanged,
-    required TResult Function(_DisableFirstUse value) disableFirstUse,
-    required TResult Function(_DarkModeChanged value) darkModeChanged,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_LocaleChanged value)? localeChanged,
-    TResult? Function(_DisableFirstUse value)? disableFirstUse,
-    TResult? Function(_DarkModeChanged value)? darkModeChanged,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_LocaleChanged value)? localeChanged,
-    TResult Function(_DisableFirstUse value)? disableFirstUse,
-    TResult Function(_DarkModeChanged value)? darkModeChanged,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AppEventCopyWith<$Res> {
-  factory $AppEventCopyWith(AppEvent value, $Res Function(AppEvent) then) =
-      _$AppEventCopyWithImpl<$Res, AppEvent>;
-}
-
-/// @nodoc
-class _$AppEventCopyWithImpl<$Res, $Val extends AppEvent>
-    implements $AppEventCopyWith<$Res> {
-  _$AppEventCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$_LoadedCopyWith<$Res> {
-  factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
-      __$$_LoadedCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_LoadedCopyWithImpl<$Res>
-    extends _$AppEventCopyWithImpl<$Res, _$_Loaded>
-    implements _$$_LoadedCopyWith<$Res> {
-  __$$_LoadedCopyWithImpl(_$_Loaded _value, $Res Function(_$_Loaded) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_Loaded implements _Loaded {
-  const _$_Loaded();
-
   @override
-  String toString() {
-    return 'AppEvent.loaded()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Loaded);
+        (other.runtimeType == runtimeType && other is AppEvent);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loaded,
-    required TResult Function(String locale) localeChanged,
-    required TResult Function() disableFirstUse,
-    required TResult Function() darkModeChanged,
-  }) {
-    return loaded();
+  String toString() {
+    return 'AppEvent()';
   }
+}
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loaded,
-    TResult? Function(String locale)? localeChanged,
-    TResult? Function()? disableFirstUse,
-    TResult? Function()? darkModeChanged,
-  }) {
-    return loaded?.call();
-  }
+/// @nodoc
+class $AppEventCopyWith<$Res> {
+  $AppEventCopyWith(AppEvent _, $Res Function(AppEvent) __);
+}
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loaded,
-    TResult Function(String locale)? localeChanged,
-    TResult Function()? disableFirstUse,
-    TResult Function()? darkModeChanged,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded();
-    }
-    return orElse();
-  }
+/// Adds pattern-matching-related methods to [AppEvent].
+extension AppEventPatterns on AppEvent {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_LocaleChanged value) localeChanged,
-    required TResult Function(_DisableFirstUse value) disableFirstUse,
-    required TResult Function(_DarkModeChanged value) darkModeChanged,
-  }) {
-    return loaded(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_LocaleChanged value)? localeChanged,
-    TResult? Function(_DisableFirstUse value)? disableFirstUse,
-    TResult? Function(_DarkModeChanged value)? darkModeChanged,
-  }) {
-    return loaded?.call(this);
-  }
-
-  @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Loaded value)? loaded,
@@ -186,514 +56,584 @@ class _$_Loaded implements _Loaded {
     TResult Function(_DarkModeChanged value)? darkModeChanged,
     required TResult orElse(),
   }) {
-    if (loaded != null) {
-      return loaded(this);
+    final _that = this;
+    switch (_that) {
+      case _Loaded() when loaded != null:
+        return loaded(_that);
+      case _LocaleChanged() when localeChanged != null:
+        return localeChanged(_that);
+      case _DisableFirstUse() when disableFirstUse != null:
+        return disableFirstUse(_that);
+      case _DarkModeChanged() when darkModeChanged != null:
+        return darkModeChanged(_that);
+      case _:
+        return orElse();
     }
-    return orElse();
   }
-}
 
-abstract class _Loaded implements AppEvent {
-  const factory _Loaded() = _$_Loaded;
-}
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
 
-/// @nodoc
-abstract class _$$_LocaleChangedCopyWith<$Res> {
-  factory _$$_LocaleChangedCopyWith(
-          _$_LocaleChanged value, $Res Function(_$_LocaleChanged) then) =
-      __$$_LocaleChangedCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String locale});
-}
-
-/// @nodoc
-class __$$_LocaleChangedCopyWithImpl<$Res>
-    extends _$AppEventCopyWithImpl<$Res, _$_LocaleChanged>
-    implements _$$_LocaleChangedCopyWith<$Res> {
-  __$$_LocaleChangedCopyWithImpl(
-      _$_LocaleChanged _value, $Res Function(_$_LocaleChanged) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? locale = null,
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_LocaleChanged value) localeChanged,
+    required TResult Function(_DisableFirstUse value) disableFirstUse,
+    required TResult Function(_DarkModeChanged value) darkModeChanged,
   }) {
-    return _then(_$_LocaleChanged(
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    final _that = this;
+    switch (_that) {
+      case _Loaded():
+        return loaded(_that);
+      case _LocaleChanged():
+        return localeChanged(_that);
+      case _DisableFirstUse():
+        return disableFirstUse(_that);
+      case _DarkModeChanged():
+        return darkModeChanged(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_LocaleChanged value)? localeChanged,
+    TResult? Function(_DisableFirstUse value)? disableFirstUse,
+    TResult? Function(_DarkModeChanged value)? darkModeChanged,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Loaded() when loaded != null:
+        return loaded(_that);
+      case _LocaleChanged() when localeChanged != null:
+        return localeChanged(_that);
+      case _DisableFirstUse() when disableFirstUse != null:
+        return disableFirstUse(_that);
+      case _DarkModeChanged() when darkModeChanged != null:
+        return darkModeChanged(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loaded,
+    TResult Function(String locale)? localeChanged,
+    TResult Function()? disableFirstUse,
+    TResult Function()? darkModeChanged,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Loaded() when loaded != null:
+        return loaded();
+      case _LocaleChanged() when localeChanged != null:
+        return localeChanged(_that.locale);
+      case _DisableFirstUse() when disableFirstUse != null:
+        return disableFirstUse();
+      case _DarkModeChanged() when darkModeChanged != null:
+        return darkModeChanged();
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loaded,
+    required TResult Function(String locale) localeChanged,
+    required TResult Function() disableFirstUse,
+    required TResult Function() darkModeChanged,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Loaded():
+        return loaded();
+      case _LocaleChanged():
+        return localeChanged(_that.locale);
+      case _DisableFirstUse():
+        return disableFirstUse();
+      case _DarkModeChanged():
+        return darkModeChanged();
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loaded,
+    TResult? Function(String locale)? localeChanged,
+    TResult? Function()? disableFirstUse,
+    TResult? Function()? darkModeChanged,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Loaded() when loaded != null:
+        return loaded();
+      case _LocaleChanged() when localeChanged != null:
+        return localeChanged(_that.locale);
+      case _DisableFirstUse() when disableFirstUse != null:
+        return disableFirstUse();
+      case _DarkModeChanged() when darkModeChanged != null:
+        return darkModeChanged();
+      case _:
+        return null;
+    }
   }
 }
 
 /// @nodoc
 
-class _$_LocaleChanged implements _LocaleChanged {
-  const _$_LocaleChanged({required this.locale});
+class _Loaded implements AppEvent {
+  const _Loaded();
 
   @override
-  final String locale;
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Loaded);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString() {
-    return 'AppEvent.localeChanged(locale: $locale)';
+    return 'AppEvent.loaded()';
   }
+}
+
+/// @nodoc
+
+class _LocaleChanged implements AppEvent {
+  const _LocaleChanged({required this.locale});
+
+  final String locale;
+
+  /// Create a copy of AppEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$LocaleChangedCopyWith<_LocaleChanged> get copyWith =>
+      __$LocaleChangedCopyWithImpl<_LocaleChanged>(this, _$identity);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LocaleChanged &&
+            other is _LocaleChanged &&
             (identical(other.locale, locale) || other.locale == locale));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, locale);
 
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_LocaleChangedCopyWith<_$_LocaleChanged> get copyWith =>
-      __$$_LocaleChangedCopyWithImpl<_$_LocaleChanged>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loaded,
-    required TResult Function(String locale) localeChanged,
-    required TResult Function() disableFirstUse,
-    required TResult Function() darkModeChanged,
-  }) {
-    return localeChanged(locale);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loaded,
-    TResult? Function(String locale)? localeChanged,
-    TResult? Function()? disableFirstUse,
-    TResult? Function()? darkModeChanged,
-  }) {
-    return localeChanged?.call(locale);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loaded,
-    TResult Function(String locale)? localeChanged,
-    TResult Function()? disableFirstUse,
-    TResult Function()? darkModeChanged,
-    required TResult orElse(),
-  }) {
-    if (localeChanged != null) {
-      return localeChanged(locale);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_LocaleChanged value) localeChanged,
-    required TResult Function(_DisableFirstUse value) disableFirstUse,
-    required TResult Function(_DarkModeChanged value) darkModeChanged,
-  }) {
-    return localeChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_LocaleChanged value)? localeChanged,
-    TResult? Function(_DisableFirstUse value)? disableFirstUse,
-    TResult? Function(_DarkModeChanged value)? darkModeChanged,
-  }) {
-    return localeChanged?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_LocaleChanged value)? localeChanged,
-    TResult Function(_DisableFirstUse value)? disableFirstUse,
-    TResult Function(_DarkModeChanged value)? darkModeChanged,
-    required TResult orElse(),
-  }) {
-    if (localeChanged != null) {
-      return localeChanged(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _LocaleChanged implements AppEvent {
-  const factory _LocaleChanged({required final String locale}) =
-      _$_LocaleChanged;
-
-  String get locale;
-  @JsonKey(ignore: true)
-  _$$_LocaleChangedCopyWith<_$_LocaleChanged> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_DisableFirstUseCopyWith<$Res> {
-  factory _$$_DisableFirstUseCopyWith(
-          _$_DisableFirstUse value, $Res Function(_$_DisableFirstUse) then) =
-      __$$_DisableFirstUseCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_DisableFirstUseCopyWithImpl<$Res>
-    extends _$AppEventCopyWithImpl<$Res, _$_DisableFirstUse>
-    implements _$$_DisableFirstUseCopyWith<$Res> {
-  __$$_DisableFirstUseCopyWithImpl(
-      _$_DisableFirstUse _value, $Res Function(_$_DisableFirstUse) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_DisableFirstUse implements _DisableFirstUse {
-  const _$_DisableFirstUse();
-
   @override
   String toString() {
-    return 'AppEvent.disableFirstUse()';
+    return 'AppEvent.localeChanged(locale: $locale)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_DisableFirstUse);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loaded,
-    required TResult Function(String locale) localeChanged,
-    required TResult Function() disableFirstUse,
-    required TResult Function() darkModeChanged,
-  }) {
-    return disableFirstUse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loaded,
-    TResult? Function(String locale)? localeChanged,
-    TResult? Function()? disableFirstUse,
-    TResult? Function()? darkModeChanged,
-  }) {
-    return disableFirstUse?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loaded,
-    TResult Function(String locale)? localeChanged,
-    TResult Function()? disableFirstUse,
-    TResult Function()? darkModeChanged,
-    required TResult orElse(),
-  }) {
-    if (disableFirstUse != null) {
-      return disableFirstUse();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_LocaleChanged value) localeChanged,
-    required TResult Function(_DisableFirstUse value) disableFirstUse,
-    required TResult Function(_DarkModeChanged value) darkModeChanged,
-  }) {
-    return disableFirstUse(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_LocaleChanged value)? localeChanged,
-    TResult? Function(_DisableFirstUse value)? disableFirstUse,
-    TResult? Function(_DarkModeChanged value)? darkModeChanged,
-  }) {
-    return disableFirstUse?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_LocaleChanged value)? localeChanged,
-    TResult Function(_DisableFirstUse value)? disableFirstUse,
-    TResult Function(_DarkModeChanged value)? darkModeChanged,
-    required TResult orElse(),
-  }) {
-    if (disableFirstUse != null) {
-      return disableFirstUse(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _DisableFirstUse implements AppEvent {
-  const factory _DisableFirstUse() = _$_DisableFirstUse;
 }
 
 /// @nodoc
-abstract class _$$_DarkModeChangedCopyWith<$Res> {
-  factory _$$_DarkModeChangedCopyWith(
-          _$_DarkModeChanged value, $Res Function(_$_DarkModeChanged) then) =
-      __$$_DarkModeChangedCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_DarkModeChangedCopyWithImpl<$Res>
-    extends _$AppEventCopyWithImpl<$Res, _$_DarkModeChanged>
-    implements _$$_DarkModeChangedCopyWith<$Res> {
-  __$$_DarkModeChangedCopyWithImpl(
-      _$_DarkModeChanged _value, $Res Function(_$_DarkModeChanged) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_DarkModeChanged implements _DarkModeChanged {
-  const _$_DarkModeChanged();
-
-  @override
-  String toString() {
-    return 'AppEvent.darkModeChanged()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_DarkModeChanged);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loaded,
-    required TResult Function(String locale) localeChanged,
-    required TResult Function() disableFirstUse,
-    required TResult Function() darkModeChanged,
-  }) {
-    return darkModeChanged();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loaded,
-    TResult? Function(String locale)? localeChanged,
-    TResult? Function()? disableFirstUse,
-    TResult? Function()? darkModeChanged,
-  }) {
-    return darkModeChanged?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loaded,
-    TResult Function(String locale)? localeChanged,
-    TResult Function()? disableFirstUse,
-    TResult Function()? darkModeChanged,
-    required TResult orElse(),
-  }) {
-    if (darkModeChanged != null) {
-      return darkModeChanged();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_LocaleChanged value) localeChanged,
-    required TResult Function(_DisableFirstUse value) disableFirstUse,
-    required TResult Function(_DarkModeChanged value) darkModeChanged,
-  }) {
-    return darkModeChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_LocaleChanged value)? localeChanged,
-    TResult? Function(_DisableFirstUse value)? disableFirstUse,
-    TResult? Function(_DarkModeChanged value)? darkModeChanged,
-  }) {
-    return darkModeChanged?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_LocaleChanged value)? localeChanged,
-    TResult Function(_DisableFirstUse value)? disableFirstUse,
-    TResult Function(_DarkModeChanged value)? darkModeChanged,
-    required TResult orElse(),
-  }) {
-    if (darkModeChanged != null) {
-      return darkModeChanged(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _DarkModeChanged implements AppEvent {
-  const factory _DarkModeChanged() = _$_DarkModeChanged;
-}
-
-/// @nodoc
-mixin _$AppState {
-  UIStatus get status => throw _privateConstructorUsedError;
-  String get locale => throw _privateConstructorUsedError;
-  bool get isDarkMode => throw _privateConstructorUsedError;
-  bool get isFirstUse => throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $AppStateCopyWith<AppState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AppStateCopyWith<$Res> {
-  factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) =
-      _$AppStateCopyWithImpl<$Res, AppState>;
+abstract mixin class _$LocaleChangedCopyWith<$Res>
+    implements $AppEventCopyWith<$Res> {
+  factory _$LocaleChangedCopyWith(
+          _LocaleChanged value, $Res Function(_LocaleChanged) _then) =
+      __$LocaleChangedCopyWithImpl;
   @useResult
-  $Res call({UIStatus status, String locale, bool isDarkMode, bool isFirstUse});
-
-  $UIStatusCopyWith<$Res> get status;
+  $Res call({String locale});
 }
 
 /// @nodoc
-class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
-    implements $AppStateCopyWith<$Res> {
-  _$AppStateCopyWithImpl(this._value, this._then);
+class __$LocaleChangedCopyWithImpl<$Res>
+    implements _$LocaleChangedCopyWith<$Res> {
+  __$LocaleChangedCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final _LocaleChanged _self;
+  final $Res Function(_LocaleChanged) _then;
 
+  /// Create a copy of AppEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
-    Object? status = null,
     Object? locale = null,
-    Object? isDarkMode = null,
-    Object? isFirstUse = null,
   }) {
-    return _then(_value.copyWith(
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as UIStatus,
+    return _then(_LocaleChanged(
       locale: null == locale
-          ? _value.locale
+          ? _self.locale
           : locale // ignore: cast_nullable_to_non_nullable
               as String,
-      isDarkMode: null == isDarkMode
-          ? _value.isDarkMode
-          : isDarkMode // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFirstUse: null == isFirstUse
-          ? _value.isFirstUse
-          : isFirstUse // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UIStatusCopyWith<$Res> get status {
-    return $UIStatusCopyWith<$Res>(_value.status, (value) {
-      return _then(_value.copyWith(status: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$_AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
-  factory _$$_AppStateCopyWith(
-          _$_AppState value, $Res Function(_$_AppState) then) =
-      __$$_AppStateCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({UIStatus status, String locale, bool isDarkMode, bool isFirstUse});
-
-  @override
-  $UIStatusCopyWith<$Res> get status;
-}
-
-/// @nodoc
-class __$$_AppStateCopyWithImpl<$Res>
-    extends _$AppStateCopyWithImpl<$Res, _$_AppState>
-    implements _$$_AppStateCopyWith<$Res> {
-  __$$_AppStateCopyWithImpl(
-      _$_AppState _value, $Res Function(_$_AppState) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? status = null,
-    Object? locale = null,
-    Object? isDarkMode = null,
-    Object? isFirstUse = null,
-  }) {
-    return _then(_$_AppState(
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as UIStatus,
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as String,
-      isDarkMode: null == isDarkMode
-          ? _value.isDarkMode
-          : isDarkMode // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFirstUse: null == isFirstUse
-          ? _value.isFirstUse
-          : isFirstUse // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_AppState implements _AppState {
-  const _$_AppState(
+class _DisableFirstUse implements AppEvent {
+  const _DisableFirstUse();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _DisableFirstUse);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'AppEvent.disableFirstUse()';
+  }
+}
+
+/// @nodoc
+
+class _DarkModeChanged implements AppEvent {
+  const _DarkModeChanged();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _DarkModeChanged);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'AppEvent.darkModeChanged()';
+  }
+}
+
+/// @nodoc
+mixin _$AppState {
+  UIStatus get status;
+  String get locale;
+  bool get isDarkMode;
+  bool get isFirstUse;
+
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $AppStateCopyWith<AppState> get copyWith =>
+      _$AppStateCopyWithImpl<AppState>(this as AppState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is AppState &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.locale, locale) || other.locale == locale) &&
+            (identical(other.isDarkMode, isDarkMode) ||
+                other.isDarkMode == isDarkMode) &&
+            (identical(other.isFirstUse, isFirstUse) ||
+                other.isFirstUse == isFirstUse));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, status, locale, isDarkMode, isFirstUse);
+
+  @override
+  String toString() {
+    return 'AppState(status: $status, locale: $locale, isDarkMode: $isDarkMode, isFirstUse: $isFirstUse)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $AppStateCopyWith<$Res> {
+  factory $AppStateCopyWith(AppState value, $Res Function(AppState) _then) =
+      _$AppStateCopyWithImpl;
+  @useResult
+  $Res call({UIStatus status, String locale, bool isDarkMode, bool isFirstUse});
+
+  $UIStatusCopyWith<$Res> get status;
+}
+
+/// @nodoc
+class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
+  _$AppStateCopyWithImpl(this._self, this._then);
+
+  final AppState _self;
+  final $Res Function(AppState) _then;
+
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = null,
+    Object? locale = null,
+    Object? isDarkMode = null,
+    Object? isFirstUse = null,
+  }) {
+    return _then(_self.copyWith(
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as UIStatus,
+      locale: null == locale
+          ? _self.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as String,
+      isDarkMode: null == isDarkMode
+          ? _self.isDarkMode
+          : isDarkMode // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFirstUse: null == isFirstUse
+          ? _self.isFirstUse
+          : isFirstUse // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UIStatusCopyWith<$Res> get status {
+    return $UIStatusCopyWith<$Res>(_self.status, (value) {
+      return _then(_self.copyWith(status: value));
+    });
+  }
+}
+
+/// Adds pattern-matching-related methods to [AppState].
+extension AppStatePatterns on AppState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AppState value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _AppState() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_AppState value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AppState():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_AppState value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AppState() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            UIStatus status, String locale, bool isDarkMode, bool isFirstUse)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _AppState() when $default != null:
+        return $default(
+            _that.status, _that.locale, _that.isDarkMode, _that.isFirstUse);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            UIStatus status, String locale, bool isDarkMode, bool isFirstUse)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AppState():
+        return $default(
+            _that.status, _that.locale, _that.isDarkMode, _that.isFirstUse);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            UIStatus status, String locale, bool isDarkMode, bool isFirstUse)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AppState() when $default != null:
+        return $default(
+            _that.status, _that.locale, _that.isDarkMode, _that.isFirstUse);
+      case _:
+        return null;
+    }
+  }
+}
+
+/// @nodoc
+
+class _AppState implements AppState {
+  const _AppState(
       {this.status = const UIInitial(),
       this.locale = AppConfig.defaultLocale,
       this.isDarkMode = false,
@@ -712,16 +652,19 @@ class _$_AppState implements _AppState {
   @JsonKey()
   final bool isFirstUse;
 
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'AppState(status: $status, locale: $locale, isDarkMode: $isDarkMode, isFirstUse: $isFirstUse)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AppStateCopyWith<_AppState> get copyWith =>
+      __$AppStateCopyWithImpl<_AppState>(this, _$identity);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AppState &&
+            other is _AppState &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.locale, locale) || other.locale == locale) &&
             (identical(other.isDarkMode, isDarkMode) ||
@@ -734,30 +677,71 @@ class _$_AppState implements _AppState {
   int get hashCode =>
       Object.hash(runtimeType, status, locale, isDarkMode, isFirstUse);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'AppState(status: $status, locale: $locale, isDarkMode: $isDarkMode, isFirstUse: $isFirstUse)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$AppStateCopyWith<$Res>
+    implements $AppStateCopyWith<$Res> {
+  factory _$AppStateCopyWith(_AppState value, $Res Function(_AppState) _then) =
+      __$AppStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call({UIStatus status, String locale, bool isDarkMode, bool isFirstUse});
+
+  @override
+  $UIStatusCopyWith<$Res> get status;
+}
+
+/// @nodoc
+class __$AppStateCopyWithImpl<$Res> implements _$AppStateCopyWith<$Res> {
+  __$AppStateCopyWithImpl(this._self, this._then);
+
+  final _AppState _self;
+  final $Res Function(_AppState) _then;
+
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$_AppStateCopyWith<_$_AppState> get copyWith =>
-      __$$_AppStateCopyWithImpl<_$_AppState>(this, _$identity);
+  $Res call({
+    Object? status = null,
+    Object? locale = null,
+    Object? isDarkMode = null,
+    Object? isFirstUse = null,
+  }) {
+    return _then(_AppState(
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as UIStatus,
+      locale: null == locale
+          ? _self.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as String,
+      isDarkMode: null == isDarkMode
+          ? _self.isDarkMode
+          : isDarkMode // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFirstUse: null == isFirstUse
+          ? _self.isFirstUse
+          : isFirstUse // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UIStatusCopyWith<$Res> get status {
+    return $UIStatusCopyWith<$Res>(_self.status, (value) {
+      return _then(_self.copyWith(status: value));
+    });
+  }
 }
 
-abstract class _AppState implements AppState {
-  const factory _AppState(
-      {final UIStatus status,
-      final String locale,
-      final bool isDarkMode,
-      final bool isFirstUse}) = _$_AppState;
-
-  @override
-  UIStatus get status;
-  @override
-  String get locale;
-  @override
-  bool get isDarkMode;
-  @override
-  bool get isFirstUse;
-  @override
-  @JsonKey(ignore: true)
-  _$$_AppStateCopyWith<_$_AppState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,158 +9,272 @@ part of 'dog_image.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-DogImage _$DogImageFromJson(Map<String, dynamic> json) {
-  return _DogImage.fromJson(json);
-}
 
 /// @nodoc
 mixin _$DogImage {
-  String get message => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $DogImageCopyWith<DogImage> get copyWith =>
-      throw _privateConstructorUsedError;
+ String get message; String get status;
+/// Create a copy of DogImage
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DogImageCopyWith<DogImage> get copyWith => _$DogImageCopyWithImpl<DogImage>(this as DogImage, _$identity);
+
+  /// Serializes this DogImage to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DogImage&&(identical(other.message, message) || other.message == message)&&(identical(other.status, status) || other.status == status));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,message,status);
+
+@override
+String toString() {
+  return 'DogImage(message: $message, status: $status)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $DogImageCopyWith<$Res> {
-  factory $DogImageCopyWith(DogImage value, $Res Function(DogImage) then) =
-      _$DogImageCopyWithImpl<$Res, DogImage>;
-  @useResult
-  $Res call({String message, String status});
-}
+abstract mixin class $DogImageCopyWith<$Res>  {
+  factory $DogImageCopyWith(DogImage value, $Res Function(DogImage) _then) = _$DogImageCopyWithImpl;
+@useResult
+$Res call({
+ String message, String status
+});
 
+
+
+
+}
 /// @nodoc
-class _$DogImageCopyWithImpl<$Res, $Val extends DogImage>
+class _$DogImageCopyWithImpl<$Res>
     implements $DogImageCopyWith<$Res> {
-  _$DogImageCopyWithImpl(this._value, this._then);
+  _$DogImageCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final DogImage _self;
+  final $Res Function(DogImage) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-    Object? status = null,
-  }) {
-    return _then(_value.copyWith(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
+/// Create a copy of DogImage
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? message = null,Object? status = null,}) {
+  return _then(_self.copyWith(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_DogImageCopyWith<$Res> implements $DogImageCopyWith<$Res> {
-  factory _$$_DogImageCopyWith(
-          _$_DogImage value, $Res Function(_$_DogImage) then) =
-      __$$_DogImageCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String message, String status});
 }
 
-/// @nodoc
-class __$$_DogImageCopyWithImpl<$Res>
-    extends _$DogImageCopyWithImpl<$Res, _$_DogImage>
-    implements _$$_DogImageCopyWith<$Res> {
-  __$$_DogImageCopyWithImpl(
-      _$_DogImage _value, $Res Function(_$_DogImage) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-    Object? status = null,
-  }) {
-    return _then(_$_DogImage(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Adds pattern-matching-related methods to [DogImage].
+extension DogImagePatterns on DogImage {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _DogImage value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _DogImage() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _DogImage value)  $default,){
+final _that = this;
+switch (_that) {
+case _DogImage():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _DogImage value)?  $default,){
+final _that = this;
+switch (_that) {
+case _DogImage() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String message,  String status)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _DogImage() when $default != null:
+return $default(_that.message,_that.status);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String message,  String status)  $default,) {final _that = this;
+switch (_that) {
+case _DogImage():
+return $default(_that.message,_that.status);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String message,  String status)?  $default,) {final _that = this;
+switch (_that) {
+case _DogImage() when $default != null:
+return $default(_that.message,_that.status);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_DogImage implements _DogImage {
-  const _$_DogImage({required this.message, required this.status});
 
-  factory _$_DogImage.fromJson(Map<String, dynamic> json) =>
-      _$$_DogImageFromJson(json);
+class _DogImage implements DogImage {
+  const _DogImage({required this.message, required this.status});
+  factory _DogImage.fromJson(Map<String, dynamic> json) => _$DogImageFromJson(json);
 
-  @override
-  final String message;
-  @override
-  final String status;
+@override final  String message;
+@override final  String status;
 
-  @override
-  String toString() {
-    return 'DogImage(message: $message, status: $status)';
-  }
+/// Create a copy of DogImage
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$DogImageCopyWith<_DogImage> get copyWith => __$DogImageCopyWithImpl<_DogImage>(this, _$identity);
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_DogImage &&
-            (identical(other.message, message) || other.message == message) &&
-            (identical(other.status, status) || other.status == status));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, message, status);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_DogImageCopyWith<_$_DogImage> get copyWith =>
-      __$$_DogImageCopyWithImpl<_$_DogImage>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_DogImageToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$DogImageToJson(this, );
 }
 
-abstract class _DogImage implements DogImage {
-  const factory _DogImage(
-      {required final String message,
-      required final String status}) = _$_DogImage;
-
-  factory _DogImage.fromJson(Map<String, dynamic> json) = _$_DogImage.fromJson;
-
-  @override
-  String get message;
-  @override
-  String get status;
-  @override
-  @JsonKey(ignore: true)
-  _$$_DogImageCopyWith<_$_DogImage> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DogImage&&(identical(other.message, message) || other.message == message)&&(identical(other.status, status) || other.status == status));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,message,status);
+
+@override
+String toString() {
+  return 'DogImage(message: $message, status: $status)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$DogImageCopyWith<$Res> implements $DogImageCopyWith<$Res> {
+  factory _$DogImageCopyWith(_DogImage value, $Res Function(_DogImage) _then) = __$DogImageCopyWithImpl;
+@override @useResult
+$Res call({
+ String message, String status
+});
+
+
+
+
+}
+/// @nodoc
+class __$DogImageCopyWithImpl<$Res>
+    implements _$DogImageCopyWith<$Res> {
+  __$DogImageCopyWithImpl(this._self, this._then);
+
+  final _DogImage _self;
+  final $Res Function(_DogImage) _then;
+
+/// Create a copy of DogImage
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? message = null,Object? status = null,}) {
+  return _then(_DogImage(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+// dart format on

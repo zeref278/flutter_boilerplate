@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,54 +9,45 @@ part of 'ui_status.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$UIStatus {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) loadFailed,
-    required TResult Function(String? message) loadSuccess,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? loadFailed,
-    TResult? Function(String? message)? loadSuccess,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? loadFailed,
-    TResult Function(String? message)? loadSuccess,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(UIInitial value) initial,
-    required TResult Function(UILoading value) loading,
-    required TResult Function(UILoadFailed value) loadFailed,
-    required TResult Function(UILoadSuccess value) loadSuccess,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UIInitial value)? initial,
-    TResult? Function(UILoading value)? loading,
-    TResult? Function(UILoadFailed value)? loadFailed,
-    TResult? Function(UILoadSuccess value)? loadSuccess,
-  }) =>
-      throw _privateConstructorUsedError;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is UIStatus);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'UIStatus()';
+  }
+}
+
+/// @nodoc
+class $UIStatusCopyWith<$Res> {
+  $UIStatusCopyWith(UIStatus _, $Res Function(UIStatus) __);
+}
+
+/// Adds pattern-matching-related methods to [UIStatus].
+extension UIStatusPatterns on UIStatus {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(UIInitial value)? initial,
@@ -64,280 +55,289 @@ mixin _$UIStatus {
     TResult Function(UILoadFailed value)? loadFailed,
     TResult Function(UILoadSuccess value)? loadSuccess,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) {
+    final _that = this;
+    switch (_that) {
+      case UIInitial() when initial != null:
+        return initial(_that);
+      case UILoading() when loading != null:
+        return loading(_that);
+      case UILoadFailed() when loadFailed != null:
+        return loadFailed(_that);
+      case UILoadSuccess() when loadSuccess != null:
+        return loadSuccess(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(UIInitial value) initial,
+    required TResult Function(UILoading value) loading,
+    required TResult Function(UILoadFailed value) loadFailed,
+    required TResult Function(UILoadSuccess value) loadSuccess,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case UIInitial():
+        return initial(_that);
+      case UILoading():
+        return loading(_that);
+      case UILoadFailed():
+        return loadFailed(_that);
+      case UILoadSuccess():
+        return loadSuccess(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(UIInitial value)? initial,
+    TResult? Function(UILoading value)? loading,
+    TResult? Function(UILoadFailed value)? loadFailed,
+    TResult? Function(UILoadSuccess value)? loadSuccess,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case UIInitial() when initial != null:
+        return initial(_that);
+      case UILoading() when loading != null:
+        return loading(_that);
+      case UILoadFailed() when loadFailed != null:
+        return loadFailed(_that);
+      case UILoadSuccess() when loadSuccess != null:
+        return loadSuccess(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String message)? loadFailed,
+    TResult Function(String? message)? loadSuccess,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case UIInitial() when initial != null:
+        return initial();
+      case UILoading() when loading != null:
+        return loading();
+      case UILoadFailed() when loadFailed != null:
+        return loadFailed(_that.message);
+      case UILoadSuccess() when loadSuccess != null:
+        return loadSuccess(_that.message);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String message) loadFailed,
+    required TResult Function(String? message) loadSuccess,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case UIInitial():
+        return initial();
+      case UILoading():
+        return loading();
+      case UILoadFailed():
+        return loadFailed(_that.message);
+      case UILoadSuccess():
+        return loadSuccess(_that.message);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String message)? loadFailed,
+    TResult? Function(String? message)? loadSuccess,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case UIInitial() when initial != null:
+        return initial();
+      case UILoading() when loading != null:
+        return loading();
+      case UILoadFailed() when loadFailed != null:
+        return loadFailed(_that.message);
+      case UILoadSuccess() when loadSuccess != null:
+        return loadSuccess(_that.message);
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc
-abstract class $UIStatusCopyWith<$Res> {
-  factory $UIStatusCopyWith(UIStatus value, $Res Function(UIStatus) then) =
-      _$UIStatusCopyWithImpl<$Res, UIStatus>;
-}
 
-/// @nodoc
-class _$UIStatusCopyWithImpl<$Res, $Val extends UIStatus>
-    implements $UIStatusCopyWith<$Res> {
-  _$UIStatusCopyWithImpl(this._value, this._then);
+class UIInitial implements UIStatus {
+  const UIInitial();
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is UIInitial);
+  }
 
-/// @nodoc
-abstract class _$$UIInitialCopyWith<$Res> {
-  factory _$$UIInitialCopyWith(
-          _$UIInitial value, $Res Function(_$UIInitial) then) =
-      __$$UIInitialCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$UIInitialCopyWithImpl<$Res>
-    extends _$UIStatusCopyWithImpl<$Res, _$UIInitial>
-    implements _$$UIInitialCopyWith<$Res> {
-  __$$UIInitialCopyWithImpl(
-      _$UIInitial _value, $Res Function(_$UIInitial) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$UIInitial implements UIInitial {
-  const _$UIInitial();
+  @override
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString() {
     return 'UIStatus.initial()';
   }
+}
+
+/// @nodoc
+
+class UILoading implements UIStatus {
+  const UILoading();
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UIInitial);
+        (other.runtimeType == runtimeType && other is UILoading);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) loadFailed,
-    required TResult Function(String? message) loadSuccess,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? loadFailed,
-    TResult? Function(String? message)? loadSuccess,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? loadFailed,
-    TResult Function(String? message)? loadSuccess,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(UIInitial value) initial,
-    required TResult Function(UILoading value) loading,
-    required TResult Function(UILoadFailed value) loadFailed,
-    required TResult Function(UILoadSuccess value) loadSuccess,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UIInitial value)? initial,
-    TResult? Function(UILoading value)? loading,
-    TResult? Function(UILoadFailed value)? loadFailed,
-    TResult? Function(UILoadSuccess value)? loadSuccess,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(UIInitial value)? initial,
-    TResult Function(UILoading value)? loading,
-    TResult Function(UILoadFailed value)? loadFailed,
-    TResult Function(UILoadSuccess value)? loadSuccess,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class UIInitial implements UIStatus {
-  const factory UIInitial() = _$UIInitial;
-}
-
-/// @nodoc
-abstract class _$$UILoadingCopyWith<$Res> {
-  factory _$$UILoadingCopyWith(
-          _$UILoading value, $Res Function(_$UILoading) then) =
-      __$$UILoadingCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$UILoadingCopyWithImpl<$Res>
-    extends _$UIStatusCopyWithImpl<$Res, _$UILoading>
-    implements _$$UILoadingCopyWith<$Res> {
-  __$$UILoadingCopyWithImpl(
-      _$UILoading _value, $Res Function(_$UILoading) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$UILoading implements UILoading {
-  const _$UILoading();
 
   @override
   String toString() {
     return 'UIStatus.loading()';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UILoading);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) loadFailed,
-    required TResult Function(String? message) loadSuccess,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? loadFailed,
-    TResult? Function(String? message)? loadSuccess,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? loadFailed,
-    TResult Function(String? message)? loadSuccess,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(UIInitial value) initial,
-    required TResult Function(UILoading value) loading,
-    required TResult Function(UILoadFailed value) loadFailed,
-    required TResult Function(UILoadSuccess value) loadSuccess,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UIInitial value)? initial,
-    TResult? Function(UILoading value)? loading,
-    TResult? Function(UILoadFailed value)? loadFailed,
-    TResult? Function(UILoadSuccess value)? loadSuccess,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(UIInitial value)? initial,
-    TResult Function(UILoading value)? loading,
-    TResult Function(UILoadFailed value)? loadFailed,
-    TResult Function(UILoadSuccess value)? loadSuccess,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class UILoading implements UIStatus {
-  const factory UILoading() = _$UILoading;
 }
 
 /// @nodoc
-abstract class _$$UILoadFailedCopyWith<$Res> {
-  factory _$$UILoadFailedCopyWith(
-          _$UILoadFailed value, $Res Function(_$UILoadFailed) then) =
-      __$$UILoadFailedCopyWithImpl<$Res>;
+
+class UILoadFailed implements UIStatus {
+  const UILoadFailed({required this.message});
+
+  final String message;
+
+  /// Create a copy of UIStatus
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $UILoadFailedCopyWith<UILoadFailed> get copyWith =>
+      _$UILoadFailedCopyWithImpl<UILoadFailed>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is UILoadFailed &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @override
+  String toString() {
+    return 'UIStatus.loadFailed(message: $message)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $UILoadFailedCopyWith<$Res>
+    implements $UIStatusCopyWith<$Res> {
+  factory $UILoadFailedCopyWith(
+          UILoadFailed value, $Res Function(UILoadFailed) _then) =
+      _$UILoadFailedCopyWithImpl;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$UILoadFailedCopyWithImpl<$Res>
-    extends _$UIStatusCopyWithImpl<$Res, _$UILoadFailed>
-    implements _$$UILoadFailedCopyWith<$Res> {
-  __$$UILoadFailedCopyWithImpl(
-      _$UILoadFailed _value, $Res Function(_$UILoadFailed) _then)
-      : super(_value, _then);
+class _$UILoadFailedCopyWithImpl<$Res> implements $UILoadFailedCopyWith<$Res> {
+  _$UILoadFailedCopyWithImpl(this._self, this._then);
 
+  final UILoadFailed _self;
+  final $Res Function(UILoadFailed) _then;
+
+  /// Create a copy of UIStatus
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$UILoadFailed(
+    return _then(UILoadFailed(
       message: null == message
-          ? _value.message
+          ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -346,259 +346,66 @@ class __$$UILoadFailedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UILoadFailed implements UILoadFailed {
-  const _$UILoadFailed({required this.message});
+class UILoadSuccess implements UIStatus {
+  const UILoadSuccess({this.message});
+
+  final String? message;
+
+  /// Create a copy of UIStatus
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $UILoadSuccessCopyWith<UILoadSuccess> get copyWith =>
+      _$UILoadSuccessCopyWithImpl<UILoadSuccess>(this, _$identity);
 
   @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'UIStatus.loadFailed(message: $message)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UILoadFailed &&
+            other is UILoadSuccess &&
             (identical(other.message, message) || other.message == message));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$UILoadFailedCopyWith<_$UILoadFailed> get copyWith =>
-      __$$UILoadFailedCopyWithImpl<_$UILoadFailed>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) loadFailed,
-    required TResult Function(String? message) loadSuccess,
-  }) {
-    return loadFailed(message);
+  String toString() {
+    return 'UIStatus.loadSuccess(message: $message)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? loadFailed,
-    TResult? Function(String? message)? loadSuccess,
-  }) {
-    return loadFailed?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? loadFailed,
-    TResult Function(String? message)? loadSuccess,
-    required TResult orElse(),
-  }) {
-    if (loadFailed != null) {
-      return loadFailed(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(UIInitial value) initial,
-    required TResult Function(UILoading value) loading,
-    required TResult Function(UILoadFailed value) loadFailed,
-    required TResult Function(UILoadSuccess value) loadSuccess,
-  }) {
-    return loadFailed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UIInitial value)? initial,
-    TResult? Function(UILoading value)? loading,
-    TResult? Function(UILoadFailed value)? loadFailed,
-    TResult? Function(UILoadSuccess value)? loadSuccess,
-  }) {
-    return loadFailed?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(UIInitial value)? initial,
-    TResult Function(UILoading value)? loading,
-    TResult Function(UILoadFailed value)? loadFailed,
-    TResult Function(UILoadSuccess value)? loadSuccess,
-    required TResult orElse(),
-  }) {
-    if (loadFailed != null) {
-      return loadFailed(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class UILoadFailed implements UIStatus {
-  const factory UILoadFailed({required final String message}) = _$UILoadFailed;
-
-  String get message;
-  @JsonKey(ignore: true)
-  _$$UILoadFailedCopyWith<_$UILoadFailed> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UILoadSuccessCopyWith<$Res> {
-  factory _$$UILoadSuccessCopyWith(
-          _$UILoadSuccess value, $Res Function(_$UILoadSuccess) then) =
-      __$$UILoadSuccessCopyWithImpl<$Res>;
+abstract mixin class $UILoadSuccessCopyWith<$Res>
+    implements $UIStatusCopyWith<$Res> {
+  factory $UILoadSuccessCopyWith(
+          UILoadSuccess value, $Res Function(UILoadSuccess) _then) =
+      _$UILoadSuccessCopyWithImpl;
   @useResult
   $Res call({String? message});
 }
 
 /// @nodoc
-class __$$UILoadSuccessCopyWithImpl<$Res>
-    extends _$UIStatusCopyWithImpl<$Res, _$UILoadSuccess>
-    implements _$$UILoadSuccessCopyWith<$Res> {
-  __$$UILoadSuccessCopyWithImpl(
-      _$UILoadSuccess _value, $Res Function(_$UILoadSuccess) _then)
-      : super(_value, _then);
+class _$UILoadSuccessCopyWithImpl<$Res>
+    implements $UILoadSuccessCopyWith<$Res> {
+  _$UILoadSuccessCopyWithImpl(this._self, this._then);
 
+  final UILoadSuccess _self;
+  final $Res Function(UILoadSuccess) _then;
+
+  /// Create a copy of UIStatus
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? message = freezed,
   }) {
-    return _then(_$UILoadSuccess(
+    return _then(UILoadSuccess(
       message: freezed == message
-          ? _value.message
+          ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
 }
 
-/// @nodoc
-
-class _$UILoadSuccess implements UILoadSuccess {
-  const _$UILoadSuccess({this.message});
-
-  @override
-  final String? message;
-
-  @override
-  String toString() {
-    return 'UIStatus.loadSuccess(message: $message)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UILoadSuccess &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UILoadSuccessCopyWith<_$UILoadSuccess> get copyWith =>
-      __$$UILoadSuccessCopyWithImpl<_$UILoadSuccess>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) loadFailed,
-    required TResult Function(String? message) loadSuccess,
-  }) {
-    return loadSuccess(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? loadFailed,
-    TResult? Function(String? message)? loadSuccess,
-  }) {
-    return loadSuccess?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? loadFailed,
-    TResult Function(String? message)? loadSuccess,
-    required TResult orElse(),
-  }) {
-    if (loadSuccess != null) {
-      return loadSuccess(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(UIInitial value) initial,
-    required TResult Function(UILoading value) loading,
-    required TResult Function(UILoadFailed value) loadFailed,
-    required TResult Function(UILoadSuccess value) loadSuccess,
-  }) {
-    return loadSuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UIInitial value)? initial,
-    TResult? Function(UILoading value)? loading,
-    TResult? Function(UILoadFailed value)? loadFailed,
-    TResult? Function(UILoadSuccess value)? loadSuccess,
-  }) {
-    return loadSuccess?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(UIInitial value)? initial,
-    TResult Function(UILoading value)? loading,
-    TResult Function(UILoadFailed value)? loadFailed,
-    TResult Function(UILoadSuccess value)? loadSuccess,
-    required TResult orElse(),
-  }) {
-    if (loadSuccess != null) {
-      return loadSuccess(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class UILoadSuccess implements UIStatus {
-  const factory UILoadSuccess({final String? message}) = _$UILoadSuccess;
-
-  String? get message;
-  @JsonKey(ignore: true)
-  _$$UILoadSuccessCopyWith<_$UILoadSuccess> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on
