@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:boilerplate/config/env/app_config.dart';
 import 'package:boilerplate/core/di/di_module.dart';
 import 'package:boilerplate/core/network/dio_client.dart';
-import 'package:boilerplate/core/services/app_service/app_service.dart';
-import 'package:boilerplate/core/services/app_service/app_service_impl.dart';
 import 'package:boilerplate/core/services/crashlytics_service/crashlytics_service.dart';
 import 'package:boilerplate/core/services/crashlytics_service/log_crashlytics_service.dart';
 import 'package:boilerplate/core/services/log_service/debug_log_service.dart';
@@ -39,10 +37,6 @@ class CoreModule extends DiModule {
         );
         await storage.init(boxName: boxName);
         return storage;
-      }, dependsOn: <Type>[Keychain])
-      ..registerSingletonAsync<AppService>(
-        () async => AppServiceImpl(storage: gi<AppStorage>()),
-        dependsOn: <Type>[AppStorage],
-      );
+      }, dependsOn: <Type>[Keychain]);
   }
 }

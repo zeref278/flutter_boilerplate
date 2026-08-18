@@ -1,5 +1,5 @@
 /// App-level user preferences.
-abstract class AppService {
+abstract class AppPreferences {
   Future<bool> get isDarkMode;
 
   Future<String> get locale;

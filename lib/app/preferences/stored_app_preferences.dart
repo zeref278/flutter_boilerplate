@@ -1,10 +1,11 @@
+import 'package:boilerplate/app/preferences/app_preferences.dart';
 import 'package:boilerplate/config/env/app_config.dart';
-import 'package:boilerplate/core/services/app_service/app_service.dart';
 import 'package:boilerplate/core/storage/app_storage.dart';
 import 'package:boilerplate/core/storage/storage_keys.dart';
 
-class AppServiceImpl implements AppService {
-  const AppServiceImpl({required AppStorage storage}) : _storage = storage;
+class StoredAppPreferences implements AppPreferences {
+  const StoredAppPreferences({required AppStorage storage})
+    : _storage = storage;
 
   final AppStorage _storage;
 

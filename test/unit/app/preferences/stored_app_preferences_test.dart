@@ -1,6 +1,6 @@
+import 'package:boilerplate/app/preferences/app_preferences.dart';
+import 'package:boilerplate/app/preferences/stored_app_preferences.dart';
 import 'package:boilerplate/config/env/app_config.dart';
-import 'package:boilerplate/core/services/app_service/app_service.dart';
-import 'package:boilerplate/core/services/app_service/app_service_impl.dart';
 import 'package:boilerplate/core/storage/app_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -32,40 +32,40 @@ class FakeAppStorage implements AppStorage {
 
 void main() {
   late FakeAppStorage storage;
-  late AppService service;
+  late AppPreferences preferences;
 
   setUp(() {
     storage = FakeAppStorage();
-    service = AppServiceImpl(storage: storage);
+    preferences = StoredAppPreferences(storage: storage);
   });
 
   test('defaults to light mode when nothing is stored', () async {
-    expect(await service.isDarkMode, isFalse);
+    expect(await preferences.isDarkMode, isFalse);
   });
 
   test('defaults to first use when nothing is stored', () async {
-    expect(await service.isFirstUse, isTrue);
+    expect(await preferences.isFirstUse, isTrue);
   });
 
   test('defaults to the configured locale when nothing is stored', () async {
-    expect(await service.locale, AppConfig.defaultLocale);
+    expect(await preferences.locale, AppConfig.defaultLocale);
   });
 
   test('round-trips dark mode', () async {
-    await service.setIsDarkMode(darkMode: true);
+    await preferences.setIsDarkMode(darkMode: true);
 
-    expect(await service.isDarkMode, isTrue);
+    expect(await preferences.isDarkMode, isTrue);
   });
 
   test('round-trips the locale', () async {
-    await service.setLocale(locale: 'vi');
+    await preferences.setLocale(locale: 'vi');
 
-    expect(await service.locale, 'vi');
+    expect(await preferences.locale, 'vi');
   });
 
   test('round-trips first use', () async {
-    await service.setIsFirstUse(isFirstUse: false);
+    await preferences.setIsFirstUse(isFirstUse: false);
 
-    expect(await service.isFirstUse, isFalse);
+    expect(await preferences.isFirstUse, isFalse);
   });
 }
