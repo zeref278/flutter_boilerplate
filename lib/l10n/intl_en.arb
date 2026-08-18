@@ -14,5 +14,9 @@
   "delete_success": "Delete success",
   "delete_failed": "Delete failed",
   "didnt_supported": "Floor didnt support",
-  "get_started": "Get started"
+  "get_started": "Get started",
+  "error_unexpected": "Something went wrong. Please try again.",
+  "error_storage": "Could not access local storage.",
+  "error_no_connection": "No internet connection.",
+  "error_timeout": "The request timed out."
 }

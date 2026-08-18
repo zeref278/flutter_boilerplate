@@ -14,5 +14,9 @@
   "delete_success": "Xoá thành công",
   "delete_failed": "Xoá không thành công",
   "didnt_supported": "Không hỗ trợ",
-  "get_started": "Bắt đầu"
+  "get_started": "Bắt đầu",
+  "error_unexpected": "Đã xảy ra lỗi. Vui lòng thử lại.",
+  "error_storage": "Không thể truy cập bộ nhớ cục bộ.",
+  "error_no_connection": "Không có kết nối internet.",
+  "error_timeout": "Yêu cầu đã hết thời gian chờ."
 }
