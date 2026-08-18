@@ -54,7 +54,12 @@ dependencies:
   go_router: ^17.5.0
 
   # storage
-  shared_preferences: ^2.5.5
+  # hive 2.2.3 is unmaintained, but it is used WITHOUT hive_generator here —
+  # no TypeAdapters, no codegen — so there is no generator to rot against
+  # future analyzer/build_runner releases. `hive_ce` is the maintained
+  # community fork and a near drop-in if that changes.
+  hive_flutter: ^1.1.0
+  flutter_secure_storage: ^11.0.0
 
   # ui
   cupertino_icons: ^1.0.9
