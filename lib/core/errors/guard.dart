@@ -1,5 +1,6 @@
 import 'package:boilerplate/core/errors/failure_mapper.dart';
 import 'package:boilerplate/core/errors/failures.dart';
+import 'package:boilerplate/core/storage/storage_exception.dart';
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -14,6 +15,8 @@ Future<Either<Failure, T>> guard<T>(Future<T> Function() body) async {
     return Right<Failure, T>(await body());
   } on DioException catch (e) {
     return Left<Failure, T>(failureFromDioException(e));
+  } on StorageException catch (e) {
+    return Left<Failure, T>(CacheFailure(message: e.message));
   } on Object catch (e) {
     return Left<Failure, T>(UnknownFailure(message: e.toString()));
   }
