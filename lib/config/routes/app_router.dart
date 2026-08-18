@@ -1,7 +1,7 @@
 import 'package:boilerplate/app/view/app_director.dart';
-import 'package:boilerplate/features/dog_image/presentation/page/dog_image_random_page.dart';
-import 'package:boilerplate/features/dog_image/presentation/page/dog_image_saved_page.dart';
-import 'package:boilerplate/features/setting/presentation/page/setting_page.dart';
+import 'package:boilerplate/features/dog_image/presentation/view/dog_image_random_page.dart';
+import 'package:boilerplate/features/dog_image/presentation/view/dog_image_saved_page.dart';
+import 'package:boilerplate/features/setting/presentation/view/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

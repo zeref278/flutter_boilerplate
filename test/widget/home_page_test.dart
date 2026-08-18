@@ -1,5 +1,5 @@
 import 'package:boilerplate/core/ui/app_keys.dart';
-import 'package:boilerplate/features/home/presentation/page/home_page.dart';
+import 'package:boilerplate/features/home/presentation/view/home_page.dart';
 import 'package:boilerplate/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

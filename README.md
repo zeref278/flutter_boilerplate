@@ -1,316 +1,133 @@
-<div align="center">
-<a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/License-MIT-yellow.svg"/></a>
+# Flutter Clean Architecture Boilerplate
 
-<a href="https://github.com/zeref278"><img alt="GitHub: zeref278" src="https://img.shields.io/github/followers/zeref278?label=Follow&style=social" /></a>
-<a href="https://github.com/zeref278/flutter_boilerplate"><img src="https://img.shields.io/github/stars/zeref278/flutter_boilerplate?style=social" /></a>
+A feature-first Flutter starter demonstrating BLoC, typed failures, dependency
+injection, Retrofit, Drift, encrypted key-value storage, platform keychain
+storage, localization, unit/widget tests, and device integration tests.
 
-<a href="https://www.buymeacoffee.com/zeref278" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+## Requirements
 
+- [FVM](https://fvm.app/) installed and available on `PATH`
+- Android Studio or Xcode for platform builds and device tests
 
-</div>
+FVM pins Flutter `3.44.9` through `.fvmrc`, so every project command uses the
+same Flutter and Dart toolchains.
 
-# Flutter Boilerplate Project
+## Setup
 
-A boilerplate project created in flutter using Bloc, Retrofit. Depend on code generation.
-## Features
+From a clean checkout, one command installs dependencies and generates every
+required source file:
 
-* State management and examples
-* Api integration and examples
-* Local database and examples
-* Code generation
-* Local storage
-* Logging
-* Routing
-* Dependency Injection
-* Crashlytics template
-* DarkTheme
-* Multi languages
-* Unit tests
-* Integration test
-* Clean architecture
-* Flutter CI
+```sh
+make setup
+```
 
-Some packages: 
-  - [Freezed](https://pub.dev/packages/freezed)
-  - [Flutter Bloc](https://pub.dev/packages/flutter_bloc)
-  - [Flutter gen](https://pub.dev/packages/flutter_gen)
-  - [Retrofit](https://pub.dev/packages/retrofit)
-  - [Dio](https://pub.dev/packages/retrofit)
-  - [Bloc test](https://pub.dev/packages/bloc_test) 
-  - [Mockito](https://pub.dev/packages/mockito)
-  - [Go router](https://pub.dev/packages/go_router)
-  - [Dependency Injection](https://github.com/fluttercommunity/get_it)
-  - [Logger](https://pub.dev/packages/logger)
-  - [Floor](https://pub.dev/packages/floor)
-  - [SharedPreferences](https://pub.dev/packages/shared_preferences)
+Generated localization, Freezed, JSON, Retrofit, Drift, asset, and Mockito
+files are intentionally gitignored. Run `make setup` after cloning, or
+`make generate` after changing a generator input. Generated files must not be
+committed.
 
+Useful commands:
 
-## Getting Started
+```sh
+make analyze
+make test
+fvm flutter test --coverage
+fvm flutter test integration_test/cases/app_flow_test.dart -d <device-id>
+fvm flutter build apk --release
+```
 
-The Boilerplate contains the minimal implementation required to create a new library or project. The repository code is preloaded with some basic components like basic app architecture, app theme, constants and required dependencies to create a new project. By using boiler plate code as standard initializer, we can have same patterns in all the projects that will inherit it. This will also help in reducing setup & development time by allowing you to use same code pattern and avoid re-writing from scratch.
-
-### Up-Coming Features:
-
-* Handle multi bloc event in the same time by bloc concurrency example
-* Load more infinite list using bloc example
-* Authentication template
+The integration suite uses the robot pattern and deliberately exercises the
+live dog API. Use `fvm flutter devices` to find a simulator or emulator id.
 
 ## Architecture
-<img src="https://raw.githubusercontent.com/zeref278/flutter_boilerplate/main/readme_attach/architecture.png" width="700"/>
 
-## How to Use 
-**Step 1:**
+Dependencies point inward within a feature:
 
-Fork, download or clone this repo by using the link below:
-
-```
-https://github.com/zeref278/flutter_boilerplate.git
+```text
+presentation -> domain <- data
 ```
 
-**Step 2:**
-Go to project root and execute the following command in terminal to get the required dependencies and generate languages, freezed, flutter gen: 
+`core` contains reusable infrastructure and never imports feature
+implementations. `Injector` is the explicit composition-root exception: it
+imports core, feature, and app modules to assemble the dependency graph.
 
-```cmd
-flutter pub get
-flutter pub run intl_utils:generate
-flutter pub run build_runner build --delete-conflicting-outputs
+```text
+lib/
+├── app/
+│   ├── bloc/                 application state
+│   ├── di/                   app registrations
+│   ├── preferences/          AppPreferences boundary and stored adapter
+│   └── view/                 app shell and first-screen director
+├── config/
+│   ├── env/                  runtime configuration
+│   └── routes/               GoRouter routes
+├── core/
+│   ├── bloc/                 shared BLoC state and observer
+│   ├── di/                   module contract and composition root
+│   ├── errors/               typed failures and exception mapping
+│   ├── network/              Dio configuration
+│   ├── services/             logging and crash-reporting boundaries
+│   ├── storage/
+│   │   ├── database/         Drift database and table declarations
+│   │   ├── app_storage.dart  app-facing key-value contract
+│   │   ├── encrypted_store.dart
+│   │   └── keychain.dart
+│   ├── ui/                   themes, dimensions, spacing, and widget keys
+│   └── use_cases/            shared use-case contracts
+├── features/
+│   ├── dog_image/
+│   │   ├── data/             data sources, DTO, mapper, repository
+│   │   ├── di/               feature registrations
+│   │   ├── domain/           entity, repository contract, use cases
+│   │   └── presentation/     BLoCs, views, widgets
+│   ├── home/presentation/view/
+│   ├── intro/presentation/view/
+│   └── setting/presentation/view/
+├── l10n/                     localization inputs
+└── main.dart
+
+integration_test/
+├── cases/                    end-to-end flows
+└── robot_tester/             reusable screen robots
+
+test/
+├── unit/                     logic and persistence tests
+└── widget/                   UI behavior tests
 ```
 
-**Step 3:**
-Go to `/packages/rest_client` and execute the following command in terminal to generate model and api client: 
+The dog-image domain uses `DogImageEntity extends Equatable`. Drift keeps its
+generated database row type separate, and the data mapper owns all conversion
+between transport, database, and domain types.
 
-```cmd
-flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
-```
+## Storage roles
 
-**Whenever change freezed file, assets, api**
+Use the narrowest role that matches the data:
 
-Run command
-```cmd
-flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
-```
+| Role | API / engine | Use for |
+|---|---|---|
+| Relational | `AppDatabase` / Drift | Queryable rows, relationships, sorting, and row-identity operations such as saved dog images. |
+| Encrypted key-value | `AppStorage` -> `EncryptedStore` / Hive AES-256 | Preferences, flags, and small cached values that do not need relational queries. Application code injects only `AppStorage`. |
+| Credentials | `AppStorage` -> `Keychain` / platform secure storage | Tokens, passwords, and other secrets protected by Android Keystore or iOS Keychain. Add their keys to `StorageKeys.secretKeys`; callers still use `AppStorage`. |
 
-## Folder structure
-```
-flutter_boilerplate/
-|- assets/                    (assets)
-|- lib/
-  |- configs/                 (flavor config)
-  |- core/                    (bloc observer, theme,...)
-  |- data/                    (repository)
-  |- features/                (features page)
-  |- generated/               (code generation includes localization and assets generation)
-  |- injector/                (dependencies injector)
-  |- l10n/                    (localization resources
-  |- router/                  (routing)
-  |- services/                (app services)
-  |- utils/                   (app utils)
-|- packages/
-  |- rest_client/             (api client)
-  |- local_database/          (local database)
-|- integration_test
-|- test/
-  |- dependencies/                (mock dependencies)
-  |- features/                (bloc test features)
+`AppStorageImpl` chooses the backend from the key, so callers never select or
+import `EncryptedStore` or `Keychain` directly. App-specific settings sit behind
+`AppPreferences`, keeping storage keys out of `AppBloc`.
 
-```
+## Error handling
 
-## [Freezed](https://pub.dev/packages/freezed): 
-### Create a immutable Model with any features available
-- Define a `constructor` + the `properties`
-- Override `toString`, operator `==`, hashCode
-- Implement a `copyWith` method to clone the object
-- Handling `de/serialization`
-### Example
-```dart
-part 'dog_image.freezed.dart';
-part 'dog_image.g.dart';
+Data sources may throw. Repositories are the boundary that converts exceptions
+to `Either<Failure, T>` through `guard`; use cases pass the result through; BLoCs
+render typed failures through localized UI messages. Internal exception text is
+not shown to users.
 
-@Freezed(fromJson: true)
-class DogImage with _$DogImage {
-  const factory DogImage({
-    required String message,
-    required String status,
-  }) = _DogImage;
+## Tests
 
-  factory DogImage.fromJson(Map<String, dynamic> json) =>
-      _$DogImageFromJson(json);
-}
-```
-### Implement
-```dart
-final DogImage dogImage = DogImage.fromJson(json);
-///
-final DogImage dogImage = dogImage.copyWith(status: 'failed');
-/// Deep copy, equal operator ...
-...
-```
+- Unit tests cover storage routing and recovery, error mapping, repositories,
+  mappers, preferences, and BLoCs.
+- Widget tests cover screen selection and interactive UI behavior.
+- Integration tests cover first launch, live image loading, persistence, and
+  saved-image listing on a real simulator or emulator.
 
-## [Retrofit]((https://pub.dev/packages/retrofit)):
-### Create a api client by code generation, you do not need to implement each request manually
-### Example
-```dart
-part 'dog_api.g.dart';
-
-@RestApi()
-abstract class DogApiClient {
-  factory DogApiClient(Dio dio, {String baseUrl}) = _DogApiClient;
-
-  @GET('/breeds/image/random')
-  Future<DogImage> getDogImageRandom();
-}
-```
-Generate to
-```dart
-  ///
-  @override
-  Future<DogImage> getDogImageRandom() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<DogImage>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/breeds/image/random',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = DogImage.fromJson(_result.data!);
-    return value;
-  }
-```
-And this api client will use the `baseUrl` from a Dio injector
-```dart
-injector.registerLazySingleton<Dio>(
-  () {
-  /// TODO: custom DIO here
-    final Dio dio = Dio(
-      BaseOptions(
-        baseUrl: AppConfig.baseUrl,
-      ),
-    );
-    if (!kReleaseMode) {
-      dio.interceptors.add(
-        LogInterceptor(
-          requestHeader: true,
-          requestBody: true,
-          responseHeader: true,
-          responseBody: true,
-          request: false,
-        ),
-      );
-    }
-    return dio;
-  },
-  instanceName: dioInstance,
-);
-
-injector.registerFactory<DogApiClient>(
-  () => DogApiClient(
-    injector(instanceName: dioInstance),
-  ),
-);
-```
-
-## Mockito and Bloc tests:
-If a bloc that you want to test have a required dependencies, you must add it into annotations `@GenerateMocks` in `/test/app_test/app_test.dart`:
-```dart
-@GenerateMocks([
-  DogImageRandomRepository,
-  LogService,
-
-  /// TODO
-])
-void main() {}
-```
-Run the following command to generate a mock dependency
-```cmd
-flutter pub run build_runner build --delete-conflicting-outputs
-```
-
-Write a test file:
-```dart
-setUp(() {
-    bloc = DogImageRandomBloc(
-      dogImageRandomRepository: repository,
-      logService: logService,
-    );
-  });
-
-  group('test add event [DogImageRandomRandomRequested]', () {
-    blocTest(
-      'emit state when success',
-      setUp: () {
-        when(repository.getDogImageRandom())
-            .thenAnswer((_) => Future<DogImage>.value(image));
-      },
-      build: () => bloc,
-      act: (_) => bloc.add(
-        const DogImageRandomRandomRequested(),
-      ),
-      expect: () => [
-        isA<DogImageRandomState>().having(
-          (state) => state.status,
-          'status',
-          UIStatus.loading,
-        ),
-        isA<DogImageRandomState>()
-            .having(
-              (state) => state.status,
-              'status',
-              UIStatus.loadSuccess,
-            )
-            .having(
-              (state) => state.dogImage,
-              'image',
-              image,
-            ),
-      ],
-    );
-
-    blocTest(
-      'emit state when failed',
-      setUp: () {
-        when(repository.getDogImageRandom()).thenThrow(Exception('error'));
-      },
-      build: () => bloc,
-      seed: () => const DogImageRandomState(dogImage: image),
-      act: (_) => bloc.add(
-        const DogImageRandomRandomRequested(),
-      ),
-      expect: () => [
-        isA<DogImageRandomState>().having(
-          (state) => state.status,
-          'status',
-          UIStatus.loading,
-        ),
-        isA<DogImageRandomState>()
-            .having(
-              (state) => state.status,
-              'status',
-              UIStatus.actionFailed,
-            )
-            .having(
-              (state) => state.dogImage,
-              'image',
-              image,
-            ),
-      ],
-    );
-  });
-```
-
-## If you want to understand architecture or any packages used in this project, you can create a discussion on github repo.
-## And feel free to create a pull request !
-
-
-
-
-
+Coverage is measured across authored `lib/` sources; generated `*.g.dart`,
+`*.freezed.dart`, Mockito mocks, and `lib/generated/` are excluded from the
+authored-code total.

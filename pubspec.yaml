@@ -59,7 +59,7 @@ dependencies:
   # future analyzer/build_runner releases. `hive_ce` is the maintained
   # community fork and a near drop-in if that changes.
   hive_flutter: ^1.1.0
-  flutter_secure_storage: ^11.0.0
+  flutter_secure_storage: ^10.3.1
 
   # ui
   cupertino_icons: ^1.0.9

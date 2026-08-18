@@ -1,6 +1,6 @@
 import 'package:boilerplate/app/bloc/app_bloc.dart';
-import 'package:boilerplate/features/home/presentation/page/home_page.dart';
-import 'package:boilerplate/features/intro/presentation/page/intro_page.dart';
+import 'package:boilerplate/features/home/presentation/view/home_page.dart';
+import 'package:boilerplate/features/intro/presentation/view/intro_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
