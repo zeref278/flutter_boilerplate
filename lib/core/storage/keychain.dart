@@ -1,10 +1,10 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-/// Platform-secure key-value storage (Android Keystore / iOS Keychain).
+/// Platform secret storage — Android Keystore, iOS Keychain.
 ///
-/// Abstract so tests can substitute an in-memory fake without touching
-/// platform channels. Strings only — encoding is the caller's job.
-abstract class SecureStorage {
+/// Abstract so tests substitute an in-memory fake without platform channels.
+/// Strings only; encoding non-strings is the caller's job.
+abstract class Keychain {
   Future<String?> read(String key);
 
   Future<void> write(String key, String value);
@@ -18,9 +18,12 @@ abstract class SecureStorage {
   Future<Map<String, String>> readAll();
 }
 
-/// Passthrough to [FlutterSecureStorage] with default platform options.
-class FlutterSecureStorageImpl implements SecureStorage {
-  const FlutterSecureStorageImpl({FlutterSecureStorage? storage})
+/// Passthrough to `flutter_secure_storage` with default platform options.
+///
+/// No error handling here: `AppStorageImpl` maps `PlatformException` at the
+/// routing layer, where it knows whether the failure is recoverable.
+class PlatformKeychain implements Keychain {
+  const PlatformKeychain({FlutterSecureStorage? storage})
     : _storage = storage ?? const FlutterSecureStorage();
 
   final FlutterSecureStorage _storage;
