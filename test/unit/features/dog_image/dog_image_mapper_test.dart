@@ -1,7 +1,7 @@
 import 'package:boilerplate/core/storage/database/app_database.dart' as db;
 import 'package:boilerplate/features/dog_image/data/mapper/dog_image_mapper.dart';
 import 'package:boilerplate/features/dog_image/data/models/dog_image_model.dart';
-import 'package:boilerplate/features/dog_image/domain/entities/dog_image.dart';
+import 'package:boilerplate/features/dog_image/domain/entities/dog_image_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -11,7 +11,7 @@ void main() {
       status: 'success',
     );
 
-    final DogImage entity = model.toEntity();
+    final DogImageEntity entity = model.toEntity();
 
     expect(entity.imageUrl, 'https://dog/a.jpg');
     expect(entity.id, isNull);
@@ -24,14 +24,14 @@ void main() {
       status: 'success',
     );
 
-    final DogImage entity = row.toEntity();
+    final DogImageEntity entity = row.toEntity();
 
     expect(entity.id, 3);
     expect(entity.imageUrl, 'https://dog/b.jpg');
   });
 
   test('maps a domain entity to an insert companion', () {
-    const DogImage entity = DogImage(imageUrl: 'https://dog/c.jpg');
+    const DogImageEntity entity = DogImageEntity(imageUrl: 'https://dog/c.jpg');
 
     final db.DogImagesCompanion companion = entity.toCompanion();
 

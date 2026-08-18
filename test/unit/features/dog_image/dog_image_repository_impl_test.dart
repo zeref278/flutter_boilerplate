@@ -4,7 +4,7 @@ import 'package:boilerplate/features/dog_image/data/data_sources/dog_image_cache
 import 'package:boilerplate/features/dog_image/data/data_sources/dog_image_data_source.dart';
 import 'package:boilerplate/features/dog_image/data/models/dog_image_model.dart';
 import 'package:boilerplate/features/dog_image/data/repositories/dog_image_repository_impl.dart';
-import 'package:boilerplate/features/dog_image/domain/entities/dog_image.dart';
+import 'package:boilerplate/features/dog_image/domain/entities/dog_image_entity.dart';
 import 'package:boilerplate/features/dog_image/domain/repositories/dog_image_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -32,7 +32,7 @@ void main() {
           const DogImageModel(message: 'https://dog/a.jpg', status: 'success'),
     );
 
-    final Either<Failure, DogImage> result = await repository.getRandom();
+    final Either<Failure, DogImageEntity> result = await repository.getRandom();
 
     expect(result.isRight(), isTrue);
     result.match(
@@ -51,7 +51,8 @@ void main() {
         ),
       );
 
-      final Either<Failure, DogImage> result = await repository.getRandom();
+      final Either<Failure, DogImageEntity> result = await repository
+          .getRandom();
 
       result.match(
         (failure) => expect(failure, isA<NetworkFailure>()),
@@ -70,7 +71,7 @@ void main() {
       ),
     );
 
-    final Either<Failure, DogImage> result = await repository.getRandom();
+    final Either<Failure, DogImageEntity> result = await repository.getRandom();
 
     result.match(
       (failure) => expect(failure, isA<UnauthorizedFailure>()),
@@ -85,7 +86,8 @@ void main() {
       ],
     );
 
-    final Either<Failure, List<DogImage>> result = await repository.getSaved();
+    final Either<Failure, List<DogImageEntity>> result = await repository
+        .getSaved();
 
     result.match((_) => fail('expected Right'), (images) {
       expect(images, hasLength(1));
@@ -97,7 +99,7 @@ void main() {
     when(cache.save(any)).thenThrow(Exception('disk full'));
 
     final Either<Failure, Unit> result = await repository.save(
-      const DogImage(imageUrl: 'https://dog/a.jpg'),
+      const DogImageEntity(imageUrl: 'https://dog/a.jpg'),
     );
 
     result.match(
@@ -110,7 +112,7 @@ void main() {
     'rejects deleting an unsaved entity without touching the cache',
     () async {
       final Either<Failure, Unit> result = await repository.delete(
-        const DogImage(imageUrl: 'https://dog/a.jpg'),
+        const DogImageEntity(imageUrl: 'https://dog/a.jpg'),
       );
 
       expect(result.isLeft(), isTrue);

@@ -4,7 +4,7 @@ import 'package:boilerplate/core/storage/database/app_database.dart' as db;
 import 'package:boilerplate/features/dog_image/data/data_sources/dog_image_cache_data_source.dart';
 import 'package:boilerplate/features/dog_image/data/data_sources/dog_image_data_source.dart';
 import 'package:boilerplate/features/dog_image/data/mapper/dog_image_mapper.dart';
-import 'package:boilerplate/features/dog_image/domain/entities/dog_image.dart';
+import 'package:boilerplate/features/dog_image/domain/entities/dog_image_entity.dart';
 import 'package:boilerplate/features/dog_image/domain/repositories/dog_image_repository.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -17,23 +17,23 @@ class DogImageRepositoryImpl implements DogImageRepository {
   final DogImageCacheDataSource _cache;
 
   @override
-  Future<Either<Failure, DogImage>> getRandom() =>
+  Future<Either<Failure, DogImageEntity>> getRandom() =>
       guard(() async => (await _remote.getRandom()).toEntity());
 
   @override
-  Future<Either<Failure, Unit>> save(DogImage image) => guard(() async {
+  Future<Either<Failure, Unit>> save(DogImageEntity image) => guard(() async {
     await _cache.save(image.toCompanion());
     return unit;
   });
 
   @override
-  Future<Either<Failure, List<DogImage>>> getSaved() => guard(() async {
+  Future<Either<Failure, List<DogImageEntity>>> getSaved() => guard(() async {
     final List<db.DogImage> rows = await _cache.getSaved();
     return rows.map((row) => row.toEntity()).toList();
   });
 
   @override
-  Future<Either<Failure, Unit>> delete(DogImage image) {
+  Future<Either<Failure, Unit>> delete(DogImageEntity image) {
     final int? id = image.id;
     if (id == null) {
       return Future<Either<Failure, Unit>>.value(

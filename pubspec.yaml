@@ -70,6 +70,7 @@ dependencies:
   intl: ^0.20.2
   logger: ^2.7.0
   rxdart: ^0.28.0
+  equatable: ^2.1.0
 
 dev_dependencies:
   flutter_test:
