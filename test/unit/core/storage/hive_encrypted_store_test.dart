@@ -64,4 +64,20 @@ void main() {
       throwsA(isA<StorageNotReadyException>()),
     );
   });
+
+  test('recreates a corrupt store instead of failing to open', () async {
+    const String corruptStoreName = 'corrupt_store';
+    final File file = File('${dir.path}/$corruptStoreName.hive');
+    await file.writeAsString('not a Hive file');
+    final EncryptedStore corruptStore = HiveEncryptedStore();
+
+    await corruptStore.open(
+      name: corruptStoreName,
+      encryptionKey: key,
+      path: dir.path,
+    );
+    await corruptStore.write<String>('recovered', 'yes');
+
+    expect(await corruptStore.read<String>('recovered'), 'yes');
+  });
 }

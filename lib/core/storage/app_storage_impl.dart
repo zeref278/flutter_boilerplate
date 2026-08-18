@@ -26,12 +26,9 @@ class AppStorageImpl implements AppStorage {
 
   @override
   Future<void> init({required String boxName, String? path}) async {
-    await _store.open(
-      name: boxName,
-      encryptionKey: await _readOrCreateEncryptionKey(),
-      path: path,
-    );
-    await _wipeSecretsOnFreshInstall();
+    final List<int> encryptionKey = await _readOrCreateEncryptionKey();
+    await _store.open(name: boxName, encryptionKey: encryptionKey, path: path);
+    await _wipeSecretsOnFreshInstall(base64Url.encode(encryptionKey));
   }
 
   Future<List<int>> _readOrCreateEncryptionKey() async {
@@ -82,13 +79,13 @@ class AppStorageImpl implements AppStorage {
   /// [StorageKeys.hasLaunchedBefore] flag means any secrets present belong to
   /// a previous install. Left alone, a reinstall could restore an old session
   /// or prefill an old password.
-  Future<void> _wipeSecretsOnFreshInstall() async {
+  Future<void> _wipeSecretsOnFreshInstall(String encryptionKey) async {
     final bool launchedBefore =
         await _store.read<bool>(StorageKeys.hasLaunchedBefore) ?? false;
     if (launchedBefore) return;
 
     try {
-      await _wipeKeychainKeepingEncryptionKey();
+      await _wipeKeychainKeepingEncryptionKey(encryptionKey: encryptionKey);
     } on PlatformException {
       // Fail open: never block startup on a wipe failure. The flag stays
       // unset, so the wipe is retried on the next launch.
@@ -99,8 +96,11 @@ class AppStorageImpl implements AppStorage {
 
   /// A keychain wipe must keep the encryption key, or the existing store
   /// becomes permanently unreadable.
-  Future<void> _wipeKeychainKeepingEncryptionKey() async {
-    final String? key = await _keychain.read(StorageKeys.boxEncryptionKey);
+  Future<void> _wipeKeychainKeepingEncryptionKey({
+    String? encryptionKey,
+  }) async {
+    final String? key =
+        encryptionKey ?? await _keychain.read(StorageKeys.boxEncryptionKey);
     await _keychain.deleteAll();
     if (key != null) {
       await _keychain.write(StorageKeys.boxEncryptionKey, key);
@@ -110,7 +110,11 @@ class AppStorageImpl implements AppStorage {
   @override
   Future<void> write<T>(String key, T value) async {
     if (!_isSecret(key)) return _store.write<T>(key, value);
-    await _keychain.write(key, value.toString());
+    try {
+      await _keychain.write(key, value.toString());
+    } on PlatformException catch (e) {
+      throw StorageWriteException('Could not write', key, originalError: e);
+    }
   }
 
   @override
@@ -119,7 +123,12 @@ class AppStorageImpl implements AppStorage {
       return _store.read<T>(key, defaultValue: defaultValue);
     }
 
-    final String? raw = await _keychain.read(key);
+    final String? raw;
+    try {
+      raw = await _keychain.read(key);
+    } on PlatformException {
+      return defaultValue;
+    }
     if (raw == null) return defaultValue;
     return _parse<T>(raw) ?? defaultValue;
   }
@@ -136,22 +145,45 @@ class AppStorageImpl implements AppStorage {
   @override
   Future<void> delete(String key) async {
     if (!_isSecret(key)) return _store.delete(key);
-    await _keychain.delete(key);
+    try {
+      await _keychain.delete(key);
+    } on PlatformException catch (e) {
+      throw StorageDeleteException('Could not delete', key, originalError: e);
+    }
   }
 
   @override
   Future<void> clear() async {
     await _store.clear();
-    await _wipeKeychainKeepingEncryptionKey();
+    try {
+      await _wipeKeychainKeepingEncryptionKey();
+    } on PlatformException catch (e) {
+      throw StorageClearException('Could not clear', originalError: e);
+    }
   }
 
   @override
-  Future<bool> containsKey(String key) async =>
-      _isSecret(key) ? _keychain.containsKey(key) : _store.containsKey(key);
+  Future<bool> containsKey(String key) async {
+    if (!_isSecret(key)) return _store.containsKey(key);
+    try {
+      return await _keychain.containsKey(key);
+    } on PlatformException catch (e) {
+      throw StorageReadException('Could not read', key, originalError: e);
+    }
+  }
 
   @override
-  Future<Set<String>> keys() async => <String>{
-    ...await _store.keys(),
-    ...(await _keychain.readAll()).keys,
-  };
+  Future<Set<String>> keys() async {
+    final Map<String, String> secretKeys;
+    try {
+      secretKeys = await _keychain.readAll();
+    } on PlatformException catch (e) {
+      throw StorageReadException(
+        'Could not read keys',
+        'keys',
+        originalError: e,
+      );
+    }
+    return <String>{...await _store.keys(), ...secretKeys.keys};
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:boilerplate/core/errors/failures.dart';
 import 'package:boilerplate/core/errors/guard.dart';
+import 'package:boilerplate/core/storage/storage_exception.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
@@ -40,5 +41,16 @@ void main() {
       (failure) => expect(failure, isA<UnknownFailure>()),
       (_) => fail('expected Left'),
     );
+  });
+
+  test('returns CacheFailure when the body throws StorageException', () async {
+    final Either<Failure, int> result = await guard(
+      () async => throw const StorageReadException('storage unavailable', 'x'),
+    );
+
+    result.match((failure) {
+      expect(failure, isA<CacheFailure>());
+      expect(failure.message, 'storage unavailable');
+    }, (_) => fail('expected Left'));
   });
 }
