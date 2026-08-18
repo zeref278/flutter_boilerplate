@@ -1,4 +1,5 @@
 import 'package:boilerplate/app/bloc/app_bloc.dart';
+import 'package:boilerplate/app/preferences/app_preferences.dart';
 import 'package:boilerplate/config/routes/app_router.dart';
 import 'package:boilerplate/core/di/injector.dart';
 import 'package:boilerplate/core/storage/app_storage.dart';
@@ -15,6 +16,13 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   tearDown(() async {
+    final AppStorage? storage = Injector.instance.isRegistered<AppStorage>()
+        ? Injector.instance<AppStorage>()
+        : null;
+    final AppPreferences? preferences =
+        Injector.instance.isRegistered<AppPreferences>()
+        ? Injector.instance<AppPreferences>()
+        : null;
     final AppDatabase? database = Injector.instance.isRegistered<AppDatabase>()
         ? Injector.instance<AppDatabase>()
         : null;
@@ -22,6 +30,11 @@ void main() {
         ? Injector.instance<AppBloc>()
         : null;
 
+    await storage?.clear();
+    await preferences?.setIsFirstUse(isFirstUse: true);
+    if (database != null) {
+      await database.delete(database.dogImages).go();
+    }
     await appBloc?.close();
     await database?.close();
     await Injector.reset();
@@ -29,15 +42,7 @@ void main() {
   });
 
   testWidgets('intro leads to home on first launch', (tester) async {
-    await app.main();
-    await tester.pumpAndSettle();
-
-    final AppStorage storage = Injector.instance<AppStorage>();
-    final AppDatabase database = Injector.instance<AppDatabase>();
-    await storage.clear();
-    await database.delete(database.dogImages).go();
-    Injector.instance<AppBloc>().add(const AppEvent.loaded());
-    await tester.pumpAndSettle();
+    await _launchApp(tester, isFirstUse: true);
 
     await IntroRobot(tester).pressStarted();
 
@@ -45,12 +50,12 @@ void main() {
   });
 
   testWidgets('loads a random dog image', (tester) async {
-    await app.main();
-    await tester.pumpAndSettle();
+    await _launchApp(tester, isFirstUse: false);
 
     final HomeRobot home = HomeRobot(tester);
     final DogImageRobot dogImage = DogImageRobot(tester);
 
+    await home.verifyVisible();
     await home.openDogImage();
     await dogImage.loadImage();
 
@@ -58,12 +63,12 @@ void main() {
   });
 
   testWidgets('saves an image and lists it', (tester) async {
-    await app.main();
-    await tester.pumpAndSettle();
+    await _launchApp(tester, isFirstUse: false);
 
     final HomeRobot home = HomeRobot(tester);
     final DogImageRobot dogImage = DogImageRobot(tester);
 
+    await home.verifyVisible();
     await home.openDogImage();
     await dogImage.loadAndSaveImage();
     await dogImage.verifyImageShown();
@@ -74,4 +79,20 @@ void main() {
 
     await dogImage.verifySavedCount(1);
   });
+}
+
+Future<void> _launchApp(WidgetTester tester, {required bool isFirstUse}) async {
+  await app.main();
+  await tester.pumpAndSettle();
+
+  final AppStorage storage = Injector.instance<AppStorage>();
+  final AppPreferences preferences = Injector.instance<AppPreferences>();
+  final AppDatabase database = Injector.instance<AppDatabase>();
+
+  await storage.clear();
+  await preferences.setIsFirstUse(isFirstUse: isFirstUse);
+  await database.delete(database.dogImages).go();
+  AppRouter.router.go(AppRouter.homePath);
+  Injector.instance<AppBloc>().add(const AppEvent.loaded());
+  await tester.pumpAndSettle();
 }
