@@ -1,3 +1,4 @@
+import 'package:boilerplate/app/di/app_module.dart';
 import 'package:boilerplate/core/di/di_module.dart';
 import 'package:boilerplate/core/di/modules/core_module.dart';
 import 'package:boilerplate/features/dog_image/di/dog_image_module.dart';
@@ -12,6 +13,7 @@ class Injector {
   static const List<DiModule> _modules = <DiModule>[
     CoreModule(),
     DogImageModule(),
+    AppModule(),
   ];
 
   static Future<void> init() async {

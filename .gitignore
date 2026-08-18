@@ -52,4 +52,5 @@ app.*.map.json
 # One consistent policy: nothing generated is committed.
 *.g.dart
 *.freezed.dart
+*.mocks.dart
 /lib/generated/

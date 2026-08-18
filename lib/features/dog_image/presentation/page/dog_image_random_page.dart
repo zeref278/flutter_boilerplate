@@ -1,9 +1,9 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:boilerplate/core/di/injector.dart';
-import 'package:boilerplate/core/dimens/app_dimens.dart';
 import 'package:boilerplate/core/errors/failure_x.dart';
-import 'package:boilerplate/core/keys/app_keys.dart';
-import 'package:boilerplate/core/spacings/app_spacing.dart';
+import 'package:boilerplate/core/ui/app_dimens.dart';
+import 'package:boilerplate/core/ui/app_keys.dart';
+import 'package:boilerplate/core/ui/app_spacing.dart';
 import 'package:boilerplate/features/dog_image/presentation/bloc/dog_image_notification.dart';
 import 'package:boilerplate/features/dog_image/presentation/bloc/dog_image_random_bloc.dart';
 import 'package:boilerplate/generated/l10n.dart';

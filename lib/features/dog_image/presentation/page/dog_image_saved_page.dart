@@ -1,7 +1,7 @@
 import 'package:boilerplate/core/bloc/ui_status.dart';
 import 'package:boilerplate/core/di/injector.dart';
 import 'package:boilerplate/core/errors/failure_x.dart';
-import 'package:boilerplate/core/keys/app_keys.dart';
+import 'package:boilerplate/core/ui/app_keys.dart';
 import 'package:boilerplate/features/dog_image/domain/entities/dog_image_entity.dart';
 import 'package:boilerplate/features/dog_image/presentation/bloc/dog_image_saved_bloc.dart';
 import 'package:boilerplate/features/dog_image/presentation/widgets/dog_image_tile.dart';
