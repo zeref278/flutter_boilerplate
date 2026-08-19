@@ -113,21 +113,26 @@ class AuthInterceptor extends Interceptor {
     if (refreshToken == null || refreshToken.isEmpty) return null;
 
     // A refresher that throws is a failed refresh, not a crash inside an
-    // interceptor: the session ends and the original 401 surfaces.
+    // interceptor: the session ends and the original 401 surfaces. The
+    // storage writes are inside the same guard because a keychain that
+    // refuses to write leaves the new token unpersisted — the next request
+    // would send the stale one and 401 again. Failing the refresh here ends
+    // the session cleanly instead of throwing out of onError, where nothing
+    // is waiting to catch it.
     final AuthTokens? tokens;
     try {
       tokens = await refresher.refresh(refreshToken);
+      if (tokens == null) return null;
+
+      await storage.write<String>(StorageKeys.accessToken, tokens.accessToken);
+      if (tokens.canRefresh) {
+        await storage.write<String>(
+          StorageKeys.refreshToken,
+          tokens.refreshToken,
+        );
+      }
     } on Object {
       return null;
-    }
-    if (tokens == null) return null;
-
-    await storage.write<String>(StorageKeys.accessToken, tokens.accessToken);
-    if (tokens.canRefresh) {
-      await storage.write<String>(
-        StorageKeys.refreshToken,
-        tokens.refreshToken,
-      );
     }
     return tokens;
   }

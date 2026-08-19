@@ -364,9 +364,10 @@ both the random load button and the saved list's retry button.
 
 
 
-Two flavors, `dev` and `production`. Each name appears in four places and must
-match in all of them: `.env.<flavor>`, `flavorizr.yaml`, `AppFlavor`, and the
-`FLAVORS` list in the `Makefile`.
+Two flavors, `dev` and `production`. Each name appears in five places and must
+match in all of them: `.env.<flavor>`, `flavorizr.yaml`, `AppFlavor`, the
+`FLAVORS` list in the `Makefile`, and
+`ios/Runner/Assets.xcassets/AppIcon-<flavor>.appiconset`.
 
 Configuration is **compiled in, not loaded**. `envied` reads one `.env` file
 during code generation and emits it as Dart constants, so nothing is bundled
@@ -474,7 +475,8 @@ for the `production` flavor only: every other flavor runs on emulators, under
 debuggers, and signed with the debug key, all of which the checks are built to
 reject.
 
-The vendor is named in exactly one file. Everything above `core/security`
+The vendor is named in exactly two files — `rasp_secure_app_guard.dart` and
+`rasp_network_security.dart`. Everything above `core/security`
 sees the app's own `SecureAppThreat`, on the same principle that keeps Hive
 inside `EncryptedStore`.
 

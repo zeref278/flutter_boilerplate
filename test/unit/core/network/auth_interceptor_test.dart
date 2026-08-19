@@ -36,11 +36,18 @@ class _SequencedAdapter implements HttpClientAdapter {
 class _MemoryAppStorage implements AppStorage {
   final Map<String, Object?> values = <String, Object?>{};
 
+  /// Simulates a keychain that refuses to persist. Real on a device with a
+  /// locked or corrupted keystore.
+  bool failWrites = false;
+
   @override
   Future<void> init({required String boxName, String? path}) async {}
 
   @override
-  Future<void> write<T>(String key, T value) async => values[key] = value;
+  Future<void> write<T>(String key, T value) async {
+    if (failWrites) throw StateError('keychain unavailable');
+    values[key] = value;
+  }
 
   @override
   Future<T?> read<T>(String key, {T? defaultValue}) async =>
@@ -261,6 +268,26 @@ void main() {
               ),
             ),
     ]);
+
+    expect(refresher.calls, 1);
+    expect(sessionExpiredCalls, 1);
+  });
+
+  test('treats an unwritable keychain as a failed refresh', () async {
+    // The new token cannot be persisted, so the next request would send the
+    // stale one and 401 again. Ending the session beats throwing out of
+    // onError, where nothing is waiting to catch it.
+    storage.values
+      ..[StorageKeys.accessToken] = 'stale'
+      ..[StorageKeys.refreshToken] = 'renewable';
+    adapter.unauthorizedResponses = 1;
+    final _CountingRefresher refresher = _CountingRefresher(
+      result: const AuthTokens(accessToken: 'fresh', refreshToken: 'rotated'),
+    );
+    final Dio dio = buildClient(refresher);
+    storage.failWrites = true;
+
+    await expectLater(dio.get<dynamic>('/x'), throwsA(isA<DioException>()));
 
     expect(refresher.calls, 1);
     expect(sessionExpiredCalls, 1);

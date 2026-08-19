@@ -32,16 +32,24 @@ Future<void> main(List<String> args) async {
   final File pubspec = File('${root.path}/pubspec.yaml');
   if (!pubspec.existsSync()) {
     _fail('No pubspec.yaml in ${root.path}. Run this from the project root.');
+    exitCode = 1;
     return;
   }
 
   final String oldName = _currentPackageName(pubspec);
   final String oldOrg = _currentOrg();
 
-  if (oldName == options.name && oldOrg == options.org) {
+  // The display name is compared too. Without it, `make rename` with an
+  // unchanged NAME and ORG but a new DISPLAY reported "nothing to do" and
+  // silently discarded the one argument that had changed.
+  final String oldDisplay = _currentDisplayName();
+
+  if (oldName == options.name &&
+      oldOrg == options.org &&
+      oldDisplay == options.display) {
     stdout.writeln(
-      'Already named ${options.name} (${options.org}). Nothing '
-      'to do.',
+      'Already named ${options.name} (${options.org}) displaying '
+      '"${options.display}". Nothing to do.',
     );
     return;
   }
@@ -271,20 +279,41 @@ void _rewriteFlavorizr(String oldOrg, String oldName, _Options options) {
 
   // Display names are per flavor and carry a suffix, so they cannot be a
   // straight substitution of the old id. Rewrite the `name:` under each
-  // flavor's `app:` instead, keeping whatever suffix is already there.
+  // flavor's `app:` instead.
+  //
+  // The suffix comes from the flavor key, never from the name already there.
+  // Reading it back off the current string meant splitting at the first
+  // space, so renaming a project already displaying "Acme Wallet Dev" to
+  // "Foo Bar" produced "Foo Bar Wallet Dev" — any multi-word display name
+  // corrupted itself on the second rename.
   source = source.replaceAllMapped(
-    RegExp(r'(\n {4}app:\n {6}name: ")([^"]*)(")'),
+    RegExp(r'(\n {2}(\w+):\n {4}app:\n {6}name: ")([^"]*)(")'),
     (Match match) {
-      final String current = match.group(2)!;
-      final String suffix = current.contains(' ')
-          ? current.substring(current.indexOf(' '))
-          : '';
-      return '${match.group(1)}${options.display}$suffix${match.group(3)}';
+      final String flavor = match.group(2)!;
+      final String suffix = flavor == _unsuffixedFlavor
+          ? ''
+          : ' ${_titleCase(flavor)}';
+      return '${match.group(1)}${options.display}$suffix${match.group(4)}';
     },
   );
 
   file.writeAsStringSync(source);
   stdout.writeln('flavorizr  ids and display names');
+}
+
+/// The one flavor whose display name carries no suffix. Every other flavor
+/// appends its own title-cased name, so `dev` displays "Foo Dev".
+const String _unsuffixedFlavor = 'production';
+
+/// The production flavor's current display name, or the empty string when
+/// `flavorizr.yaml` is missing or has not been written yet.
+String _currentDisplayName() {
+  final File file = File('flavorizr.yaml');
+  if (!file.existsSync()) return '';
+  final RegExpMatch? match = RegExp(
+    '\\n {2}$_unsuffixedFlavor:\\n {4}app:\\n {6}name: "([^"]*)"',
+  ).firstMatch(file.readAsStringSync());
+  return match?.group(1) ?? '';
 }
 
 void _fail(String message) => stderr.writeln('rename: $message');

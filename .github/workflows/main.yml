@@ -36,7 +36,8 @@ jobs:
         run: dart format --set-exit-if-changed .
 
       - name: Analyze
-        run: dart analyze
+        # --fatal-infos: AGENTS.md requires zero issues, not zero errors.
+        run: dart analyze --fatal-infos
 
       - name: Test and enforce authored coverage
         shell: bash

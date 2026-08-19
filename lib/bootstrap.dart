@@ -4,6 +4,7 @@ import 'package:boilerplate/app/view/app.dart';
 import 'package:boilerplate/config/env/app_config.dart';
 import 'package:boilerplate/core/bloc/bloc_observer.dart';
 import 'package:boilerplate/core/di/injector.dart';
+import 'package:boilerplate/core/security/network_security.dart';
 import 'package:boilerplate/core/security/secure_app_guard.dart';
 import 'package:boilerplate/core/services/crashlytics_service/crashlytics_service.dart';
 import 'package:boilerplate/core/services/log_service/log_service.dart';
@@ -24,6 +25,16 @@ Future<void> bootstrap() async {
       // compiled with another's values must not reach a user.
       AppConfig.verifyFlavor();
       await Injector.init(appModules);
+
+      // Resolved eagerly, and here rather than lazily on first use. The
+      // network security factory throws NetworkSecurityMisconfigured when
+      // the configuration describes protection that would not actually be
+      // applied — pinning hashes with no adapter to apply them. It is
+      // registered lazily, so without this line the first thing to resolve
+      // Dio is a widget build on the first network screen, and the build a
+      // team ships reports itself as pinned right up until someone navigates
+      // there. Failing during startup is the whole point of the check.
+      Injector.instance<NetworkSecurity>();
 
       // Awaited so a device that fails the integrity checks is already
       // blocked when the first frame builds, rather than showing the app and

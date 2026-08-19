@@ -98,7 +98,10 @@ $(BUNDLE_TARGETS): build_appbundle_%: env_%
 
 analyze: ## Format check and static analysis
 	$(DART) format --set-exit-if-changed .
-	$(DART) analyze
+# --fatal-infos because AGENTS.md requires zero *issues*, not zero errors.
+# `dart analyze` defaults to --no-fatal-infos, so without this an info-level
+# lint passes here and the contract is documentation only.
+	$(DART) analyze --fatal-infos
 
 test: ## Run unit and widget tests
 	$(FLUTTER) test

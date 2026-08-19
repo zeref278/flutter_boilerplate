@@ -1,6 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
   <uses-permission android:name="android.permission.INTERNET"/>
-  <application android:label="@string/app_name" android:name="${applicationName}" android:icon="@mipmap/ic_launcher">
+  <!-- allowBackup is false because Android defaults it to true, which makes
+       the Hive box and the EncryptedSharedPreferences that flutter_secure_storage
+       uses eligible for adb and cloud backup. The AES key itself lives in the
+       Keystore and is not exportable, so this is defence in depth rather than a
+       fix for a hole — but a build that advertises device binding should not
+       ship the platform default here. `make flavorize` rewrites this file
+       (android:androidManifest is in flavorizr.yaml), so check the attribute
+       survived when reviewing `git diff android`. -->
+  <application android:label="@string/app_name" android:name="${applicationName}" android:icon="@mipmap/ic_launcher" android:allowBackup="false" android:fullBackupContent="false">
     <activity android:name=".MainActivity" android:exported="true" android:launchMode="singleTop" android:taskAffinity="" android:theme="@style/LaunchTheme" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize">
       <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user

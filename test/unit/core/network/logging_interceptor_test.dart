@@ -103,14 +103,81 @@ void main() {
     expect(log.combined, contains('application/json'));
   });
 
+  test('does not log a request body unless asked to', () {
+    // A login body carries a password under a key this class cannot guess.
+    LoggingInterceptor(logService: log).onRequest(
+      request(body: '{"password":"hunter2"}'),
+      RequestInterceptorHandler(),
+    );
+
+    expect(log.combined, isNot(contains('hunter2')));
+    expect(log.combined, isNot(contains('body:')));
+  });
+
+  test('logs a request body when explicitly opted in', () {
+    LoggingInterceptor(
+      logService: log,
+      logBodies: true,
+    ).onRequest(request(body: 'plain-payload'), RequestInterceptorHandler());
+
+    expect(log.combined, contains('plain-payload'));
+  });
+
   test('truncates a body that would bury the rest of the console', () {
     LoggingInterceptor(
       logService: log,
+      logBodies: true,
       maxBodyLength: 10,
     ).onRequest(request(body: 'x' * 500), RequestInterceptorHandler());
 
     expect(log.combined, contains('more characters'));
     expect(log.combined.length, lessThan(200));
+  });
+
+  test('redacts credentials carried in the query string', () {
+    // `?api_key=` is as readable in scrollback as any header.
+    LoggingInterceptor(logService: log).onRequest(
+      RequestOptions(
+        path: '/things',
+        method: 'GET',
+        queryParameters: <String, dynamic>{
+          'api_key': 'sk-secret',
+          'access_token': 'tok-secret',
+          'page': '2',
+        },
+      ),
+      RequestInterceptorHandler(),
+    );
+
+    expect(log.combined, isNot(contains('sk-secret')));
+    expect(log.combined, isNot(contains('tok-secret')));
+    expect(log.combined, contains('api_key=REDACTED'));
+    expect(log.combined, contains('access_token=REDACTED'));
+    // An ordinary parameter still has to survive, or the log is useless.
+    expect(log.combined, contains('page=2'));
+  });
+
+  test('redacts additional query parameters the caller names', () {
+    LoggingInterceptor(
+      logService: log,
+      redactedParams: <String>{'X-Tenant'},
+    ).onRequest(
+      RequestOptions(
+        path: '/things',
+        queryParameters: <String, dynamic>{'x-tenant': 'leaky'},
+      ),
+      RequestInterceptorHandler(),
+    );
+
+    expect(log.combined, isNot(contains('leaky')));
+  });
+
+  test('leaves a query-less URI untouched', () {
+    LoggingInterceptor(
+      logService: log,
+    ).onRequest(request(), RequestInterceptorHandler());
+
+    expect(log.combined, isNot(contains('?')));
   });
 
   test('logs the status line of a failed request', () async {

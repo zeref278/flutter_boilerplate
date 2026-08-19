@@ -66,4 +66,3 @@ instructions:
   - ios:buildTargets
   - ios:schema
   - ios:plist
-  - ide:config
