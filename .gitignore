@@ -50,6 +50,13 @@ app.*.map.json
 *.jks
 *.keystore
 
+# Configuration. .env.dev and .env.production are committed as templates —
+# this project's only setting is a public API's base URL. The moment one of
+# them holds a real credential, gitignore it and commit a .env.example in its
+# place. A `.local` override is ignored here so that switch costs nothing.
+.env.local
+.env.*.local
+
 # Android Studio will place build artifacts here
 /android/app/debug
 /android/app/profile

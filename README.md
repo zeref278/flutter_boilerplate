@@ -378,6 +378,25 @@ make run_dev                # bakes .env.dev, then flutter run --flavor dev
 make build_apk_production   # bakes .env.production, then builds
 ```
 
+| `.env` key | What it does |
+|---|---|
+| `ENVIRONMENT` | `DEV` or `PROD`. Drives `AppConfig.isProduction`, which arms RASP and the release-only checks. Must match the flavor. |
+| `BASE_URL` | API origin. |
+| `CONNECT_TIMEOUT_MS` / `RECEIVE_TIMEOUT_MS` / `SEND_TIMEOUT_MS` | Dio timeouts. Dio's own defaults are unbounded, which turns a dead network into a hung UI. |
+| `ENABLE_NETWORK_LOG` | Installs `LoggingInterceptor`, which redacts credential headers. Read from configuration rather than `kReleaseMode`, so a profile build of `production` stays quiet too. |
+| `API_KEY` | **Secret.** Sent as `Authorization: Bearer <key>` when non-empty, `obfuscate: true` at rest. Read the warning below before putting a real one here. |
+| `VALID_ANDROID_SIGNATURES` | SHA-256 fingerprints the runtime signature check accepts. Empty disables the comparison. |
+| `ENABLE_ANTI_PROXY`, `SPKI_SHA256_HASHES`, `CERTIFICATE_SHA256_FINGERPRINTS` | Transport security — see [Network security](#network-security). |
+
+> **`.env.dev` and `.env.production` are committed, and nothing stops you
+> committing a secret into them.** They are templates here because this
+> project's only real setting is a public API's base URL, and a boilerplate
+> you have to configure before it runs is a boilerplate nobody runs. The
+> moment `API_KEY` — or any other value — holds something real, gitignore
+> that file, commit a `.env.example` beside it, and have CI write the real
+> one before `make env_<flavor>`. `.gitignore` already ignores
+> `.env.local` and `.env.*.local` so the switch costs nothing.
+
 `.vscode/launch.json` mirrors this: each configuration has a `preLaunchTask`
 that bakes its own env, so launching from the editor cannot skip the step.
 It is hand-written rather than generated for exactly that reason — see the
@@ -398,11 +417,6 @@ Secrets marked `obfuscate: true` are XOR-scrambled at rest in `libapp.so`.
 That raises the cost of pulling them out; it is not encryption, and a value
 that must stay secret does not belong in a client binary at all. Obfuscated
 fields must be `static final` rather than `static const`.
-
-The `.env` files are committed here because this project's only configuration
-is a public API's base URL. A project with real credentials should gitignore
-them, commit a `.env.example`, and have CI write the real file before
-`make env_<flavor>`.
 
 ### Native scaffolding
 
