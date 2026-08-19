@@ -1,17 +1,15 @@
 import 'dart:async';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:boilerplate/app/bloc/app_notification.dart';
 import 'package:boilerplate/app/preferences/app_preferences.dart';
 import 'package:boilerplate/config/env/app_config.dart';
-import 'package:boilerplate/core/bloc/ui_status.dart';
-import 'package:boilerplate/core/errors/failures.dart';
-import 'package:boilerplate/core/storage/storage_exception.dart';
+import 'package:boilerplate/core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'app_bloc.freezed.dart';
 part 'app_event.dart';
+part 'app_notification.dart';
 part 'app_state.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
@@ -86,5 +84,5 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   AppNotification _notificationFor(StorageException exception) =>
-      AppNotification(failure: CacheFailure(message: exception.message));
+      AppNotification.failed(failure: CacheFailure(message: exception.message));
 }

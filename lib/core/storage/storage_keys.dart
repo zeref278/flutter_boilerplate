@@ -6,6 +6,11 @@
 class StorageKeys {
   StorageKeys._();
 
+  /// Name of the encrypted box every non-secret key lands in. Storage naming,
+  /// so it belongs beside the keys rather than in whichever module happens to
+  /// open the store.
+  static const String boxName = 'app';
+
   // Settings
   static const String darkMode = 'dark_mode';
   static const String locale = 'locale';

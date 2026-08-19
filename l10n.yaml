@@ -1,0 +1,11 @@
+# Flutter's first-party localization generator. Run through `make generate`.
+arb-dir: lib/l10n
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+# Output lands under lib/generated/, which is gitignored, excluded from
+# analysis, and excluded from the authored-code coverage total.
+output-dir: lib/generated/l10n
+# Makes AppLocalizations.of(context) non-nullable, so `context.l10n` needs no
+# bang operator at any call site.
+nullable-getter: false

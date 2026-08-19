@@ -1,6 +1,6 @@
 import 'package:boilerplate/app/bloc/app_bloc.dart';
-import 'package:boilerplate/core/ui/app_keys.dart';
-import 'package:boilerplate/generated/l10n.dart';
+import 'package:boilerplate/core/core.dart';
+import 'package:boilerplate/features/intro/presentation/intro_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,10 +12,10 @@ class IntroPage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: ElevatedButton(
-          key: const Key(WidgetKeys.introStartedButtonKey),
+          key: const Key(IntroKeys.startedButton),
           onPressed: () =>
               context.read<AppBloc>().add(const AppEvent.firstUseCompleted()),
-          child: Text(S.of(context).get_started),
+          child: Text(context.l10n.introGetStarted),
         ),
       ),
     );

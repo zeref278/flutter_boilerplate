@@ -6,7 +6,7 @@ part 'failures.freezed.dart';
 ///
 /// `sealed` is load-bearing, not stylistic: freezed 3 otherwise generates
 /// variants that only `implements` this union, and Dart then rejects the
-/// exhaustive switch in `FailureX`.
+/// exhaustive switch in `FailureEx`.
 @Freezed(fromJson: false, toJson: false)
 sealed class Failure with _$Failure {
   const factory Failure.network({required String message}) = NetworkFailure;

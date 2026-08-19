@@ -1,0 +1,18 @@
+# Copy to android/key.properties and fill in. That file is gitignored:
+# it names a keystore and carries its passwords.
+#
+# Generate a keystore:
+#   keytool -genkey -v -keystore ~/upload-keystore.jks \
+#     -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+#
+# storeFile is resolved relative to the android/ directory, so an absolute
+# path outside the repository is the safe choice — never commit the keystore.
+#
+# The SHA-256 fingerprint of this certificate is also what belongs in
+# VALID_ANDROID_SIGNATURES in .env.production. Read it with:
+#   keytool -list -v -keystore <path> -alias <alias> | grep SHA256
+# then strip the colons.
+storePassword=
+keyPassword=
+keyAlias=upload
+storeFile=/absolute/path/to/upload-keystore.jks

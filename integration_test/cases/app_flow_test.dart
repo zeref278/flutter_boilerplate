@@ -3,14 +3,14 @@ import 'package:boilerplate/app/preferences/app_preferences.dart';
 import 'package:boilerplate/config/routes/app_router.dart';
 import 'package:boilerplate/core/di/injector.dart';
 import 'package:boilerplate/core/storage/app_storage.dart';
-import 'package:boilerplate/core/storage/database/app_database.dart';
+import 'package:boilerplate/database/app_database.dart';
 import 'package:boilerplate/main.dart' as app;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
-import '../robot_tester/dog_image_robot.dart';
-import '../robot_tester/home_robot.dart';
-import '../robot_tester/intro_robot.dart';
+import '../robots/dog_image_robot.dart';
+import '../robots/home_robot.dart';
+import '../robots/intro_robot.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

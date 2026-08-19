@@ -36,7 +36,7 @@ void main() {
 
   setUp(() {
     storage = FakeAppStorage();
-    preferences = StoredAppPreferences(storage: storage);
+    preferences = StoredAppPreferences(storage);
   });
 
   test('defaults to light mode when nothing is stored', () async {

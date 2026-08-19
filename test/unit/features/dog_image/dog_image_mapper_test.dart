@@ -1,5 +1,5 @@
-import 'package:boilerplate/core/storage/database/app_database.dart' as db;
-import 'package:boilerplate/features/dog_image/data/mapper/dog_image_mapper.dart';
+import 'package:boilerplate/database/app_database.dart' as db;
+import 'package:boilerplate/features/dog_image/data/mappers/dog_image_mapper.dart';
 import 'package:boilerplate/features/dog_image/data/models/dog_image_model.dart';
 import 'package:boilerplate/features/dog_image/domain/entities/dog_image_entity.dart';
 import 'package:flutter_test/flutter_test.dart';

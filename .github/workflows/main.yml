@@ -23,10 +23,13 @@ jobs:
           channel: 'stable'
           cache: true
 
+      # Bakes .env.dev, which is what the analyzer, the tests, and a clean
+      # checkout all expect. The production build below re-runs codegen
+      # against .env.production before it builds.
       - name: Install dependencies and generate
         run: |
           flutter pub get
-          dart run intl_utils:generate
+          flutter gen-l10n
           dart run build_runner build
 
       - name: Verify formatting
@@ -47,10 +50,22 @@ jobs:
           xcrun simctl bootstatus "$DEVICE_ID" -b
           make coverage FLUTTER=flutter DART=dart COVERAGE_DEVICE="$DEVICE_ID"
 
-      - name: Build APK
-        run: flutter build apk --release
+      # `make env_production` is not optional here: a --flavor production
+      # build compiled against .env.dev would produce a production-signed,
+      # production-named APK carrying development configuration. AppConfig
+      # refuses to start in that state, so getting the order wrong fails at
+      # launch rather than shipping.
+      - name: Build production APK
+        run: make build_apk_production FLUTTER=flutter DART=dart
 
       - uses: actions/upload-artifact@v4
         with:
           name: release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/app-production-release.apk
+
+      # The obfuscation map is the only way to read a crash report from this
+      # APK back into symbols. It is useless later if it is not kept now.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: production-debug-symbols
+          path: build/symbols/production

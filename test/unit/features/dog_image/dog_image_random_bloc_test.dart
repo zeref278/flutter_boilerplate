@@ -4,7 +4,7 @@ import 'package:boilerplate/core/errors/failures.dart';
 import 'package:boilerplate/features/dog_image/domain/entities/dog_image_entity.dart';
 import 'package:boilerplate/features/dog_image/domain/use_cases/get_random_dog_image_use_case.dart';
 import 'package:boilerplate/features/dog_image/domain/use_cases/save_dog_image_use_case.dart';
-import 'package:boilerplate/features/dog_image/presentation/bloc/dog_image_random_bloc.dart';
+import 'package:boilerplate/features/dog_image/presentation/random/bloc/dog_image_random_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mockito/annotations.dart';
@@ -64,7 +64,7 @@ void main() {
   );
 
   blocTest<DogImageRandomBloc, DogImageRandomState>(
-    'saves the image when saveToDb is set',
+    'saves the image when shouldSave is set',
     setUp: () {
       when(
         getRandom.call(),
@@ -75,7 +75,7 @@ void main() {
     },
     build: () => DogImageRandomBloc(getRandom, save),
     act: (bloc) =>
-        bloc.add(const DogImageRandomEvent.randomRequested(saveToDb: true)),
+        bloc.add(const DogImageRandomEvent.randomRequested(shouldSave: true)),
     verify: (_) => verify(save.call(image)).called(1),
   );
 
@@ -92,7 +92,7 @@ void main() {
     },
     build: () => DogImageRandomBloc(getRandom, save),
     act: (bloc) =>
-        bloc.add(const DogImageRandomEvent.randomRequested(saveToDb: true)),
+        bloc.add(const DogImageRandomEvent.randomRequested(shouldSave: true)),
     expect: () => <Matcher>[
       isA<DogImageRandomState>().having((s) => s.isBusy, 'isBusy', true),
       isA<DogImageRandomState>().having(

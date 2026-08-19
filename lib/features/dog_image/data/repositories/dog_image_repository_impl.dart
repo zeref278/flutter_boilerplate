@@ -1,9 +1,8 @@
-import 'package:boilerplate/core/errors/failures.dart';
-import 'package:boilerplate/core/errors/guard.dart';
-import 'package:boilerplate/core/storage/database/app_database.dart' as db;
-import 'package:boilerplate/features/dog_image/data/data_sources/dog_image_cache_data_source.dart';
-import 'package:boilerplate/features/dog_image/data/data_sources/dog_image_data_source.dart';
-import 'package:boilerplate/features/dog_image/data/mapper/dog_image_mapper.dart';
+import 'package:boilerplate/core/core.dart';
+import 'package:boilerplate/database/app_database.dart' as db;
+import 'package:boilerplate/features/dog_image/data/data_sources/dog_image_local_data_source.dart';
+import 'package:boilerplate/features/dog_image/data/data_sources/dog_image_remote_data_source.dart';
+import 'package:boilerplate/features/dog_image/data/mappers/dog_image_mapper.dart';
 import 'package:boilerplate/features/dog_image/domain/entities/dog_image_entity.dart';
 import 'package:boilerplate/features/dog_image/domain/repositories/dog_image_repository.dart';
 import 'package:fpdart/fpdart.dart';
@@ -11,10 +10,10 @@ import 'package:fpdart/fpdart.dart';
 /// The repository boundary delegates every datasource operation to [guard],
 /// where transport and database exceptions become typed failures.
 class DogImageRepositoryImpl implements DogImageRepository {
-  const DogImageRepositoryImpl(this._remote, this._cache);
+  const DogImageRepositoryImpl(this._remote, this._local);
 
-  final DogImageDataSource _remote;
-  final DogImageCacheDataSource _cache;
+  final DogImageRemoteDataSource _remote;
+  final DogImageLocalDataSource _local;
 
   @override
   Future<Either<Failure, DogImageEntity>> getRandom() =>
@@ -22,13 +21,13 @@ class DogImageRepositoryImpl implements DogImageRepository {
 
   @override
   Future<Either<Failure, Unit>> save(DogImageEntity image) => guard(() async {
-    await _cache.save(image.toCompanion());
+    await _local.save(image.toCompanion());
     return unit;
   });
 
   @override
   Future<Either<Failure, List<DogImageEntity>>> getSaved() => guard(() async {
-    final List<db.DogImage> rows = await _cache.getSaved();
+    final List<db.DogImage> rows = await _local.getSaved();
     return rows.map((row) => row.toEntity()).toList();
   });
 
@@ -43,7 +42,7 @@ class DogImageRepositoryImpl implements DogImageRepository {
       );
     }
     return guard(() async {
-      await _cache.delete(id);
+      await _local.delete(id);
       return unit;
     });
   }

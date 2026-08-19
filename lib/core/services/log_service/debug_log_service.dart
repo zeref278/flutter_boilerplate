@@ -8,7 +8,7 @@ class DebugLogService implements LogService {
     : _logger =
           logger ??
           Logger(
-            printer: PrettyPrinter(methodCount: 0, errorMethodCount: 8),
+            printer: PrettyPrinter(methodCount: 0),
             output: _DeveloperLogOutput(),
           );
 

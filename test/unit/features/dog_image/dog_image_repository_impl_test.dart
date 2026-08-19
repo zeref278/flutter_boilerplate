@@ -1,7 +1,7 @@
 import 'package:boilerplate/core/errors/failures.dart';
-import 'package:boilerplate/core/storage/database/app_database.dart' as db;
-import 'package:boilerplate/features/dog_image/data/data_sources/dog_image_cache_data_source.dart';
-import 'package:boilerplate/features/dog_image/data/data_sources/dog_image_data_source.dart';
+import 'package:boilerplate/database/app_database.dart' as db;
+import 'package:boilerplate/features/dog_image/data/data_sources/dog_image_local_data_source.dart';
+import 'package:boilerplate/features/dog_image/data/data_sources/dog_image_remote_data_source.dart';
 import 'package:boilerplate/features/dog_image/data/models/dog_image_model.dart';
 import 'package:boilerplate/features/dog_image/data/repositories/dog_image_repository_impl.dart';
 import 'package:boilerplate/features/dog_image/domain/entities/dog_image_entity.dart';
@@ -15,15 +15,15 @@ import 'package:sqlite3/common.dart';
 
 import 'dog_image_repository_impl_test.mocks.dart';
 
-@GenerateMocks(<Type>[DogImageDataSource, DogImageCacheDataSource])
+@GenerateMocks(<Type>[DogImageRemoteDataSource, DogImageLocalDataSource])
 void main() {
-  late MockDogImageDataSource remote;
-  late MockDogImageCacheDataSource cache;
+  late MockDogImageRemoteDataSource remote;
+  late MockDogImageLocalDataSource cache;
   late DogImageRepository repository;
 
   setUp(() {
-    remote = MockDogImageDataSource();
-    cache = MockDogImageCacheDataSource();
+    remote = MockDogImageRemoteDataSource();
+    cache = MockDogImageLocalDataSource();
     repository = DogImageRepositoryImpl(remote, cache);
   });
 

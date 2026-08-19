@@ -14,9 +14,3 @@ abstract class BaseUseCaseNoParams<Output> {
 
   Future<Either<Failure, Output>> call();
 }
-
-/// Explicit "no input" marker for `BaseUseCase` implementations that want
-/// the parameterised shape without real parameters.
-class NoParams {
-  const NoParams();
-}

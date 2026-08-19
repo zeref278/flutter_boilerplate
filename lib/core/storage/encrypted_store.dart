@@ -63,7 +63,12 @@ class HiveEncryptedStore implements EncryptedStore {
   Future<Box<dynamic>> _openOrRecreate(HiveCipher cipher) async {
     try {
       return await Hive.openBox<dynamic>(_name, encryptionCipher: cipher);
-    } on HiveError {
+    } on Object catch (error) {
+      // Hive reports an unreadable box as a HiveError, which extends Error
+      // rather than Exception. Matching it in the `on` clause would be
+      // catching an Error, so it is matched here instead and everything else
+      // rethrown with its original stack trace intact.
+      if (error is! HiveError) rethrow;
       await Hive.deleteBoxFromDisk(_name);
       return Hive.openBox<dynamic>(_name, encryptionCipher: cipher);
     }

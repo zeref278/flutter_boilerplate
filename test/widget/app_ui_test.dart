@@ -5,34 +5,52 @@ import 'package:boilerplate/app/view/app_director.dart';
 import 'package:boilerplate/config/env/app_config.dart';
 import 'package:boilerplate/config/routes/app_router.dart';
 import 'package:boilerplate/core/di/injector.dart';
+import 'package:boilerplate/core/extensions/build_context_ex.dart';
+import 'package:boilerplate/core/security/secure_app_guard.dart';
+import 'package:boilerplate/core/security/secure_app_threat.dart';
 import 'package:boilerplate/core/storage/storage_exception.dart';
-import 'package:boilerplate/core/ui/app_keys.dart';
 import 'package:boilerplate/features/dog_image/domain/entities/dog_image_entity.dart';
-import 'package:boilerplate/features/dog_image/presentation/widgets/dog_image_tile.dart';
+import 'package:boilerplate/features/dog_image/presentation/saved/widgets/dog_image_tile.dart';
+import 'package:boilerplate/features/home/presentation/home_keys.dart';
+import 'package:boilerplate/features/intro/presentation/intro_keys.dart';
 import 'package:boilerplate/features/setting/presentation/view/setting_page.dart';
-import 'package:boilerplate/generated/l10n.dart';
+import 'package:boilerplate/generated/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+/// A guard whose verdict the test decides, so the shell can be driven into
+/// the blocked state without a device or a platform channel.
+class _ControllableSecureAppGuard implements SecureAppGuard {
+  /// Narrowed to the notifier so the test can write the verdict the shell
+  /// only reads.
+  @override
+  final ValueNotifier<SecureAppThreat?> threat =
+      ValueNotifier<SecureAppThreat?>(null);
+
+  @override
+  Future<void> arm() async {}
+}
 
 void main() {
   Widget wrap({required AppBloc bloc, required Widget child}) =>
       BlocProvider<AppBloc>.value(
         value: bloc,
         child: MaterialApp(
-          localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: child,
         ),
       );
 
   setUp(() async {
     await Injector.reset();
+    // App resolves the guard before it builds anything else. The permissive
+    // one keeps these tests about the shell rather than about RASP, which has
+    // no platform channel to answer them here anyway.
+    Injector.instance.registerSingleton<SecureAppGuard>(
+      PermissiveSecureAppGuard(),
+    );
     AppRouter.router.go(AppRouter.homePath);
   });
 
@@ -51,16 +69,13 @@ void main() {
     await tester.pumpWidget(wrap(bloc: bloc, child: const AppDirector()));
     await tester.pumpAndSettle();
 
-    expect(
-      find.byKey(const Key(WidgetKeys.introStartedButtonKey)),
-      findsOneWidget,
-    );
+    expect(find.byKey(const Key(IntroKeys.startedButton)), findsOneWidget);
 
-    await tester.tap(find.byKey(const Key(WidgetKeys.introStartedButtonKey)));
+    await tester.tap(find.byKey(const Key(IntroKeys.startedButton)));
     await tester.pumpAndSettle();
 
     expect(preferences.firstUseValue, isFalse);
-    expect(find.byKey(const Key(WidgetKeys.homeScaffoldKey)), findsOneWidget);
+    expect(find.byKey(const Key(HomeKeys.scaffold)), findsOneWidget);
   });
 
   testWidgets('settings persist dark mode and locale selections', (
@@ -80,7 +95,7 @@ void main() {
     expect(bloc.state.isDarkMode, isTrue);
 
     final BuildContext context = tester.element(find.byType(SettingPage));
-    await tester.tap(find.text(S.of(context).vietnamese));
+    await tester.tap(find.text(context.l10n.settingVietnamese));
     await tester.pumpAndSettle();
 
     expect(preferences.localeValue, 'vi');
@@ -109,10 +124,7 @@ void main() {
     await tester.tap(find.text('Retry'));
     await tester.pumpAndSettle();
 
-    expect(
-      find.byKey(const Key(WidgetKeys.introStartedButtonKey)),
-      findsOneWidget,
-    );
+    expect(find.byKey(const Key(IntroKeys.startedButton)), findsOneWidget);
   });
 
   testWidgets('preference write failure is localized and rolls back UI', (
@@ -129,7 +141,7 @@ void main() {
 
     await tester.pumpWidget(const App());
     await tester.pumpAndSettle();
-    await tester.tap(find.byKey(const Key(WidgetKeys.homeSettingButtonKey)));
+    await tester.tap(find.byKey(const Key(HomeKeys.settingButton)));
     await tester.pumpAndSettle();
     await tester.tap(find.byType(SwitchListTile));
     await tester.pump();
@@ -137,6 +149,32 @@ void main() {
     expect(find.text('Could not access local storage.'), findsOneWidget);
     expect(bloc.state.isDarkMode, isFalse);
     expect(preferences.darkModeValue, isFalse);
+  });
+
+  testWidgets('a detected threat replaces the app rather than covering it', (
+    tester,
+  ) async {
+    final _ControllableSecureAppGuard guard = _ControllableSecureAppGuard();
+    await Injector.reset();
+    Injector.instance.registerSingleton<SecureAppGuard>(guard);
+    final _MemoryAppPreferences preferences = _MemoryAppPreferences()
+      ..firstUseValue = false;
+    Injector.instance.registerSingleton<AppBloc>(
+      AppBloc(preferences),
+      dispose: (value) => value.close(),
+    );
+
+    await tester.pumpWidget(const App());
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key(HomeKeys.scaffold)), findsOneWidget);
+
+    guard.threat.value = SecureAppThreat.privilegedAccess;
+    await tester.pumpAndSettle();
+
+    expect(find.text("Can't run here"), findsOneWidget);
+    // The shell is gone, not merely obscured: nothing behind the notice is
+    // still mounted and reachable.
+    expect(find.byKey(const Key(HomeKeys.scaffold)), findsNothing);
   });
 
   testWidgets('unknown routes show a localized message without error details', (
@@ -149,12 +187,8 @@ void main() {
       BlocProvider<AppBloc>.value(
         value: bloc,
         child: MaterialApp.router(
-          localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           routerConfig: AppRouter.router,
         ),
       ),

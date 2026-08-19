@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:boilerplate/app/bloc/app_bloc.dart';
-import 'package:boilerplate/app/bloc/app_notification.dart';
 import 'package:boilerplate/app/preferences/app_preferences.dart';
 import 'package:boilerplate/core/bloc/ui_status.dart';
 import 'package:boilerplate/core/errors/failures.dart';
@@ -94,7 +93,7 @@ void main() {
           .having(
             (s) => s.notification,
             'notification',
-            isA<AppNotification>().having(
+            isA<AppNotificationFailed>().having(
               (notification) => notification.failure,
               'failure',
               isA<CacheFailure>(),

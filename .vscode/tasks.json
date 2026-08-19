@@ -1,0 +1,17 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "bake env: dev",
+      "type": "shell",
+      "command": "make env_dev",
+      "problemMatcher": []
+    },
+    {
+      "label": "bake env: production",
+      "type": "shell",
+      "command": "make env_production",
+      "problemMatcher": []
+    }
+  ]
+}

@@ -33,11 +33,22 @@ migrate_working_dir/
 /build/
 /coverage/
 
+# Xcode's Swift Package Manager resolution state. Regenerated on every build
+# from the Flutter tool's own package graph, so committing it only produces
+# churn. ios/Podfile.lock is committed, because that one pins what ships.
+**/xcshareddata/swiftpm/
+
 # Symbolication related
 app.*.symbols
 
 # Obfuscation related
 app.*.map.json
+
+# Release signing. key.properties names a keystore and carries its passwords;
+# key.properties.example is committed in its place. Never commit a keystore.
+/android/key.properties
+*.jks
+*.keystore
 
 # Android Studio will place build artifacts here
 /android/app/debug
@@ -54,3 +65,6 @@ app.*.map.json
 *.freezed.dart
 *.mocks.dart
 /lib/generated/
+
+# Design docs written during development, kept out of version control.
+/docs/superpowers/

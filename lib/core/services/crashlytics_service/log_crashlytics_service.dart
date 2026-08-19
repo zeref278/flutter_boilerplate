@@ -6,8 +6,7 @@ import 'package:boilerplate/core/services/log_service/log_service.dart';
 /// Swap for a Firebase-backed implementation in CoreModule when a crash
 /// reporting backend is added. Deliberately never throws.
 class LogCrashlyticsService implements CrashlyticsService {
-  const LogCrashlyticsService({required LogService logService})
-    : _logService = logService;
+  const LogCrashlyticsService(this._logService);
 
   final LogService _logService;
 

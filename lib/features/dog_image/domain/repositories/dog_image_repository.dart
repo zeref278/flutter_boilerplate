@@ -1,4 +1,4 @@
-import 'package:boilerplate/core/errors/failures.dart';
+import 'package:boilerplate/core/core.dart';
 import 'package:boilerplate/features/dog_image/domain/entities/dog_image_entity.dart';
 import 'package:fpdart/fpdart.dart';
 

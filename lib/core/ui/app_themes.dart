@@ -82,7 +82,7 @@ class AppThemes {
     primaryColor: _lightPrimaryColor,
     scaffoldBackgroundColor: _lightBackgroundColor,
     appBarTheme: AppBarTheme(
-      color: _lightBackgroundColor,
+      backgroundColor: _lightBackgroundColor,
       iconTheme: const IconThemeData(color: _lightIconColor),
       toolbarTextStyle: _lightTextTheme.bodyMedium,
       titleTextStyle: _lightTextTheme.titleLarge,
@@ -98,7 +98,7 @@ class AppThemes {
     primaryColor: _darkPrimaryColor,
     scaffoldBackgroundColor: _darkBackgroundColor,
     appBarTheme: AppBarTheme(
-      color: _darkBackgroundColor,
+      backgroundColor: _darkBackgroundColor,
       iconTheme: const IconThemeData(color: _darkIconColor),
       toolbarTextStyle: _darkTextTheme.bodyMedium,
       titleTextStyle: _darkTextTheme.titleLarge,

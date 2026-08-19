@@ -1,7 +1,6 @@
 import 'package:boilerplate/app/bloc/app_bloc.dart';
 import 'package:boilerplate/config/env/app_config.dart';
-import 'package:boilerplate/core/ui/app_dimens.dart';
-import 'package:boilerplate/generated/l10n.dart';
+import 'package:boilerplate/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,15 +10,11 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(S.of(context).setting)),
-      body: Padding(
-        padding: const EdgeInsets.all(AppDimens.basePadding),
+      appBar: AppBar(title: Text(context.l10n.settingTitle)),
+      body: const Padding(
+        padding: EdgeInsets.all(AppSpacing.space8),
         child: Column(
-          children: <Widget>[
-            const _LocaleSelector(),
-            const Divider(),
-            const _DarkModeSwitch(),
-          ],
+          children: <Widget>[_LocaleSelector(), Divider(), _DarkModeSwitch()],
         ),
       ),
     );
@@ -33,20 +28,26 @@ class _LocaleSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     final String locale = context.select((AppBloc bloc) => bloc.state.locale);
 
-    return Column(
-      children: AppConfig.supportedLocales.map((code) {
-        return RadioListTile<String>(
-          value: code,
-          groupValue: locale,
-          onChanged: (value) {
-            if (value == null) return;
-            context.read<AppBloc>().add(AppEvent.localeChanged(value));
-          },
-          title: Text(
-            code == 'en' ? S.of(context).english : S.of(context).vietnamese,
-          ),
-        );
-      }).toList(),
+    // The selection lives on the group rather than on each tile: per-tile
+    // groupValue/onChanged were deprecated after Flutter 3.32.
+    return RadioGroup<String>(
+      groupValue: locale,
+      onChanged: (value) {
+        if (value == null) return;
+        context.read<AppBloc>().add(AppEvent.localeChanged(value));
+      },
+      child: Column(
+        children: AppConfig.supportedLocales.map((code) {
+          return RadioListTile<String>(
+            value: code,
+            title: Text(
+              code == 'en'
+                  ? context.l10n.settingEnglish
+                  : context.l10n.settingVietnamese,
+            ),
+          );
+        }).toList(),
+      ),
     );
   }
 }
@@ -64,7 +65,7 @@ class _DarkModeSwitch extends StatelessWidget {
       value: isDarkMode,
       onChanged: (_) =>
           context.read<AppBloc>().add(const AppEvent.darkModeToggled()),
-      title: Text(S.of(context).dark_mode),
+      title: Text(context.l10n.settingDarkMode),
     );
   }
 }

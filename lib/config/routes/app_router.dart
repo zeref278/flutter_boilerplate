@@ -1,8 +1,8 @@
 import 'package:boilerplate/app/view/app_director.dart';
-import 'package:boilerplate/features/dog_image/presentation/view/dog_image_random_page.dart';
-import 'package:boilerplate/features/dog_image/presentation/view/dog_image_saved_page.dart';
+import 'package:boilerplate/core/core.dart';
+import 'package:boilerplate/features/dog_image/presentation/random/view/dog_image_random_page.dart';
+import 'package:boilerplate/features/dog_image/presentation/saved/view/dog_image_saved_page.dart';
 import 'package:boilerplate/features/setting/presentation/view/setting_page.dart';
-import 'package:boilerplate/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -18,8 +18,8 @@ class AppRouter {
   static const String dogImageRandomName = 'dogImageRandom';
   static const String dogImageRandomPath = '/dog-image';
 
-  static const String savedImagesName = 'savedImages';
-  static const String savedImagesPath = '/saved-images';
+  static const String dogImageSavedName = 'dogImageSaved';
+  static const String dogImageSavedPath = '/dog-image/saved';
 
   static GoRouter get router => _router;
 
@@ -41,12 +41,12 @@ class AppRouter {
         builder: (context, state) => const DogImageRandomPage(),
       ),
       GoRoute(
-        name: savedImagesName,
-        path: savedImagesPath,
+        name: dogImageSavedName,
+        path: dogImageSavedPath,
         builder: (context, state) => const DogImageSavedPage(),
       ),
     ],
     errorBuilder: (context, state) =>
-        Scaffold(body: Center(child: Text(S.of(context).route_not_found))),
+        Scaffold(body: Center(child: Text(context.l10n.errorRouteNotFound))),
   );
 }

@@ -1,0 +1,6 @@
+#include? "Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"
+#include "Generated.xcconfig"
+
+ASSET_PREFIX=dev
+BUNDLE_NAME=Boilerplate Dev
+BUNDLE_DISPLAY_NAME=Boilerplate Dev
