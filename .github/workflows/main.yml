@@ -35,8 +35,17 @@ jobs:
       - name: Analyze
         run: dart analyze
 
-      - name: Test
-        run: flutter test
+      - name: Test and enforce authored coverage
+        shell: bash
+        run: |
+          DEVICE_ID="$(
+            xcrun simctl list devices available -j |
+            jq -r '[.devices | to_entries | sort_by(.key)[] | .value[] | select(.isAvailable and (.name | startswith("iPhone")))] | sort_by(.name, .udid) | .[0].udid'
+          )"
+          test -n "$DEVICE_ID" && test "$DEVICE_ID" != "null"
+          xcrun simctl boot "$DEVICE_ID" || true
+          xcrun simctl bootstatus "$DEVICE_ID" -b
+          make coverage FLUTTER=flutter DART=dart COVERAGE_DEVICE="$DEVICE_ID"
 
       - name: Build APK
         run: flutter build apk --release

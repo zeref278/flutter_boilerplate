@@ -21,10 +21,6 @@ migration:
     - platform: ios
       create_revision: 6b182d2c7585eba26d4edce0f97630effd256c33
       base_revision: 6b182d2c7585eba26d4edce0f97630effd256c33
-    - platform: web
-      create_revision: 6b182d2c7585eba26d4edce0f97630effd256c33
-      base_revision: 6b182d2c7585eba26d4edce0f97630effd256c33
-
   # User provided section
 
   # List of Local paths (relative to this file) that should be

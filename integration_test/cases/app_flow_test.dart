@@ -26,17 +26,12 @@ void main() {
     final AppDatabase? database = Injector.instance.isRegistered<AppDatabase>()
         ? Injector.instance<AppDatabase>()
         : null;
-    final AppBloc? appBloc = Injector.instance.isRegistered<AppBloc>()
-        ? Injector.instance<AppBloc>()
-        : null;
-
     await storage?.clear();
     await preferences?.setIsFirstUse(isFirstUse: true);
     if (database != null) {
       await database.delete(database.dogImages).go();
     }
-    await appBloc?.close();
-    await database?.close();
+    // GetIt owns and disposes the app bloc and Drift database.
     await Injector.reset();
     AppRouter.router.go(AppRouter.homePath);
   });

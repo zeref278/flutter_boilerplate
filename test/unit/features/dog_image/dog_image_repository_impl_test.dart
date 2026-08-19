@@ -11,6 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:sqlite3/common.dart';
 
 import 'dog_image_repository_impl_test.mocks.dart';
 
@@ -82,7 +83,7 @@ void main() {
   test('maps saved rows to entities carrying their ids', () async {
     when(cache.getSaved()).thenAnswer(
       (_) async => <db.DogImage>[
-        db.DogImage(id: 1, message: 'https://dog/a.jpg', status: 'ok'),
+        const db.DogImage(id: 1, message: 'https://dog/a.jpg', status: 'ok'),
       ],
     );
 
@@ -95,15 +96,37 @@ void main() {
     });
   });
 
-  test('returns Left with CacheFailure when saving throws', () async {
-    when(cache.save(any)).thenThrow(Exception('disk full'));
+  test(
+    'returns Left with UnknownFailure when saving throws a generic error',
+    () async {
+      when(cache.save(any)).thenThrow(Exception('disk full'));
+
+      final Either<Failure, Unit> result = await repository.save(
+        const DogImageEntity(imageUrl: 'https://dog/a.jpg'),
+      );
+
+      result.match(
+        (failure) => expect(failure, isA<UnknownFailure>()),
+        (_) => fail('expected Left'),
+      );
+    },
+  );
+
+  test('returns Left with CacheFailure when SQLite rejects a save', () async {
+    when(cache.save(any)).thenThrow(
+      SqliteException(
+        extendedResultCode: 13,
+        message: 'database or disk is full',
+        operation: 'inserting a saved dog image',
+      ),
+    );
 
     final Either<Failure, Unit> result = await repository.save(
       const DogImageEntity(imageUrl: 'https://dog/a.jpg'),
     );
 
     result.match(
-      (failure) => expect(failure, isA<UnknownFailure>()),
+      (failure) => expect(failure, isA<CacheFailure>()),
       (_) => fail('expected Left'),
     );
   });

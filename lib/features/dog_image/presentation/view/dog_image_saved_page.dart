@@ -3,6 +3,7 @@ import 'package:boilerplate/core/di/injector.dart';
 import 'package:boilerplate/core/errors/failure_x.dart';
 import 'package:boilerplate/core/ui/app_keys.dart';
 import 'package:boilerplate/features/dog_image/domain/entities/dog_image_entity.dart';
+import 'package:boilerplate/features/dog_image/presentation/bloc/dog_image_notification.dart';
 import 'package:boilerplate/features/dog_image/presentation/bloc/dog_image_saved_bloc.dart';
 import 'package:boilerplate/features/dog_image/presentation/widgets/dog_image_tile.dart';
 import 'package:boilerplate/generated/l10n.dart';
@@ -18,10 +19,24 @@ class DogImageSavedPage extends StatelessWidget {
       create: (_) =>
           Injector.instance<DogImageSavedBloc>()
             ..add(const DogImageSavedEvent.loadRequested()),
-      child: Scaffold(
-        key: const Key(WidgetKeys.savedImagesScaffoldKey),
-        appBar: AppBar(title: Text(S.of(context).image_from_db)),
-        body: const _Body(),
+      child: BlocListener<DogImageSavedBloc, DogImageSavedState>(
+        listenWhen: (previous, next) =>
+            previous.notification != next.notification,
+        listener: (context, state) {
+          final notification = state.notification;
+          if (notification case DogImageNotificationFailed(:final failure)) {
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(content: Text(failure.displayMessage(context))),
+              );
+          }
+        },
+        child: Scaffold(
+          key: const Key(WidgetKeys.savedImagesScaffoldKey),
+          appBar: AppBar(title: Text(S.of(context).image_from_db)),
+          body: const _Body(),
+        ),
       ),
     );
   }

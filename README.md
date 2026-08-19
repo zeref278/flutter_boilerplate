@@ -4,6 +4,9 @@ A feature-first Flutter starter demonstrating BLoC, typed failures, dependency
 injection, Retrofit, Drift, encrypted key-value storage, platform keychain
 storage, localization, unit/widget tests, and device integration tests.
 
+Supported deployment targets are Android and iOS. Web is intentionally out of
+scope; the repository carries no Flutter web platform target or runtime assets.
+
 ## Requirements
 
 - [FVM](https://fvm.app/) installed and available on `PATH`
@@ -31,13 +34,18 @@ Useful commands:
 ```sh
 make analyze
 make test
-fvm flutter test --coverage
+make coverage COVERAGE_DEVICE=<explicit-ios-device-id>
 fvm flutter test integration_test/cases/app_flow_test.dart -d <device-id>
 fvm flutter build apk --release
 ```
 
 The integration suite uses the robot pattern and deliberately exercises the
-live dog API. Use `fvm flutter devices` to find a simulator or emulator id.
+live dog API. Use `fvm flutter devices` to find a booted Android/iOS simulator,
+emulator, or device id. `make coverage` deliberately requires an explicit iOS
+id and rejects other platforms: it runs the unit/widget and iOS integration
+suites into separate LCOV traces, merges coverage by authored file and line,
+and fails below 80%. It therefore requires macOS with Xcode, a booted iOS
+simulator or connected iOS device, and network access to `dog.ceo`.
 
 ## Architecture
 
@@ -113,12 +121,22 @@ Use the narrowest role that matches the data:
 import `EncryptedStore` or `Keychain` directly. App-specific settings sit behind
 `AppPreferences`, keeping storage keys out of `AppBloc`.
 
+GetIt owns and disposes the app-scoped BLoC, Dio client, and Drift database.
+The Hive box remains process-owned: `AppStorage` intentionally exposes only its
+seven storage operations and does not add lifecycle methods solely for one
+backend. Tests that initialize Hive directly retain responsibility for closing
+their isolated boxes.
+
 ## Error handling
 
 Data sources may throw. Repositories are the boundary that converts exceptions
 to `Either<Failure, T>` through `guard`; use cases pass the result through; BLoCs
-render typed failures through localized UI messages. Internal exception text is
-not shown to users.
+render typed failures through localized UI messages. `guard` orders known Dio,
+SQLite, and storage catches before its terminal unknown-error fallback. The app
+preference boundary is separate from repositories: `AppBloc` catches its typed
+`StorageException`s, keeps the last persisted state on failed writes, and emits
+identity-based one-shot notifications. Internal exception text is not shown to
+users.
 
 ## Tests
 
@@ -130,4 +148,8 @@ not shown to users.
 
 Coverage is measured across authored `lib/` sources; generated `*.g.dart`,
 `*.freezed.dart`, Mockito mocks, and `lib/generated/` are excluded from the
-authored-code total.
+authored-code total. The checked-in `tool/coverage_gate.dart` unions the
+unit/widget and integration traces by source line, writes `coverage/lcov.info`,
+prints the exact hit/line calculation, and exits non-zero below 80%. CI invokes
+the same `make coverage` command with an explicitly selected, booted iOS
+simulator.

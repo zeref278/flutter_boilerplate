@@ -18,7 +18,7 @@ void main() {
   });
 
   test('maps a database row to a domain entity, carrying the id', () {
-    final db.DogImage row = db.DogImage(
+    const db.DogImage row = db.DogImage(
       id: 3,
       message: 'https://dog/b.jpg',
       status: 'success',
@@ -36,5 +36,6 @@ void main() {
     final db.DogImagesCompanion companion = entity.toCompanion();
 
     expect(companion.message.value, 'https://dog/c.jpg');
+    expect(companion.status.value, 'success');
   });
 }

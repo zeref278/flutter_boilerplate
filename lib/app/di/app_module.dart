@@ -17,6 +17,9 @@ class AppModule extends DiModule {
         () => StoredAppPreferences(storage: gi<AppStorage>()),
       )
       // App-scoped, so a lazySingleton rather than a factory.
-      ..registerLazySingleton<AppBloc>(() => AppBloc(gi<AppPreferences>()));
+      ..registerLazySingleton<AppBloc>(
+        () => AppBloc(gi<AppPreferences>()),
+        dispose: (bloc) => bloc.close(),
+      );
   }
 }

@@ -21,6 +21,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byKey(const Key(WidgetKeys.homeScaffoldKey)), findsOneWidget);
+    expect(find.text('Home'), findsOneWidget);
     expect(
       find.byKey(const Key(WidgetKeys.homeDogImageButtonKey)),
       findsOneWidget,

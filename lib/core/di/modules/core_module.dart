@@ -27,8 +27,14 @@ class CoreModule extends DiModule {
       ..registerLazySingleton<CrashlyticsService>(
         () => LogCrashlyticsService(logService: gi<LogService>()),
       )
-      ..registerLazySingleton<Dio>(() => createDio(baseUrl: AppConfig.baseUrl))
-      ..registerLazySingleton<AppDatabase>(AppDatabase.new)
+      ..registerLazySingleton<Dio>(
+        () => createDio(baseUrl: AppConfig.baseUrl),
+        dispose: (client) => client.close(force: true),
+      )
+      ..registerLazySingleton<AppDatabase>(
+        AppDatabase.new,
+        dispose: (database) => database.close(),
+      )
       ..registerSingletonAsync<Keychain>(() async => const PlatformKeychain())
       ..registerSingletonAsync<AppStorage>(() async {
         final AppStorage storage = AppStorageImpl(

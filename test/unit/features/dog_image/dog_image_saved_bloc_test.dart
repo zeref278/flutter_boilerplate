@@ -4,6 +4,7 @@ import 'package:boilerplate/core/errors/failures.dart';
 import 'package:boilerplate/features/dog_image/domain/entities/dog_image_entity.dart';
 import 'package:boilerplate/features/dog_image/domain/use_cases/delete_saved_dog_image_use_case.dart';
 import 'package:boilerplate/features/dog_image/domain/use_cases/get_saved_dog_images_use_case.dart';
+import 'package:boilerplate/features/dog_image/presentation/bloc/dog_image_notification.dart';
 import 'package:boilerplate/features/dog_image/presentation/bloc/dog_image_saved_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
@@ -88,6 +89,36 @@ void main() {
         'images',
         <DogImageEntity>[b],
       ),
+    ],
+  );
+
+  blocTest<DogImageSavedBloc, DogImageSavedState>(
+    'keeps the image and emits a typed notification when deletion fails',
+    seed: () => const DogImageSavedState(
+      status: UIStatus.loadSuccess(),
+      images: <DogImageEntity>[a, b],
+    ),
+    setUp: () => when(deleteSaved.call(any)).thenAnswer(
+      (_) async => const Left<Failure, Unit>(
+        CacheFailure(message: 'database unavailable'),
+      ),
+    ),
+    build: () => DogImageSavedBloc(getSaved, deleteSaved),
+    act: (bloc) => bloc.add(const DogImageSavedEvent.deleteRequested(a)),
+    expect: () => <Matcher>[
+      isA<DogImageSavedState>().having((s) => s.isBusy, 'isBusy', isTrue),
+      isA<DogImageSavedState>()
+          .having((s) => s.isBusy, 'isBusy', isFalse)
+          .having((s) => s.images, 'images', <DogImageEntity>[a, b])
+          .having(
+            (s) => s.notification,
+            'notification',
+            isA<DogImageNotificationFailed>().having(
+              (notification) => notification.failure,
+              'failure',
+              isA<CacheFailure>(),
+            ),
+          ),
     ],
   );
 }

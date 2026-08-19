@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:boilerplate/app/bloc/app_notification.dart';
 import 'package:boilerplate/app/preferences/app_preferences.dart';
 import 'package:boilerplate/config/env/app_config.dart';
 import 'package:boilerplate/core/bloc/ui_status.dart';
@@ -14,10 +16,10 @@ part 'app_state.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc(this._preferences) : super(const AppState()) {
-    on<AppLoaded>(_onLoaded);
-    on<AppDarkModeToggled>(_onDarkModeToggled);
-    on<AppLocaleChanged>(_onLocaleChanged);
-    on<AppFirstUseCompleted>(_onFirstUseCompleted);
+    on<AppLoaded>(_onLoaded, transformer: sequential());
+    on<AppDarkModeToggled>(_onDarkModeToggled, transformer: sequential());
+    on<AppLocaleChanged>(_onLocaleChanged, transformer: sequential());
+    on<AppFirstUseCompleted>(_onFirstUseCompleted, transformer: sequential());
   }
 
   final AppPreferences _preferences;
@@ -49,8 +51,12 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     Emitter<AppState> emit,
   ) async {
     final bool next = !state.isDarkMode;
-    await _preferences.setIsDarkMode(darkMode: next);
-    emit(state.copyWith(isDarkMode: next));
+    try {
+      await _preferences.setIsDarkMode(darkMode: next);
+      emit(state.copyWith(isDarkMode: next, notification: null));
+    } on StorageException catch (e) {
+      emit(state.copyWith(notification: _notificationFor(e)));
+    }
   }
 
   Future<void> _onLocaleChanged(
@@ -58,8 +64,12 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     Emitter<AppState> emit,
   ) async {
     if (state.locale == event.locale) return;
-    await _preferences.setLocale(locale: event.locale);
-    emit(state.copyWith(locale: event.locale));
+    try {
+      await _preferences.setLocale(locale: event.locale);
+      emit(state.copyWith(locale: event.locale, notification: null));
+    } on StorageException catch (e) {
+      emit(state.copyWith(notification: _notificationFor(e)));
+    }
   }
 
   Future<void> _onFirstUseCompleted(
@@ -67,7 +77,14 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     Emitter<AppState> emit,
   ) async {
     if (!state.isFirstUse) return;
-    await _preferences.setIsFirstUse(isFirstUse: false);
-    emit(state.copyWith(isFirstUse: false));
+    try {
+      await _preferences.setIsFirstUse(isFirstUse: false);
+      emit(state.copyWith(isFirstUse: false, notification: null));
+    } on StorageException catch (e) {
+      emit(state.copyWith(notification: _notificationFor(e)));
+    }
   }
+
+  AppNotification _notificationFor(StorageException exception) =>
+      AppNotification(failure: CacheFailure(message: exception.message));
 }

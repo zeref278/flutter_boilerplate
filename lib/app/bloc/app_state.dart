@@ -7,5 +7,6 @@ abstract class AppState with _$AppState {
     @Default(AppConfig.defaultLocale) String locale,
     @Default(false) bool isDarkMode,
     @Default(true) bool isFirstUse,
+    AppNotification? notification,
   }) = _AppState;
 }

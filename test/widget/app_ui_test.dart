@@ -1,7 +1,11 @@
 import 'package:boilerplate/app/bloc/app_bloc.dart';
 import 'package:boilerplate/app/preferences/app_preferences.dart';
+import 'package:boilerplate/app/view/app.dart';
 import 'package:boilerplate/app/view/app_director.dart';
 import 'package:boilerplate/config/env/app_config.dart';
+import 'package:boilerplate/config/routes/app_router.dart';
+import 'package:boilerplate/core/di/injector.dart';
+import 'package:boilerplate/core/storage/storage_exception.dart';
 import 'package:boilerplate/core/ui/app_keys.dart';
 import 'package:boilerplate/features/dog_image/domain/entities/dog_image_entity.dart';
 import 'package:boilerplate/features/dog_image/presentation/widgets/dog_image_tile.dart';
@@ -26,6 +30,16 @@ void main() {
           home: child,
         ),
       );
+
+  setUp(() async {
+    await Injector.reset();
+    AppRouter.router.go(AppRouter.homePath);
+  });
+
+  tearDown(() async {
+    await Injector.reset();
+    AppRouter.router.go(AppRouter.homePath);
+  });
 
   testWidgets('director replaces intro with home after first use completes', (
     tester,
@@ -71,6 +85,85 @@ void main() {
 
     expect(preferences.localeValue, 'vi');
     expect(bloc.state.locale, 'vi');
+  });
+
+  testWidgets('initial preference failure shows localized retry UI', (
+    tester,
+  ) async {
+    final _ThrowingAppPreferences preferences = _ThrowingAppPreferences(
+      failReads: true,
+    );
+    final AppBloc bloc = AppBloc(preferences);
+    Injector.instance.registerSingleton<AppBloc>(
+      bloc,
+      dispose: (value) => value.close(),
+    );
+
+    await tester.pumpWidget(const App());
+    await tester.pumpAndSettle();
+
+    expect(find.text('Could not access local storage.'), findsOneWidget);
+    expect(find.text('Retry'), findsOneWidget);
+
+    preferences.failReads = false;
+    await tester.tap(find.text('Retry'));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(const Key(WidgetKeys.introStartedButtonKey)),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('preference write failure is localized and rolls back UI', (
+    tester,
+  ) async {
+    final _ThrowingAppPreferences preferences = _ThrowingAppPreferences(
+      failDarkModeWrites: true,
+    )..firstUseValue = false;
+    final AppBloc bloc = AppBloc(preferences);
+    Injector.instance.registerSingleton<AppBloc>(
+      bloc,
+      dispose: (value) => value.close(),
+    );
+
+    await tester.pumpWidget(const App());
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key(WidgetKeys.homeSettingButtonKey)));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(SwitchListTile));
+    await tester.pump();
+
+    expect(find.text('Could not access local storage.'), findsOneWidget);
+    expect(bloc.state.isDarkMode, isFalse);
+    expect(preferences.darkModeValue, isFalse);
+  });
+
+  testWidgets('unknown routes show a localized message without error details', (
+    tester,
+  ) async {
+    final AppBloc bloc = AppBloc(_MemoryAppPreferences());
+    addTearDown(bloc.close);
+
+    await tester.pumpWidget(
+      BlocProvider<AppBloc>.value(
+        value: bloc,
+        child: MaterialApp.router(
+          localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          routerConfig: AppRouter.router,
+        ),
+      ),
+    );
+    AppRouter.router.go('/missing');
+    await tester.pumpAndSettle();
+
+    expect(find.text('Page not found.'), findsOneWidget);
+    expect(find.textContaining('no routes for location'), findsNothing);
   });
 
   test('saved-image tile renders its URL and invokes deletion', () {
@@ -124,6 +217,32 @@ class _MemoryAppPreferences implements AppPreferences {
   @override
   Future<void> setIsFirstUse({required bool isFirstUse}) async {
     firstUseValue = isFirstUse;
+  }
+}
+
+class _ThrowingAppPreferences extends _MemoryAppPreferences {
+  _ThrowingAppPreferences({
+    this.failReads = false,
+    this.failDarkModeWrites = false,
+  });
+
+  bool failReads;
+  final bool failDarkModeWrites;
+
+  @override
+  Future<bool> get isDarkMode async {
+    if (failReads) {
+      throw const StorageReadException('preferences unavailable', 'dark_mode');
+    }
+    return super.isDarkMode;
+  }
+
+  @override
+  Future<void> setIsDarkMode({required bool darkMode}) async {
+    if (failDarkModeWrites) {
+      throw const StorageWriteException('preferences unavailable', 'dark_mode');
+    }
+    await super.setIsDarkMode(darkMode: darkMode);
   }
 }
 

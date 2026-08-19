@@ -8,8 +8,8 @@ import 'package:boilerplate/features/dog_image/domain/entities/dog_image_entity.
 import 'package:boilerplate/features/dog_image/domain/repositories/dog_image_repository.dart';
 import 'package:fpdart/fpdart.dart';
 
-/// The only layer that catches exceptions, and the only one importing Dio or
-/// drift error types.
+/// The repository boundary delegates every datasource operation to [guard],
+/// where transport and database exceptions become typed failures.
 class DogImageRepositoryImpl implements DogImageRepository {
   const DogImageRepositoryImpl(this._remote, this._cache);
 

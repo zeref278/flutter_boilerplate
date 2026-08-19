@@ -49,6 +49,8 @@ dependencies:
   # local database
   drift: ^2.34.3
   drift_flutter: ^0.3.1
+  # Direct because guard maps the database driver's SqliteException.
+  sqlite3: 3.5.1
 
   # routing
   go_router: ^17.5.0
