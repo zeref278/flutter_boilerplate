@@ -5,9 +5,11 @@
 *.swp
 .DS_Store
 .atom/
+.build/
 .buildlog/
 .history
 .svn/
+.swiftpm/
 migrate_working_dir/
 
 # IntelliJ related
@@ -25,12 +27,16 @@ migrate_working_dir/
 **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/
-.flutter-plugins
 .flutter-plugins-dependencies
-.packages
 .pub-cache/
 .pub/
 /build/
+/coverage/
+
+# Xcode's Swift Package Manager resolution state. Regenerated on every build
+# from the Flutter tool's own package graph, so committing it only produces
+# churn. ios/Podfile.lock is committed, because that one pins what ships.
+**/xcshareddata/swiftpm/
 
 # Symbolication related
 app.*.symbols
@@ -38,10 +44,34 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
+# Release signing. key.properties names a keystore and carries its passwords;
+# key.properties.example is committed in its place. Never commit a keystore.
+/android/key.properties
+*.jks
+*.keystore
+
+# Configuration. .env.dev and .env.production are committed as templates —
+# this project's only setting is a public API's base URL. The moment one of
+# them holds a real credential, gitignore it and commit a .env.example in its
+# place. A `.local` override is ignored here so that switch costs nothing.
+.env.local
+.env.*.local
+
 # Android Studio will place build artifacts here
 /android/app/debug
 /android/app/profile
 /android/app/release
 
-# Flutter gen code
-/lib/generated
+# fvm
+.fvm/versions
+.fvm/flutter_sdk
+
+# Generated code — regenerate with `make setup`.
+# One consistent policy: nothing generated is committed.
+*.g.dart
+*.freezed.dart
+*.mocks.dart
+/lib/generated/
+
+# Design docs written during development, kept out of version control.
+/docs/superpowers/

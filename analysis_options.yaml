@@ -23,7 +23,6 @@ linter:
     - avoid_init_to_null
     - avoid_js_rounded_ints
     - avoid_multiple_declarations_per_line
-    - avoid_null_checks_in_equality_operators
     - avoid_positional_boolean_parameters
     - avoid_print
     - avoid_private_typedef_functions
@@ -63,7 +62,6 @@ linter:
     - empty_catches
     - empty_constructor_bodies
     - empty_statements
-    - enable_null_safety
     - eol_at_end_of_file
     - exhaustive_cases
     - file_names
@@ -71,7 +69,6 @@ linter:
     - hash_and_equals
     - implicit_call_tearoffs
     - implementation_imports
-    - iterable_contains_unrelated_type
     - join_return_with_assignment
     - leading_newlines_in_multiline_strings
     - library_annotations
@@ -79,7 +76,6 @@ linter:
     - library_prefixes
     - library_private_types_in_public_api
     - lines_longer_than_80_chars
-    - list_remove_unrelated_type
     - literal_only_boolean_expressions
     - missing_whitespace_between_adjacent_strings
     - no_adjacent_strings_in_list
@@ -95,7 +91,6 @@ linter:
     - null_closures
     - only_throw_errors
     - overridden_fields
-    - package_api_docs
     - package_names
     - package_prefixed_library_names
     - parameter_assignments
@@ -176,7 +171,6 @@ linter:
     - use_enums
     - use_full_hex_values_for_flutter_colors
     - use_function_type_syntax_for_parameters
-    - use_if_null_to_convert_nulls_to_bools
     - use_is_even_rather_than_modulo
     - use_key_in_widget_constructors
     - use_late_for_private_fields_and_variables

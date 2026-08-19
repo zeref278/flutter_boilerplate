@@ -1,0 +1,41 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "dev (debug)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "args": ["--flavor", "dev"],
+      "preLaunchTask": "bake env: dev"
+    },
+    {
+      "name": "dev (profile)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "flutterMode": "profile",
+      "args": ["--flavor", "dev"],
+      "preLaunchTask": "bake env: dev"
+    },
+    {
+      "name": "production (debug)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "args": ["--flavor", "production"],
+      "preLaunchTask": "bake env: production"
+    },
+    {
+      "name": "production (release)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "flutterMode": "release",
+      "args": ["--flavor", "production"],
+      "preLaunchTask": "bake env: production"
+    }
+  ]
+}

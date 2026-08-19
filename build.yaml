@@ -1,0 +1,11 @@
+targets:
+  $default:
+    builders:
+      # Let the envied path be overridden at build time, so each flavor bakes
+      # its own .env without a copied-over shared file:
+      #   dart run build_runner build \
+      #     --define=envied_generator:envied=path=.env.production
+      # Driven by the Makefile `env_<flavor>` targets.
+      envied_generator|envied:
+        options:
+          override: true

@@ -1,11 +1,11 @@
 # This file tracks properties of this Flutter project.
 # Used by Flutter tool to assess capabilities and perform upgrades etc.
 #
-# This file should be version controlled.
+# This file should be version controlled and should not be manually edited.
 
 version:
-  revision: eb6d86ee27deecba4a83536aa20f366a6044895c
-  channel: stable
+  revision: "6b182d2c7585eba26d4edce0f97630effd256c33"
+  channel: "stable"
 
 project_type: app
 
@@ -13,18 +13,14 @@ project_type: app
 migration:
   platforms:
     - platform: root
-      create_revision: eb6d86ee27deecba4a83536aa20f366a6044895c
-      base_revision: eb6d86ee27deecba4a83536aa20f366a6044895c
+      create_revision: 6b182d2c7585eba26d4edce0f97630effd256c33
+      base_revision: 6b182d2c7585eba26d4edce0f97630effd256c33
     - platform: android
-      create_revision: eb6d86ee27deecba4a83536aa20f366a6044895c
-      base_revision: eb6d86ee27deecba4a83536aa20f366a6044895c
+      create_revision: 6b182d2c7585eba26d4edce0f97630effd256c33
+      base_revision: 6b182d2c7585eba26d4edce0f97630effd256c33
     - platform: ios
-      create_revision: eb6d86ee27deecba4a83536aa20f366a6044895c
-      base_revision: eb6d86ee27deecba4a83536aa20f366a6044895c
-    - platform: web
-      create_revision: eb6d86ee27deecba4a83536aa20f366a6044895c
-      base_revision: eb6d86ee27deecba4a83536aa20f366a6044895c
-
+      create_revision: 6b182d2c7585eba26d4edce0f97630effd256c33
+      base_revision: 6b182d2c7585eba26d4edce0f97630effd256c33
   # User provided section
 
   # List of Local paths (relative to this file) that should be

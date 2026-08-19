@@ -1,0 +1,68 @@
+# Native flavor scaffolding for `flutter_flavorizr`. Run with `make flavorize`.
+#
+# This generates the ANDROID and iOS side of flavors only: product flavors,
+# xcconfigs, build targets, and schemes. It deliberately does not generate the
+# Dart side.
+#
+# `flutter_flavorizr` would normally emit `lib/flavors.dart`, `lib/main_*.dart`
+# and a demo app, so the running app could ask which flavor it is. This project
+# has no such question to ask: `envied` compiles one `.env` file into the
+# binary before the build starts, so `AppConfig` already holds the answer and
+# there is exactly one `main.dart`. Two sources of truth for the same fact is
+# how they drift apart. See `instructions` below.
+#
+# Regenerating is safe to repeat: every processor rewrites its own managed
+# section. Review `git diff android ios` afterwards regardless — this edits
+# the Xcode project file.
+
+flavors:
+  dev:
+    app:
+      name: "Boilerplate Dev"
+    android:
+      applicationId: "com.boilerplate.boilerplate.dev"
+    ios:
+      bundleId: "com.boilerplate.boilerplate.dev"
+
+  production:
+    app:
+      name: "Boilerplate"
+    android:
+      applicationId: "com.boilerplate.boilerplate"
+    ios:
+      bundleId: "com.boilerplate.boilerplate"
+
+# Only the native processors. Each omission is deliberate:
+#
+#   flutter:*        would write lib/flavors.dart, lib/main_<flavor>.dart and a
+#                    demo app, duplicating what AppConfig already knows.
+#   *:icons          these resize a source image declared as `icon:` on a
+#                    flavor. No flavor declares one here, so they would do
+#                    nothing. To use them, add a large square PNG, point
+#                    `icon:` at it under each flavor's `app:`, and add
+#                    `android:icons` and `ios:icons` back to this list.
+#                    Until then the iOS icon sets are hand-maintained: the
+#                    generated build settings reference
+#                    AppIcon-$(ASSET_PREFIX), so ios/Runner/Assets.xcassets
+#                    carries an AppIcon-dev and an AppIcon-production set.
+#                    Adding a flavor means adding its icon set too, or the
+#                    iOS build fails at asset compilation.
+#   *:dummyAssets    would overwrite launch assets with flavorizr placeholders.
+#   assets:*         only download and unpack the placeholders above.
+#   macos:*          no macOS target in this project.
+#   google:firebase  no Firebase in this project.
+#   huawei:agconnect no AGConnect in this project.
+#   ide:config       its launch configurations pass --flavor without baking the
+#                    matching .env first, so every IDE launch would depend on
+#                    someone having run the right make target beforehand.
+#                    .vscode/launch.json is hand-written instead, with a
+#                    preLaunchTask that bakes the env.
+instructions:
+  - android:androidManifest
+  - android:flavorizrGradle
+  - android:buildGradle
+  - ios:podfile
+  - ios:xcconfig
+  - ios:buildTargets
+  - ios:schema
+  - ios:plist

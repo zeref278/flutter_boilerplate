@@ -1,0 +1,6 @@
+#include? "Pods/Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"
+#include "Generated.xcconfig"
+
+ASSET_PREFIX=production
+BUNDLE_NAME=Boilerplate
+BUNDLE_DISPLAY_NAME=Boilerplate

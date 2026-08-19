@@ -1,32 +1,62 @@
 import 'dart:async';
-import 'package:boilerplate/core/bloc_core/bloc_observer.dart';
-import 'package:boilerplate/features/app/view/app.dart';
-import 'package:boilerplate/injector/injector.dart';
-import 'package:boilerplate/services/crashlytics_service/crashlytics_service.dart';
-import 'package:flutter/foundation.dart';
+
+import 'package:boilerplate/app/view/app.dart';
+import 'package:boilerplate/config/env/app_config.dart';
+import 'package:boilerplate/core/bloc/bloc_observer.dart';
+import 'package:boilerplate/core/di/injector.dart';
+import 'package:boilerplate/core/security/network_security.dart';
+import 'package:boilerplate/core/security/secure_app_guard.dart';
+import 'package:boilerplate/core/services/crashlytics_service/crashlytics_service.dart';
+import 'package:boilerplate/core/services/log_service/log_service.dart';
+import 'package:boilerplate/di/app_modules.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
 
-Future<void> bootstrap({
-  AsyncCallback? firebaseInitialization,
-  AsyncCallback? flavorConfiguration,
-}) async {
-  await runZonedGuarded(() async {
-    WidgetsFlutterBinding.ensureInitialized();
+/// Starts the app.
+///
+/// Configuration is compiled in rather than passed here: `envied` bakes one
+/// flavor's `.env` file into the binary at code-generation time, so there is
+/// nothing left to select at startup. See `AppConfig`.
+Future<void> bootstrap() async {
+  await runZonedGuarded(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      // Before anything reads configuration: a binary built as one flavor and
+      // compiled with another's values must not reach a user.
+      AppConfig.verifyFlavor();
+      await Injector.init(appModules);
 
-    await firebaseInitialization?.call();
-    Logger.level = Level.verbose;
-    await flavorConfiguration?.call();
+      // Resolved eagerly, and here rather than lazily on first use. The
+      // network security factory throws NetworkSecurityMisconfigured when
+      // the configuration describes protection that would not actually be
+      // applied — pinning hashes with no adapter to apply them. It is
+      // registered lazily, so without this line the first thing to resolve
+      // Dio is a widget build on the first network screen, and the build a
+      // team ships reports itself as pinned right up until someone navigates
+      // there. Failing during startup is the whole point of the check.
+      Injector.instance<NetworkSecurity>();
 
-    Injector.init();
+      // Awaited so a device that fails the integrity checks is already
+      // blocked when the first frame builds, rather than showing the app and
+      // then covering it.
+      await Injector.instance<SecureAppGuard>().arm();
 
-    await Injector.instance.allReady();
+      final LogService log = Injector.instance<LogService>();
+      Bloc.observer = AppBlocObserver(onInfo: log.i, onFailure: log.e);
 
-    Bloc.observer = AppBlocObserver();
-
-    runApp(const App());
-  }, (error, stack) {
-    Injector.instance<CrashlyticsService>().recordException(error, stack);
-  });
+      runApp(const App());
+    },
+    (error, stackTrace) {
+      // Guarded: this can fire before DI is ready, and an error thrown from
+      // inside the error handler loses the original error entirely.
+      try {
+        Injector.instance<CrashlyticsService>().recordException(
+          error,
+          stackTrace,
+        );
+      } on Object {
+        debugPrint('Fatal before DI was ready: $error\n$stackTrace');
+      }
+    },
+  );
 }
