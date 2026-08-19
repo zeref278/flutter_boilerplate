@@ -1,6 +1,24 @@
 import 'dart:io';
 import 'dart:math' as math;
 
+/// Merges LCOV traces and fails when authored `lib/` coverage is below a
+/// threshold.
+///
+/// **What the denominator actually is.** `flutter test --coverage` emits an
+/// `SF:` record only for a library the run loaded, so a `lib/` file that no
+/// test ever imports contributes nothing here and cannot pull the percentage
+/// down. The gate therefore measures *authored `lib/` code that something
+/// imported*, not all of it.
+///
+/// That is deliberate rather than overlooked. Seeding the map from a
+/// `lib/**.dart` glob would drag in the composition root — the DI modules,
+/// `bootstrap`, `main` — roughly 260 lines whose tests would assert that
+/// registration code registers things. The percentage would drop by about
+/// twelve points and the work to win it back would be the least valuable
+/// tests in the repository. Coverage is a floor on logic, not on wiring.
+///
+/// The consequence to know: adding a `lib/` file and no test for it does not
+/// move this number. Adding a *partly* tested file does.
 void main(List<String> arguments) {
   String root = Directory.current.absolute.path;
   String output = 'coverage/lcov.info';

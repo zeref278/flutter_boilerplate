@@ -174,6 +174,16 @@ flutter test integration_test/cases/app_flow_test.dart -d <device-id> --flavor d
 Coverage gates at 80% across authored `lib/`, merging the host and device
 traces. Generated sources are excluded from the total.
 
+Know what that denominator is. `flutter test --coverage` emits a record only
+for a library the run actually loaded, so a `lib/` file no test imports is
+invisible to the gate — it measures authored code *that something imported*,
+not all authored code. Counting the rest would drag in the composition root
+(the DI modules, `bootstrap`, `main`: about 260 lines) and cost roughly twelve
+points, to be won back by tests asserting that registration code registers
+things. The floor is on logic, not on wiring. The practical consequence: a new
+`lib/` file with no test does not move this number, but a partly tested one
+does.
+
 Prefer hand-written fakes over mocks for anything with behaviour. Name tests
 for the behaviour under test, not the method.
 
