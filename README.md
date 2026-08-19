@@ -125,7 +125,7 @@ way and any feature stays deletable.
 | **Release signing** | Read from a gitignored `key.properties`. Absent means debug-key fallback, announced on every build. |
 | **Proxy sniffing** | The HTTP client is forced past the system proxy, so Charles, Proxyman, and Burp see nothing even on a device the operator controls. |
 | **MITM** | SPKI pinning validates the server's public key during the handshake already happening. Optional whole-certificate pinning on top. |
-| **Credential leakage in logs** | The logger redacts `Authorization`, `Cookie`, `X-API-Key` and friends by name before writing. A token in scrollback outlives the request by weeks. |
+| **Credential leakage in logs** | Credential headers and query parameters are redacted by name; bodies are not logged unless you opt in, because a payload key could be anything. A token in scrollback outlives the request by weeks. |
 | **Session handling** | Tokens attached from the keychain, renewed once on 401 behind a single-flight guard, cleared on failure. |
 | **Transport** | Explicit Dio timeouts — the defaults are unbounded, which turns a dead network into a hung UI. |
 
@@ -135,6 +135,16 @@ Two failure modes are handled deliberately rather than dogmatically:
   a bug in the checks brick every install — worse than the tampering it hunts.
 - An **empty signature list** disables the signature comparison rather than
   failing every build. Fill `VALID_ANDROID_SIGNATURES` before shipping.
+
+> **No crash backend is wired.** `LogCrashlyticsService` forwards to the
+> logger, and the logger's default filter drops everything in a release
+> build. So "recorded and ignored" above means *recorded in debug*: in a
+> production release those RASP internal errors, the engine's own
+> exceptions, and anything reaching `bootstrap`'s zone handler go nowhere.
+> The boundary exists so you only swap one class — register a
+> Firebase-backed `CrashlyticsService` in `CoreModule` — but until you do,
+> treat every "we record it and keep going" tradeoff on this page as a
+> debug-build promise only.
 
 ---
 

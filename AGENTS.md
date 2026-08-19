@@ -93,10 +93,19 @@ new caller is a decision about transport security rather than an omission.
 
 ### Never log a credential
 
-`LoggingInterceptor` redacts `authorization`, `cookie`, `x-api-key` and
-friends by name. If you add a header that carries a secret, add it to that
-deny-list. Do not reintroduce `pretty_dio_logger` — it prints
-`options.headers` verbatim, which is why it was removed.
+A credential reaches a log through three doors, and all three are shut:
+
+- **Headers** — redacted by name against `defaultRedactedHeaders`. Add any
+  new secret-carrying header to that deny-list.
+- **Query strings** — redacted by name against `defaultRedactedParams`.
+  `?api_key=` reads as plainly in scrollback as any header.
+- **Bodies** — not written unless `logBodies: true`. A login body's password
+  and a token endpoint's response are the payload, under a key this class
+  cannot guess, so the default is to write nothing. Turning it on is a
+  deliberate debugging choice, not something to leave on.
+
+Do not reintroduce `pretty_dio_logger` — it prints `options.headers`
+verbatim, which is why it was removed.
 
 ### Interceptor order is the contract
 
