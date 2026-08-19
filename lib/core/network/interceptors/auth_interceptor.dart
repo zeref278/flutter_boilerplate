@@ -57,6 +57,9 @@ class AuthInterceptor extends Interceptor {
   /// The refresh currently in flight, shared by every waiter.
   Future<AuthTokens?>? _inFlightRefresh;
 
+  /// The session teardown currently in flight, shared by every waiter.
+  Future<void>? _inFlightSessionEnd;
+
   @override
   Future<void> onRequest(
     RequestOptions options,
@@ -85,7 +88,7 @@ class AuthInterceptor extends Interceptor {
 
     final AuthTokens? tokens = await _refreshOnce();
     if (tokens == null) {
-      await _endSession();
+      await _endSessionOnce();
       return handler.next(err);
     }
 
@@ -139,6 +142,18 @@ class AuthInterceptor extends Interceptor {
         extra: <String, dynamic>{...request.extra, _retriedExtra: true},
       ),
     );
+  }
+
+  /// Ends the session at most once per burst.
+  ///
+  /// Every waiter on a failed [_refreshOnce] arrives here together, so
+  /// without this they would each clear the credentials and each call
+  /// [onSessionExpired] — pushing the login screen once per in-flight
+  /// request. Same reasoning as the single-flight refresh above.
+  Future<void> _endSessionOnce() {
+    return _inFlightSessionEnd ??= _endSession().whenComplete(() {
+      _inFlightSessionEnd = null;
+    });
   }
 
   Future<void> _endSession() async {

@@ -240,6 +240,32 @@ void main() {
     expect(adapter.seenAuthorizationHeaders, hasLength(2));
   });
 
+  test('ends the session once for a burst of concurrent 401s', () async {
+    // The refresh is single-flight, so the session-end that follows a failed
+    // refresh must be too. A callback that routes to login would otherwise
+    // push the login screen once per in-flight request.
+    storage.values
+      ..[StorageKeys.accessToken] = 'stale'
+      ..[StorageKeys.refreshToken] = 'renewable';
+    adapter.unauthorizedResponses = 5;
+    final _CountingRefresher refresher = _CountingRefresher();
+    final Dio dio = buildClient(refresher);
+
+    await Future.wait<void>(<Future<void>>[
+      for (int i = 0; i < 5; i++)
+        dio
+            .get<dynamic>('/x$i')
+            .catchError(
+              (Object _) => Response<dynamic>(
+                requestOptions: RequestOptions(path: '/x$i'),
+              ),
+            ),
+    ]);
+
+    expect(refresher.calls, 1);
+    expect(sessionExpiredCalls, 1);
+  });
+
   test('the default refresher renews nothing', () async {
     expect(await const UnsupportedTokenRefresher().refresh('any'), isNull);
   });
