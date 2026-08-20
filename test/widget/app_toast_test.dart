@@ -134,6 +134,79 @@ void main() {
     expect(find.text('nowhere to go'), findsNothing);
   });
 
+  testWidgets('a dying toast does not take its successor with it', (
+    tester,
+  ) async {
+    // The stale-timer race. Removal goes through setState, so the outgoing
+    // State — and its timer — survives until the next frame. With a dismisser
+    // scoped to "whatever is current", that timer removed the toast raised
+    // inside the window, and the message it swallowed was the newest one.
+    final BuildContext context = await pumpHost(tester);
+
+    AppToast.show(context, 'first', duration: const Duration(seconds: 1));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 990));
+
+    AppToast.show(context, 'second');
+    await tester.pump(const Duration(milliseconds: 20));
+
+    expect(find.text('second'), findsOneWidget);
+    expect(find.text('first'), findsNothing);
+  });
+
+  testWidgets('swipe dismisses it', (tester) async {
+    final BuildContext context = await pumpHost(tester);
+
+    AppToast.show(context, 'swipe me');
+    await tester.pumpAndSettle();
+
+    await tester.drag(find.text('swipe me'), const Offset(500, 0));
+    await tester.pumpAndSettle();
+
+    expect(find.text('swipe me'), findsNothing);
+    // The entry is gone, so a later dismiss must not touch a removed entry.
+    expect(AppToast.dismiss, returnsNormally);
+  });
+
+  testWidgets('sits above the keyboard rather than behind it', (tester) async {
+    // What SnackBar gets right and a naive bottom offset does not. The insets
+    // go on the test view, not on a MediaQuery inside `home`: the toast is
+    // inserted into the *root* overlay, which sits above anything `home`
+    // wraps, so it reads the root MediaQuery either way.
+    tester.view
+      ..devicePixelRatio = 1
+      ..physicalSize = const Size(400, 600)
+      ..viewInsets = const FakeViewPadding(bottom: 300);
+    addTearDown(tester.view.reset);
+
+    final BuildContext context = await pumpHost(tester);
+
+    AppToast.show(context, 'above the keyboard');
+    await tester.pumpAndSettle();
+
+    final double toastBottom = tester
+        .getRect(find.text('above the keyboard'))
+        .bottom;
+    expect(toastBottom, lessThan(600 - 300));
+  });
+
+  testWidgets('announces itself to a screen reader', (tester) async {
+    // Without a live region the toast appears and auto-dismisses having told
+    // these users nothing — a regression against both mechanisms it replaced.
+    final BuildContext context = await pumpHost(tester);
+
+    AppToast.show(context, 'announce me');
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byWidgetPredicate(
+        (Widget widget) =>
+            widget is Semantics && widget.properties.liveRegion == true,
+      ),
+      findsOneWidget,
+    );
+  });
+
   testWidgets('dismiss is safe when nothing is showing', (tester) async {
     expect(AppToast.dismiss, returnsNormally);
   });

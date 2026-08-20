@@ -115,9 +115,11 @@ route*, so the back button dismissed it, `RouteObserver`s counted it as a
 navigation, and a `pop` during its lifetime popped the bar instead of the
 page. A notification is not a destination.
 
-`ScaffoldMessenger` is not the answer either: it is per-`Scaffold`, so the
-same failure looks different depending on which screen raised it, and a
-screen with no `Scaffold` cannot show one at all.
+`ScaffoldMessenger` is not the answer either — but not for the reason it is
+tempting to give. `MaterialApp` does install one root messenger, so snackbars
+*do* survive route changes. The actual blocker is that showing one still
+needs a `Scaffold` beneath it, and the app-level listener in
+`MaterialApp.builder` has none.
 
 The app mounts one `Overlay` above the router in `MaterialApp.builder`, and
 `show` targets the root overlay, so every toast lands in the same layer and
@@ -126,10 +128,31 @@ app-level `BlocListener` an overlay to find — `MaterialApp.builder` runs
 above the `Navigator`, so without it an app-level failure would be shown
 nowhere.
 
-The auto-dismiss timer belongs to the toast's `State`, not to `AppToast`.
-A timer parked in a static outlives the widget, and every widget test that
-raised a toast then fails teardown with *"A Timer is still pending even
-after the widget tree was disposed"*.
+Ownership belongs to the entry, not to the static. Three bugs came out of
+getting that wrong, all the same shape:
+
+- The auto-dismiss timer belongs to the toast's `State`. Parked in a static
+  it outlives the widget, and every widget test that raised a toast fails
+  teardown with *"A Timer is still pending even after the widget tree was
+  disposed"*.
+- The dismiss callback is scoped to its own entry. Bare `dismiss` let a dying
+  toast's timer remove its *successor*: removal goes through `setState`, so
+  the outgoing `State` survives a frame, and a toast raised in that window
+  vanished before it appeared — swallowing the newest message.
+- `OverlayEntry` is `remove()`d **and** `dispose()`d. `remove()` alone leaks
+  the `ValueNotifier` the entry allocates in its field initializer.
+
+Hold the entry in a `State`, never build one inside `MaterialApp.builder`.
+`Overlay.initialEntries` is read once, in `OverlayState.initState`: an entry
+constructed in `builder` is reallocated every rebuild, never inserted, never
+disposed, while the inserted one keeps serving the child its closure captured
+first. See `_ToastLayer` in `lib/app/view/app.dart`.
+
+One consequence to know before extending this: an `Overlay` above the
+`Navigator` is what `Overlay.of(context, rootOverlay: true)` resolves to
+app-wide, and that is the lookup Flutter uses for text-selection handles and
+toolbars, the magnifier, and context menus. Nothing in `lib/` has a text
+field today, so nothing is affected yet.
 
 ### Interceptor order is the contract
 

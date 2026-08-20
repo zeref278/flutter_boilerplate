@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:boilerplate/core/ui/app_spacing.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +15,13 @@ enum ToastKind { failure, success, info }
 /// lifetime can pop instead of the page underneath. A notification is not a
 /// destination, so it does not belong in the navigation stack.
 ///
-/// It is also not a `SnackBar`: `ScaffoldMessenger` is per-`Scaffold`, so the
-/// same failure looks different depending on which screen raised it, and a
-/// screen without a `Scaffold` cannot show one at all.
+/// It is also not a `SnackBar`. `MaterialApp` does install one root
+/// `ScaffoldMessenger`, so snackbars do survive route changes — but showing
+/// one still requires a `Scaffold` beneath the messenger, and the app-level
+/// listener in `MaterialApp.builder` has none.
 ///
-/// The overlay entry is inserted once, removed on dismiss, and replaced rather
-/// than stacked — a burst of failures shows the latest instead of a queue the
-/// user has to sit through.
+/// The overlay entry is replaced rather than stacked, so a burst of failures
+/// shows the latest instead of a queue the user has to sit through.
 abstract final class AppToast {
   static OverlayEntry? _entry;
 
@@ -44,14 +45,23 @@ abstract final class AppToast {
 
     dismiss();
 
-    final ThemeData theme = Theme.of(context);
-    final OverlayEntry entry = OverlayEntry(
+    // The dismisser is scoped to this entry, not to whatever is current.
+    // Passing the bare `dismiss` let a dying toast's timer remove its
+    // successor: removal goes through setState, so the outgoing State — and
+    // its timer — survives until the next frame, and a toast raised inside
+    // that window was torn down before it ever appeared. The message it
+    // swallowed was always the newest one.
+    late final OverlayEntry entry;
+    void dismissThisEntry() {
+      if (identical(_entry, entry)) dismiss();
+    }
+
+    entry = OverlayEntry(
       builder: (_) => _ToastView(
         message: message,
+        kind: kind,
         duration: duration,
-        background: _backgroundFor(kind, theme.colorScheme),
-        foreground: _foregroundFor(kind, theme.colorScheme),
-        onDismissed: dismiss,
+        onDismissed: dismissThisEntry,
       ),
     );
 
@@ -61,39 +71,29 @@ abstract final class AppToast {
 
   /// Removes the current toast, if any. Safe to call when none is showing.
   static void dismiss() {
-    _entry?.remove();
+    final OverlayEntry? entry = _entry;
     _entry = null;
+    // remove() before dispose() is the framework's own order. Without the
+    // dispose(), every toast leaks the ValueNotifier an OverlayEntry
+    // allocates eagerly in its field initializer.
+    entry
+      ?..remove()
+      ..dispose();
   }
-
-  static Color _backgroundFor(ToastKind kind, ColorScheme scheme) =>
-      switch (kind) {
-        ToastKind.failure => scheme.errorContainer,
-        ToastKind.success => scheme.primaryContainer,
-        ToastKind.info => scheme.secondaryContainer,
-      };
-
-  static Color _foregroundFor(ToastKind kind, ColorScheme scheme) =>
-      switch (kind) {
-        ToastKind.failure => scheme.onErrorContainer,
-        ToastKind.success => scheme.onPrimaryContainer,
-        ToastKind.info => scheme.onSecondaryContainer,
-      };
 }
 
 /// The toast itself: fades and lifts in, and can be swiped away.
 class _ToastView extends StatefulWidget {
   const _ToastView({
     required this.message,
+    required this.kind,
     required this.duration,
-    required this.background,
-    required this.foreground,
     required this.onDismissed,
   });
 
   final String message;
+  final ToastKind kind;
   final Duration duration;
-  final Color background;
-  final Color foreground;
   final VoidCallback onDismissed;
 
   @override
@@ -105,7 +105,7 @@ class _ToastViewState extends State<_ToastView>
   late final AnimationController _controller = AnimationController(
     duration: const Duration(milliseconds: 220),
     vsync: this,
-  )..forward();
+  );
 
   late final Animation<double> _curve = CurvedAnimation(
     parent: _controller,
@@ -123,6 +123,7 @@ class _ToastViewState extends State<_ToastView>
   void initState() {
     super.initState();
     _dismissTimer = Timer(widget.duration, widget.onDismissed);
+    _controller.forward();
   }
 
   @override
@@ -134,29 +135,58 @@ class _ToastViewState extends State<_ToastView>
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    final (
+      Color background,
+      Color foreground,
+      IconData icon,
+    ) = switch (widget.kind) {
+      ToastKind.failure => (
+        scheme.errorContainer,
+        scheme.onErrorContainer,
+        Icons.error_outline,
+      ),
+      ToastKind.success => (
+        scheme.primaryContainer,
+        scheme.onPrimaryContainer,
+        Icons.check_circle_outline,
+      ),
+      ToastKind.info => (
+        scheme.secondaryContainer,
+        scheme.onSecondaryContainer,
+        Icons.info_outline,
+      ),
+    };
 
     return Positioned(
       left: AppSpacing.space16,
       right: AppSpacing.space16,
-      bottom: media.padding.bottom + AppSpacing.space24,
-      // Insets come from MediaQuery rather than a nested SafeArea: this is
-      // already positioned against the overlay's edge, where a SafeArea has
-      // no unconsumed padding left to apply.
-      child: FadeTransition(
-        opacity: _curve,
-        // Transform and opacity only: both composite, so the toast never
-        // triggers layout on the screen underneath it.
-        child: SlideTransition(
-          position: Tween<Offset>(
-            begin: const Offset(0, 0.35),
-            end: Offset.zero,
-          ).animate(_curve),
+      // viewInsets, not just padding: a toast raised while the keyboard is up
+      // would otherwise render behind it, which is what SnackBar gets right.
+      bottom:
+          math.max(
+            MediaQuery.viewInsetsOf(context).bottom,
+            MediaQuery.paddingOf(context).bottom,
+          ) +
+          AppSpacing.space24,
+      child: _maybeAnimate(
+        // liveRegion so a screen reader announces the message. Without it the
+        // toast appears and auto-dismisses having told those users nothing —
+        // a regression against both SnackBar, which sets it, and a Flushbar
+        // route, which took focus. The icon carries the same meaning as the
+        // colour for anyone who cannot distinguish the two.
+        child: Semantics(
+          container: true,
+          liveRegion: true,
+          onDismiss: widget.onDismissed,
           child: Dismissible(
             key: const ValueKey<String>('app-toast'),
+            // Removed by the callback rather than by a parent list rebuilding,
+            // so there is nothing to resize away first.
+            resizeDuration: null,
             onDismissed: (_) => widget.onDismissed(),
             child: Material(
-              color: widget.background,
+              color: background,
               borderRadius: BorderRadius.circular(AppSpacing.space12),
               elevation: 6,
               child: Padding(
@@ -164,16 +194,47 @@ class _ToastViewState extends State<_ToastView>
                   horizontal: AppSpacing.space16,
                   vertical: AppSpacing.space12,
                 ),
-                child: Text(
-                  widget.message,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.copyWith(color: widget.foreground),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Icon(icon, color: foreground, size: AppSpacing.space20),
+                    AppSpacing.horizontalSpacing12,
+                    Expanded(
+                      child: Text(
+                        widget.message,
+                        // Bounded: at a large text scale an unbounded message
+                        // grew taller than the screen and was clipped from the
+                        // top, hiding the very text it came to show.
+                        maxLines: 4,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodyMedium?.copyWith(color: foreground),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  /// Skips the entrance animation when the platform asks for reduced motion.
+  Widget _maybeAnimate({required Widget child}) {
+    if (MediaQuery.disableAnimationsOf(context)) return child;
+    return FadeTransition(
+      opacity: _curve,
+      // Transform and opacity only: both composite, so the toast never
+      // triggers layout on the screen underneath it.
+      child: SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(0, 0.35),
+          end: Offset.zero,
+        ).animate(_curve),
+        child: child,
       ),
     );
   }

@@ -95,38 +95,89 @@ class _AppState extends State<App> {
             darkTheme: AppThemes.darkTheme,
             themeMode: state.isDarkMode ? ThemeMode.dark : ThemeMode.light,
             routerConfig: AppRouter.router,
-            // The app owns one Overlay, mounted above the router. Toasts go
-            // there rather than into the Navigator's own overlay, so a
-            // message outlives the route that raised it and a route change
-            // never cancels one mid-flight. It also gives this listener an
-            // Overlay to find: `MaterialApp.builder` runs above the
-            // Navigator, so without this there is none in scope and an
-            // app-level failure would be shown nowhere.
-            builder: (context, child) => Overlay(
-              initialEntries: <OverlayEntry>[
-                OverlayEntry(
-                  builder: (context) => BlocListener<AppBloc, AppState>(
-                    listenWhen: (previous, next) =>
-                        previous.notification != next.notification,
-                    listener: (context, state) {
-                      final AppNotification? notification = state.notification;
-                      if (notification == null) return;
-                      switch (notification) {
-                        case AppNotificationFailed(:final failure):
-                          AppToast.show(
-                            context,
-                            failure.displayMessage(context),
-                          );
-                      }
-                    },
-                    child: child ?? const SizedBox.shrink(),
-                  ),
-                ),
-              ],
+            builder: (context, child) => _ToastLayer(
+              child: BlocListener<AppBloc, AppState>(
+                listenWhen: (previous, next) =>
+                    previous.notification != next.notification,
+                listener: (context, state) {
+                  final AppNotification? notification = state.notification;
+                  if (notification == null) return;
+                  switch (notification) {
+                    case AppNotificationFailed(:final failure):
+                      AppToast.show(context, failure.displayMessage(context));
+                  }
+                },
+                child: child ?? const SizedBox.shrink(),
+              ),
             ),
           );
         },
       ),
     );
   }
+}
+
+/// Mounts the app's single [Overlay] above the router.
+///
+/// Toasts go here rather than into the `Navigator`'s own overlay, so a message
+/// outlives the route that raised it and a route change never cancels one
+/// mid-flight. It also gives the app-level listener an `Overlay` to find:
+/// `MaterialApp.builder` runs *above* the `Navigator`, so without this there
+/// is none in scope and an app-level failure would be shown nowhere — shown
+/// nowhere silently, because `AppToast.show` no-ops when it finds no overlay.
+///
+/// The entry is built once and held, not rebuilt inside `builder`.
+/// `Overlay.initialEntries` is read exactly once, in `OverlayState.initState`:
+/// an entry constructed in `builder` is allocated on every rebuild, never
+/// inserted, never disposed, and the one entry that *did* get inserted keeps
+/// serving the [child] its closure captured the first time. Anyone adding a
+/// reactive wrapper in `builder` would find it silently frozen.
+///
+/// Note for anyone extending this: an `Overlay` above the `Navigator` is what
+/// `Overlay.of(context, rootOverlay: true)` now resolves to app-wide, which
+/// is the lookup Flutter uses for text-selection handles and toolbars, the
+/// magnifier, and context menus. Nothing in `lib/` has a text field today, so
+/// nothing is affected yet.
+class _ToastLayer extends StatefulWidget {
+  const _ToastLayer({required this.child});
+
+  final Widget child;
+
+  @override
+  State<_ToastLayer> createState() => _ToastLayerState();
+}
+
+class _ToastLayerState extends State<_ToastLayer> {
+  /// The live child, pushed through a notifier so the held entry re-reads it
+  /// rather than pinning whatever it closed over.
+  late final ValueNotifier<Widget> _child = ValueNotifier<Widget>(widget.child);
+
+  late final OverlayEntry _entry = OverlayEntry(
+    builder: (_) => ValueListenableBuilder<Widget>(
+      valueListenable: _child,
+      builder: (_, Widget child, _) => child,
+    ),
+  );
+
+  @override
+  void didUpdateWidget(covariant _ToastLayer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _child.value = widget.child;
+  }
+
+  @override
+  void dispose() {
+    // Any toast still showing belongs to an Overlay that is going away with
+    // this widget; clearing it keeps the static from pointing at a corpse.
+    AppToast.dismiss();
+    _entry
+      ..remove()
+      ..dispose();
+    _child.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) =>
+      Overlay(initialEntries: <OverlayEntry>[_entry]);
 }
