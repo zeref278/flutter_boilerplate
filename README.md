@@ -777,7 +777,7 @@ the first, so the `listenWhen` comparison silently swallows it.
 
 Sealed is what makes the presentation choice explicit. The page switches
 exhaustively over the union, so a new outcome does not compile until someone
-decides which widget shows it — a snackbar, a flushbar, or a dialog.
+decides which widget shows it — a toast or a dialog.
 
 A dialog is the case worth studying, because it awaits a decision rather than
 firing and forgetting. Deleting a saved image runs the full round trip:

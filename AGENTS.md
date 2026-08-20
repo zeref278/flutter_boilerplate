@@ -107,6 +107,30 @@ A credential reaches a log through three doors, and all three are shut:
 Do not reintroduce `pretty_dio_logger` — it prints `options.headers`
 verbatim, which is why it was removed.
 
+### Transient messages go in the overlay, never on the Navigator
+
+`AppToast.show` inserts an `OverlayEntry`. Do not reach for
+`another_flushbar` — it was removed because it shows its bar by *pushing a
+route*, so the back button dismissed it, `RouteObserver`s counted it as a
+navigation, and a `pop` during its lifetime popped the bar instead of the
+page. A notification is not a destination.
+
+`ScaffoldMessenger` is not the answer either: it is per-`Scaffold`, so the
+same failure looks different depending on which screen raised it, and a
+screen with no `Scaffold` cannot show one at all.
+
+The app mounts one `Overlay` above the router in `MaterialApp.builder`, and
+`show` targets the root overlay, so every toast lands in the same layer and
+outlives the route that raised it. That mount is also what gives the
+app-level `BlocListener` an overlay to find — `MaterialApp.builder` runs
+above the `Navigator`, so without it an app-level failure would be shown
+nowhere.
+
+The auto-dismiss timer belongs to the toast's `State`, not to `AppToast`.
+A timer parked in a static outlives the widget, and every widget test that
+raised a toast then fails teardown with *"A Timer is still pending even
+after the widget tree was disposed"*.
+
 ### Interceptor order is the contract
 
 ```text

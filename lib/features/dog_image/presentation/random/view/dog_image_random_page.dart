@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:boilerplate/core/core.dart';
 import 'package:boilerplate/features/dog_image/presentation/random/bloc/dog_image_random_bloc.dart';
 import 'package:boilerplate/features/dog_image/presentation/random/dog_image_random_keys.dart';
@@ -35,11 +34,7 @@ class _Body extends StatelessWidget {
           if (notification == null) return;
           switch (notification) {
             case DogImageRandomNotificationFailed(:final failure):
-              Flushbar<void>(
-                message: failure.displayMessage(context),
-                duration: const Duration(seconds: 2),
-                backgroundColor: Colors.red,
-              ).show(context);
+              AppToast.show(context, failure.displayMessage(context));
           }
         },
         buildWhen: (prev, next) =>

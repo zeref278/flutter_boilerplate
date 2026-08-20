@@ -75,7 +75,6 @@ dependencies:
   # ui
   cupertino_icons: ^1.0.9
   flutter_svg: ^2.3.0
-  another_flushbar: ^2.2.4
 
   # utils
   intl: ^0.20.2

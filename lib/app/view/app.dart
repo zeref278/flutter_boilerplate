@@ -95,24 +95,34 @@ class _AppState extends State<App> {
             darkTheme: AppThemes.darkTheme,
             themeMode: state.isDarkMode ? ThemeMode.dark : ThemeMode.light,
             routerConfig: AppRouter.router,
-            builder: (context, child) => BlocListener<AppBloc, AppState>(
-              listenWhen: (previous, next) =>
-                  previous.notification != next.notification,
-              listener: (context, state) {
-                final AppNotification? notification = state.notification;
-                if (notification == null) return;
-                switch (notification) {
-                  case AppNotificationFailed(:final failure):
-                    ScaffoldMessenger.of(context)
-                      ..hideCurrentSnackBar()
-                      ..showSnackBar(
-                        SnackBar(
-                          content: Text(failure.displayMessage(context)),
-                        ),
-                      );
-                }
-              },
-              child: child ?? const SizedBox.shrink(),
+            // The app owns one Overlay, mounted above the router. Toasts go
+            // there rather than into the Navigator's own overlay, so a
+            // message outlives the route that raised it and a route change
+            // never cancels one mid-flight. It also gives this listener an
+            // Overlay to find: `MaterialApp.builder` runs above the
+            // Navigator, so without this there is none in scope and an
+            // app-level failure would be shown nowhere.
+            builder: (context, child) => Overlay(
+              initialEntries: <OverlayEntry>[
+                OverlayEntry(
+                  builder: (context) => BlocListener<AppBloc, AppState>(
+                    listenWhen: (previous, next) =>
+                        previous.notification != next.notification,
+                    listener: (context, state) {
+                      final AppNotification? notification = state.notification;
+                      if (notification == null) return;
+                      switch (notification) {
+                        case AppNotificationFailed(:final failure):
+                          AppToast.show(
+                            context,
+                            failure.displayMessage(context),
+                          );
+                      }
+                    },
+                    child: child ?? const SizedBox.shrink(),
+                  ),
+                ),
+              ],
             ),
           );
         },

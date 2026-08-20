@@ -1,5 +1,6 @@
 import 'package:boilerplate/core/di/injector.dart';
 import 'package:boilerplate/core/errors/failures.dart';
+import 'package:boilerplate/core/ui/app_toast.dart';
 import 'package:boilerplate/features/dog_image/domain/entities/dog_image_entity.dart';
 import 'package:boilerplate/features/dog_image/domain/repositories/dog_image_repository.dart';
 import 'package:boilerplate/features/dog_image/domain/use_cases/delete_saved_dog_image_use_case.dart';
@@ -88,8 +89,7 @@ void main() {
     expect(find.text('Could not access local storage.'), findsOneWidget);
     expect(find.textContaining('database unavailable'), findsNothing);
 
-    final BuildContext context = tester.element(find.byType(DogImageSavedPage));
-    ScaffoldMessenger.of(context).clearSnackBars();
+    AppToast.dismiss();
     await tester.pumpAndSettle();
 
     bloc.add(const DogImageSavedEvent.loadRequested());
