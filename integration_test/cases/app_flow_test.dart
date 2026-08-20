@@ -11,6 +11,7 @@ import 'package:integration_test/integration_test.dart';
 import '../robots/dog_image_robot.dart';
 import '../robots/home_robot.dart';
 import '../robots/intro_robot.dart';
+import '../support/fixture_api.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -79,6 +80,10 @@ void main() {
 Future<void> _launchApp(WidgetTester tester, {required bool isFirstUse}) async {
   await app.main();
   await tester.pumpAndSettle();
+
+  // Before any request is made. Without this the suite's result depends on a
+  // free public API being reachable from wherever it runs.
+  FixtureApiAdapter.installUnlessLive();
 
   final AppStorage storage = Injector.instance<AppStorage>();
   final AppPreferences preferences = Injector.instance<AppPreferences>();
