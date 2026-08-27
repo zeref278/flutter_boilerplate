@@ -38,11 +38,7 @@ class DogImageSavedPage extends StatelessWidget {
 
     switch (notification) {
       case DogImageSavedNotificationFailed(:final failure):
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(
-            SnackBar(content: Text(failure.displayMessage(context))),
-          );
+        AppToast.show(context, failure.displayMessage(context));
       case DogImageSavedNotificationConfirmDelete(:final image):
         unawaited(_confirmDelete(context, image));
     }

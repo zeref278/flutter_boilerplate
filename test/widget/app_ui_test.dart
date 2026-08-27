@@ -9,6 +9,7 @@ import 'package:boilerplate/core/extensions/build_context_ex.dart';
 import 'package:boilerplate/core/security/secure_app_guard.dart';
 import 'package:boilerplate/core/security/secure_app_threat.dart';
 import 'package:boilerplate/core/storage/storage_exception.dart';
+import 'package:boilerplate/core/ui/app_toast.dart';
 import 'package:boilerplate/features/dog_image/domain/entities/dog_image_entity.dart';
 import 'package:boilerplate/features/dog_image/presentation/saved/widgets/dog_image_tile.dart';
 import 'package:boilerplate/features/home/presentation/home_keys.dart';
@@ -33,6 +34,10 @@ class _ControllableSecureAppGuard implements SecureAppGuard {
 }
 
 void main() {
+  // A toast raised by one test must not be left pointing at a torn-down
+  // overlay when the next one starts.
+  tearDown(AppToast.dismiss);
+
   Widget wrap({required AppBloc bloc, required Widget child}) =>
       BlocProvider<AppBloc>.value(
         value: bloc,
